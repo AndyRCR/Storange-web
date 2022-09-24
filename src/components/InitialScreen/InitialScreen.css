@@ -1,0 +1,64 @@
+.initialContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.initialContainer .formContainer{
+    width: 80%;
+    padding: 16px;
+    max-width: 570px;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.initialContainer img{
+    width: 200px;
+}
+.initialContainer .logo{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    margin-bottom: 20px;
+}
+
+.initialContainer h1{
+    font-size: 21px;
+    margin: 0;
+}
+
+.initialContainer p,
+.initialContainer a,
+.initialContainer button{
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+.initialContainer p{
+    color: rgba(0,0,0,.6);
+}
+
+.initialContainer .form{
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.initialContainer .options{
+    display: flex;
+}
+
+.initialContainer .options > div{
+    margin: 0 12px;
+}
+
+.initialContainer a{
+    font-size: 14px;
+    color: var(--color-storange);
+}

@@ -1,0 +1,123 @@
+.articleContainer{
+    padding: 200px 120px 0;
+}
+
+.articleContainer .volver{
+    color: var(--color-storange);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.articleContainer .volverIcon{
+    margin: 0 7px;
+}
+
+.articleContainer .info{
+    min-width: 400px;
+}
+
+.articleContainer .article{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.article .images,
+.article .info{
+    padding: 0 40px;
+}
+
+.articleContainer .titleContainer{
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.articleContainer .titleEdit{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.articleContainer .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.articleContainer .title h1{
+    margin: 0;
+    font-size: 24px;
+}
+
+.articleContainer .editIcon{
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color-storange);
+}
+
+.articleContainer .caracteristicas{
+    line-height: 1.5;
+    padding-bottom: 20px;
+}
+
+.articleContainer .caracteristicas h3{
+    font-size: 20px;
+}
+
+.articleContainer .caracteristicas p{
+    margin: 0;
+}
+
+.articleContainer .caracteristicas{
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.articleContainer .title.propertie{
+    margin-top: 20px;
+}
+
+.articleContainer .title.propertie h1{
+    font-size: 16px;
+}
+
+.articleContainer .descripcion h3{
+    font-size: 16px;
+}
+
+.articleContainer .plusIcon{
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.articleContainer .propietario h3,
+.articleContainer .gestion h3,
+.articleContainer .acciones h3{
+    font-size: 16px;
+}
+
+.articleContainer .estado{
+    border: 1px solid var(--color-storange);
+    color: var(--color-storange);
+    border-radius: 14px;
+    width: 150px;
+    text-align: center;
+    height: 30px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.articleContainer .buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+.articleContainer .secondaryButtons{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 20px;
+}

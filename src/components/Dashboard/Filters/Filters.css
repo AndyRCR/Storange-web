@@ -1,0 +1,28 @@
+.filters{
+    width: 20%;
+    padding: 0 30px;
+    position: fixed;
+    left: 0;
+}
+
+.filters .filterIcon{
+    margin: 0 10px;
+}
+
+.filters .buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+.filters h1{
+    font-size: 20px;
+}
+
+.filters h3{
+    font-size: 16px;
+}
+
+.filters button{
+    margin: 15px 0;
+    display: flex;
+}

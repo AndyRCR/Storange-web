@@ -1,0 +1,9 @@
+.articlesList{
+    width: 75%;
+    margin: 0 30px;
+}
+
+.articlesList h1{
+    font-size: 24px;
+    margin-top: 0;
+}

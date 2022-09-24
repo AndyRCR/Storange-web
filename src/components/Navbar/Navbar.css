@@ -1,0 +1,80 @@
+.navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+}
+
+.navbar .navbarLogo{
+    background-color: var(--color-storange);
+    text-align: center;
+    padding: 24px;
+}
+
+.navbar .appbar{
+    background-color: #F3F3F3;
+    box-shadow: none;
+    padding: 12px 90px;
+}
+
+.navbar .navLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(83, 83, 83);
+    font-size: 16px;
+    margin-right: 60px;
+}
+
+.navbar .menuIcon{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.navbar .activeNavLink{
+    color: var(--color-storange);
+}
+
+.navbar .avatar{
+    background-color: var(--color-storange);
+}
+
+.menuItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    height: 36px;
+    font-weight: bold;
+}
+
+.menuItem:nth-child(1){
+    height: fit-content;
+}
+
+.menuItem:nth-child(2){
+    border-top: 1px solid rgba(0,0,0,.12);
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.menuItem:nth-child(3){
+    font-size: 14px;
+    color: #f44336;
+}
+
+.menuItem .name{
+    margin-bottom: 0;
+}
+
+.menuItem .email{
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* .navbar .userInfo{
+    display: flex;
+    flex-direction: column;
+} */
