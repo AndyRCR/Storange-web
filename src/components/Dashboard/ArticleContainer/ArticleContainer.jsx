@@ -6,6 +6,7 @@ import { withStyles, makeStyles } from '@mui/styles'
 import { Link, useParams } from 'react-router-dom'
 import { GlobalContext } from '../../../context/GlobalStateContext'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
+import { ClimbingBoxLoader } from 'react-spinners'
 import './ArticleContainer.css'
 
 const CssTextField = withStyles({
@@ -39,7 +40,16 @@ const useStyles = makeStyles({
     textTransform: 'none !important',
     fontWeight: 'bold !important',
     color: '#fff !important',
-    width: '100px',
+    width: '150px',
+    margin: '15px 0 !important'
+  },
+  buttonWhite: {
+    backgroundColor: '#fff !important',
+    border: '1px solid #f94700 !important',
+    textTransform: 'none !important',
+    fontWeight: 'bold !important',
+    color: '#f94700 !important',
+    width: '150px',
     margin: '15px 0 !important'
   },
   buttonSecondary: {
@@ -60,10 +70,13 @@ const ArticleContainer = () => {
 
   const classes = useStyles()
 
-  const { obtenerArticulo, fotos, articulo } = useContext(GlobalContext)
+  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading } = useContext(GlobalContext)
 
   const [editTitle, setEditTitle] = useState(false)
   const [editDescription, setEditDescription] = useState(false)
+
+  const [newTitle, setNewTitle] = useState('')
+  const [newDescription, setNewDescription] = useState('')
 
   let { id } = useParams()
 
@@ -75,22 +88,18 @@ const ArticleContainer = () => {
     <div className='articleContainer'>
       <div className='homeButton'>
         <Link className='volver' to={'/dashboard'}>
-          <FontAwesomeIcon className='volverIcon' icon={faArrowLeft}/>
+          <FontAwesomeIcon className='volverIcon' icon={faArrowLeft} />
           Volver
         </Link>
       </div>
 
       <div className='article'>
-        <div className='images'>
-          {fotos !== null ? (
-            <ImageCarousel fotos={fotos} />
-          ) : (
-            <CircularProgress />
-          )}
-        </div>
-        <div className='info'>
-          {articulo !== null ? (
-            <>
+        {fotos !== null && articulo !== null ? (
+          <>
+            <div className='images'>
+              <ImageCarousel fotos={fotos} />
+            </div>
+            <div className="info">
               <div className='titleContainer'>
                 {editTitle ? (
                   <div className='titleEdit'>
@@ -98,21 +107,33 @@ const ArticleContainer = () => {
                       id="outlined-basic"
                       label="Nombre del artículo"
                       variant="outlined"
-                      value={articulo.Titulo}
+                      value={newTitle}
+                      onChange={(e) => setNewTitle(e.target.value)}
                     />
-                    <Button
-                      className={classes.button}
-                      onClick={() => setEditTitle(false)}>
-                      Guardar
-                    </Button>
+                    <div className='buttonsEdit'>
+                      <Button
+                        className={classes.buttonWhite}
+                        onClick={() => setEditTitle(false)}>
+                        Cancelar
+                      </Button>
+                      <Button
+                        className={classes.button}
+                        onClick={() => {
+                          if (!isLoading) actualizarTitulo(newTitle, setEditTitle)
+                        }}>
+                        {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Guardar'}
+                      </Button>
+                    </div>
                   </div>
-
                 ) : (
                   <div className='title'>
                     <h1>{articulo.Titulo}</h1>
                     <FontAwesomeIcon
                       className='editIcon'
-                      onClick={() => setEditTitle(true)}
+                      onClick={() => {
+                        setNewTitle(articulo.Titulo)
+                        setEditTitle(true)
+                      }}
                       icon={faPen} />
                   </div>
                 )}
@@ -133,26 +154,55 @@ const ArticleContainer = () => {
               </div>
               <div className='propietario'>
                 <h3>Descripcion propietario:</h3>
-                {editDescription ? (
-                  <div>
-                    <CssTextField
-                      id="outlined-basic"
-                      label="Añadir una descripción"
-                      variant="outlined"
-                    />
-                    <Button
-                      className={classes.button}
-                      onClick={() => setEditDescription(false)}>
-                      Guardar
-                    </Button>
-                  </div>
+                {articulo.descripcionPropietario === null || editDescription ? (
+                  <>
+                    {editDescription ? (
+                      <div>
+                        <CssTextField
+                          id="outlined-basic"
+                          label="Añadir una descripción"
+                          variant="outlined"
+                          value={newDescription}
+                          onChange={(e) => setNewDescription(e.target.value)}
+                        />
+                        <div className='buttonsEdit'>
+                          <Button
+                            className={classes.buttonWhite}
+                            onClick={() => setEditDescription(false)}>
+                            Cancelar
+                          </Button>
+                          <Button
+                            className={classes.button}
+                            onClick={() => {
+                              if (!isLoading) actualizarDescripcion(newDescription, setEditDescription)
+                            }}>
+                            {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Guardar'}
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <Button
+                        className={classes.buttonSecondary}
+                        onClick={() => {
+                          setNewDescription(articulo.descripcionPropietario === null ? '' : articulo.descripcionPropietario)
+                          setEditDescription(true)
+                        }}>
+                        <FontAwesomeIcon className='plusIcon' icon={faPlus} />
+                        Añadir una descripción
+                      </Button>
+                    )}
+                  </>
                 ) : (
-                  <Button
-                    className={classes.buttonSecondary}
-                    onClick={() => setEditDescription(true)}>
-                    <FontAwesomeIcon className='plusIcon' icon={faPlus}/>
-                    Añadir una descripción
-                  </Button>
+                  <div className='descripcionPropietario'>
+                    <p>{articulo.descripcionPropietario}</p>
+                    <FontAwesomeIcon
+                      className='editIcon'
+                      onClick={() => {
+                        setNewDescription(articulo.descripcionPropietario === null ? '' : articulo.descripcionPropietario)
+                        setEditDescription(true)
+                      }}
+                      icon={faPen} />
+                  </div>
                 )}
               </div>
               <div className='gestion'>
@@ -177,11 +227,14 @@ const ArticleContainer = () => {
                   </div>
                 </div>
               </div>
-            </>
-          ) : (
-            <CircularProgress />
-          )}
-        </div>
+            </div>
+          </>
+        ) : (
+          <div className='loadingSpinner'>
+            <ClimbingBoxLoader size={20} color={'#F94700'} />
+            <h3>Cargando...</h3>
+          </div>
+        )}
       </div>
     </div>
   )

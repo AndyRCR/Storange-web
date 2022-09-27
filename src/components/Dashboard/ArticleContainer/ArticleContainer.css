@@ -19,7 +19,7 @@
 .articleContainer .article{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 0 30px;
 }
 
@@ -115,9 +115,25 @@
     flex-direction: column;
 }
 
+.articleContainer .buttonsEdit{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .articleContainer .secondaryButtons{
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 20px;
+}
+
+.articleContainer .descripcionPropietario{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.articleContainer .descripcionPropietario p{
+    margin: 0;
 }

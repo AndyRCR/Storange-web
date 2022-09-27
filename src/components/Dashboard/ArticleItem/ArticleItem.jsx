@@ -10,7 +10,8 @@ const ArticleItem = ({articulo}) => {
         </div>
         <div className='articleInfo'>
             <p className='title'>{articulo.titulo}</p>
-            <p className='info'>{articulo.qrCode}</p>
+            {/* <p className='info'>{articulo.qrCode}</p> */}
+            <p className='info'>Descripcion: {articulo.descripcion}</p>
             <p className="info">Estado: {articulo.conservacion}</p>
             <p className="info">Medidas: {`${articulo.medidaLargo} x ${articulo.medidaProfundidad} x ${articulo.medidaAltura}`} metros</p>
             <p className="info">Volumen: {articulo.volumen} m3</p>

@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faX } from '@fortawesome/free-solid-svg-icons'
-import CircularProgress from '@mui/material/CircularProgress'
+import { SyncLoader } from 'react-spinners'
 import { GlobalContext } from '../../../context/GlobalStateContext'
 import './Filters.css'
 
@@ -81,7 +81,9 @@ const Filters = () => {
                             label={`Eliminados (${articulos.filter(el => el.idEstadoArticulo === 4).length})`} />
                     </FormGroup>
                 ) : (
-                    <CircularProgress style={{'color': '#F94700', 'margin': '20px'}}/>
+                    <div className='filterSpinner'>
+                        <SyncLoader size={10} color={'#F94700'}/>
+                    </div>
                 )}
             </div>
             <div className="tipoFilters">
@@ -112,7 +114,9 @@ const Filters = () => {
                                 label={`Suelto (${articulos.filter(el => el.tipoArticulo.toLowerCase() === 'suelto').length})`} />
                     </FormGroup>
                 ) : (
-                    <CircularProgress style={{'color': '#F94700', 'margin': '20px'}}/>
+                    <div className='filterSpinner'>
+                        <SyncLoader size={10} color={'#F94700'}/>
+                    </div>
                 )}
             </div>
             <div className='buttons'>
@@ -124,13 +128,13 @@ const Filters = () => {
                     Limpiar filtros
                 </Button>
 
-                <Button
+                {/* <Button
                     onClick={handleFilters}
                     className={classes.buttonFilter}
                     variant='contained'>
                     <FontAwesomeIcon className='filterIcon' icon={faFilter} />
                     Filtrar articulos
-                </Button>
+                </Button> */}
             </div>
         </div>
     )

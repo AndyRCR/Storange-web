@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { withStyles } from '@mui/styles'
 import { TextField } from '@mui/material'
 import { GlobalContext } from '../../../context/GlobalStateContext'
-import CircularProgress from '@mui/material/CircularProgress'
-import './ArticlesList.css'
 import Article from '../ArticleItem/ArticleItem'
+import { ClimbingBoxLoader } from 'react-spinners'
+import './ArticlesList.css'
 
 const CssTextField = withStyles({
     root: {
@@ -41,11 +41,16 @@ const CssTextField = withStyles({
 
 const ArticlesList = () => {
 
-    const { articulos, filteredArticles, handleFilters, cajaFilter, sueltoFilter } = useContext(GlobalContext)
+    const { articulos, filteredArticles, handleFilters, filter, setFilter, buscarArticulos } = useContext(GlobalContext)
+
+    const handleFilterChange = (e) =>{
+        setFilter(e.target.value)
+    }
 
     useEffect(() => {
         handleFilters()
-    }, [articulos])
+        buscarArticulos()
+    }, [articulos, filter])
 
     return (
         <div className='articlesList'>
@@ -57,16 +62,26 @@ const ArticlesList = () => {
                     name="article"
                     size='small'
                     style={{ width: '100%' }}
+                    onChange={handleFilterChange}
                 />
             </div>
-            {filteredArticles?.length > 0 ? (
-                filteredArticles.map(articulo => {
-                    return (
-                        <Article key={articulo.idArticulo} articulo={articulo} />
-                    )
-                })
+            {filteredArticles !== null ? (
+                filteredArticles.length > 0 ? (
+                    filteredArticles.map(articulo => {
+                        return (
+                            <Article key={articulo.idArticulo} articulo={articulo} />
+                        )
+                    })
+                ) : (
+                    <div className='loadingSpinner'>
+                        <h1>No se encontraron resultados :(</h1>
+                    </div>
+                )
             ) : (
-                <CircularProgress style={{ 'color': '#F94700', 'margin': '20px' }} />
+                <div className='loadingSpinner'>
+                    <ClimbingBoxLoader size={20} color={'#F94700'}/>
+                    <h3>Cargando...</h3>
+                </div>
             )}
         </div>
     )
