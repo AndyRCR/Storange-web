@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react'
-import { withStyles } from '@mui/styles'
-import { TextField } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
+import { withStyles, makeStyles } from '@mui/styles'
+import { Pagination, TextField } from '@mui/material'
 import { GlobalContext } from '../../../context/GlobalStateContext'
 import Article from '../ArticleItem/ArticleItem'
 import { ClimbingBoxLoader } from 'react-spinners'
@@ -39,11 +39,28 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
+const useStyles = makeStyles({
+    root: {
+        '& ul > li:not(:first-child):not(:last-child) > button.Mui-selected': {
+            backgroundColor: '#F94700',
+            color: '#fff',
+            fontWeight: 'bold'
+        },
+        '& ul > li:not(:first-child):not(:last-child) > button:not(.Mui-selected)': {
+            fontWeight: 'bold'
+        }
+    }
+})
+
 const ArticlesList = () => {
+
+    const classes = useStyles()
 
     const { articulos, filteredArticles, handleFilters, filter, setFilter, buscarArticulos } = useContext(GlobalContext)
 
-    const handleFilterChange = (e) =>{
+    const [page, setPage] = useState(1)
+
+    const handleFilterChange = (e) => {
         setFilter(e.target.value)
     }
 
@@ -67,11 +84,33 @@ const ArticlesList = () => {
             </div>
             {filteredArticles !== null ? (
                 filteredArticles.length > 0 ? (
-                    filteredArticles.map(articulo => {
-                        return (
-                            <Article key={articulo.idArticulo} articulo={articulo} />
-                        )
-                    })
+                    <>
+                        <div className="articlesPagination">
+                            <Pagination
+                            showFirstButton
+                            showLastButton
+                            page={page}
+                            className={classes.root}
+                            onChange={(e, pageNumber) => setPage(pageNumber)}
+                            count={Math.round(filteredArticles.length/10)}
+                            shape="rounded" />
+                        </div>
+                        {[...filteredArticles].slice((page-1)*10, (page-1)*10+10).map(articulo => {
+                            return (
+                                <Article key={articulo.idArticulo} articulo={articulo} />
+                            )
+                        })}
+                        <div className="articlesPagination">
+                            <Pagination
+                            showFirstButton
+                            showLastButton
+                            className={classes.root}
+                            page={page}
+                            onChange={(e, pageNumber) => setPage(pageNumber)}
+                            count={Math.round(filteredArticles.length/10)}
+                            shape="rounded" />
+                        </div>
+                    </>
                 ) : (
                     <div className='loadingSpinner'>
                         <h1>No se encontraron resultados :(</h1>
@@ -79,7 +118,7 @@ const ArticlesList = () => {
                 )
             ) : (
                 <div className='loadingSpinner'>
-                    <ClimbingBoxLoader size={20} color={'#F94700'}/>
+                    <ClimbingBoxLoader size={20} color={'#F94700'} />
                     <h3>Cargando...</h3>
                 </div>
             )}

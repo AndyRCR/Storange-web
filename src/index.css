@@ -4,11 +4,24 @@
   --color-storange: #F94700;
 }
 
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar-track{
+	background-color: #F3F3F3;
+}
+
+::-webkit-scrollbar{
+	width: 12px;
+	background-color: #F3F3F3;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: var(--color-storange);
 }
 
 .filterSpinner{

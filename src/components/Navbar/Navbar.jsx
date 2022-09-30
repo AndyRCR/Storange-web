@@ -91,7 +91,7 @@ const Navbar = () => {
 
                             <NavLink
                                 className={ ({isActive}) => isActive ? 'navLink activeNavLink' : 'navLink'}
-                                to={'/dashboard/pickup_send'}
+                                to={'/pickup_send'}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 <FontAwesomeIcon className='menuIcon' icon={faTruckFast}/>
@@ -109,7 +109,7 @@ const Navbar = () => {
 
                             <NavLink
                                 className={ ({isActive}) => isActive ? 'navLink activeNavLink' : 'navLink'}
-                                to={'/dashboard/perfil'}
+                                to={'/perfil'}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 <FontAwesomeIcon className='menuIcon' icon={faFaceLaugh}/>

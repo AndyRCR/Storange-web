@@ -4,7 +4,7 @@
     margin: 20px 0;
     padding: 16px;
     display: flex;
-    height: 200px;
+    height: fit-content;
 }
 
 .articleItem .articleInfo{

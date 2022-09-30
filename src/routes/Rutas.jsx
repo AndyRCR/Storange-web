@@ -1,11 +1,12 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from '../components/Layout'
 import ArticleView from '../views/ArticleView'
 import DashboardView from '../views/DashboardView'
 import LoginView from '../views/LoginView'
+import RecogerEnviarView from '../views/RecogerEnviarView'
 import RecoveryView from '../views/RecoveryView'
 import RegisterView from '../views/RegisterView'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const Rutas = () => {
   return (
@@ -17,8 +18,10 @@ const Rutas = () => {
             <Route path='/dashboard' element={<Layout/>}>
                 <Route index element={<DashboardView/>}/>
                 <Route path='/dashboard/item/:id' element={<ArticleView/>}/>
-                {/* <Route path= element={<Dashboard/>}/>
-                <Route index element={<Dashboard/>}/> */}
+                {/* <Route index element={<Dashboard/>}/> */}
+            </Route>
+            <Route path='/pickup_send' element={<Layout/>}>
+              <Route index element={<RecogerEnviarView/>}/>
             </Route>
         </Routes>
     </BrowserRouter>
