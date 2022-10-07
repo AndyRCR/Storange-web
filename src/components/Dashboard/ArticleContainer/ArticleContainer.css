@@ -1,8 +1,9 @@
 .articleContainer{
-    padding: 200px 120px 0;
+    padding: 130px 120px 0;
 }
 
 .articleContainer .volver{
+    cursor: pointer;
     color: var(--color-storange);
     text-decoration: none;
     font-weight: bold;
@@ -63,6 +64,7 @@
 
 .articleContainer .caracteristicas h3{
     font-size: 20px;
+    margin: 10px 0;
 }
 
 .articleContainer .caracteristicas p{
@@ -92,7 +94,9 @@
 
 .articleContainer .propietario h3,
 .articleContainer .gestion h3,
-.articleContainer .acciones h3{
+.articleContainer .acciones h3,
+.articleContainer .descripcion h3{
+    margin: 10px 0;
     font-size: 16px;
 }
 
@@ -126,6 +130,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 20px;
+}
+
+.articleContainer .secondaryButtons.secondaryFix{
+    margin-top: 0;
 }
 
 .articleContainer .descripcionPropietario{

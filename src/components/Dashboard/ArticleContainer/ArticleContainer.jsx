@@ -1,9 +1,11 @@
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Button, CircularProgress, TextField } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { withStyles, makeStyles } from '@mui/styles'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { GlobalContext } from '../../../context/GlobalStateContext'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import { ClimbingBoxLoader } from 'react-spinners'
@@ -62,15 +64,21 @@ const useStyles = makeStyles({
     backgroundColor: '#f94700 !important',
     textTransform: 'none !important',
     fontWeight: 'bold !important',
-    color: '#fff !important'
+    color: '#fff !important',
+    borderRadius: '4px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer'
   }
 })
 
 const ArticleContainer = () => {
 
+  const navigate = useNavigate()
   const classes = useStyles()
 
-  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading } = useContext(GlobalContext)
+  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading, actualizarEstadoEnvio, setChange, change, setLoaderState } = useContext(GlobalContext)
 
   const [editTitle, setEditTitle] = useState(false)
   const [editDescription, setEditDescription] = useState(false)
@@ -84,13 +92,22 @@ const ArticleContainer = () => {
     obtenerArticulo(id)
   }, [])
 
+  useEffect(()=>{ 
+  }, [articulo])
+
   return (
     <div className='articleContainer'>
       <div className='homeButton'>
-        <Link className='volver' to={'/dashboard'}>
+        <div
+        onClick={() => {
+          setChange(!change)
+          setLoaderState(0)
+          setTimeout(() => navigate(`/dashboard`), 500)
+        }}
+        className='volver'>
           <FontAwesomeIcon className='volverIcon' icon={faArrowLeft} />
           Volver
-        </Link>
+        </div>
       </div>
 
       <div className='article'>
@@ -208,15 +225,36 @@ const ArticleContainer = () => {
               <div className='gestion'>
                 <h3>Gestión del artículo</h3>
                 <div className='estado'>
-                  Almacenado
+                  {articulo.estadoArticulo}
                 </div>
               </div>
               <div className='acciones'>
                 <h3>Acciones</h3>
                 <div className='buttons'>
-                  <Button className={classes.buttonAction}>
-                    Seleccionar para envío
-                  </Button>
+                  {articulo.estadoEnvio === 0 ? (
+                    <Button
+                    onClick={() => actualizarEstadoEnvio(1, articulo.idArticulo)}
+                    className={classes.buttonAction}>
+                      {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Seleccionar para envío'}
+                    </Button>
+                  ):(
+                    <div className='secondaryButtons secondaryFix'>
+                      <Button
+                      onClick={() => actualizarEstadoEnvio(0, articulo.idArticulo)}
+                      className={classes.buttonAction}>
+                        {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Quitar del carrito'}
+                      </Button>
+                      <div
+                      onClick={() => {
+                        setChange(!change)
+                        setLoaderState(0)
+                        setTimeout(() => navigate('/pickup_send'), 500)
+                      }}
+                      className={classes.buttonAction}>
+                        Ver carrito
+                      </div>
+                    </div>
+                  )}
                   <div className='secondaryButtons'>
                     <Button className={classes.buttonAction}>
                       Vender
@@ -236,6 +274,17 @@ const ArticleContainer = () => {
           </div>
         )}
       </div>
+      <ToastContainer
+      position="bottom-right"
+      autoClose={1000}
+      hideProgressBar
+      theme='light'
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover/>
     </div>
   )
 }

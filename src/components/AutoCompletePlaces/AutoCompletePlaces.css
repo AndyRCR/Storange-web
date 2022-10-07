@@ -1,0 +1,31 @@
+.autoCompletePlaces{
+  display: flex;
+  flex-direction: column;
+}
+
+.autoCompletePlaces input{
+  margin: 10px 0;
+  padding: 15px 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  width: 400px;
+}
+
+.pac-container {
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  width: 300px;
+  box-shadow: none;
+  border: 1px solid rgb(116, 116, 116);
+  border-radius: 0 0 4px 4px;
+}
+
+.pac-item,
+.pac-item-query {
+  color: #000;
+}
+
+.pac-item:hover {
+  background: rgb(214, 214, 214);
+}

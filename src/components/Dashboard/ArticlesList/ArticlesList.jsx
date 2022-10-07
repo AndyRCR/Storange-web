@@ -8,6 +8,9 @@ import './ArticlesList.css'
 
 const CssTextField = withStyles({
     root: {
+        '&': {
+            margin: '10px 0 !important'
+        },
         '& p': {
             textAlign: 'left',
             fontSize: '12px',
@@ -56,18 +59,20 @@ const ArticlesList = () => {
 
     const classes = useStyles()
 
-    const { articulos, filteredArticles, handleFilters, filter, setFilter, buscarArticulos } = useContext(GlobalContext)
+    const { articulos, filteredArticles, buscarArticulos, activeFilters } = useContext(GlobalContext)
 
     const [page, setPage] = useState(1)
+    const [filter, setFilter] = useState('')
 
     const handleFilterChange = (e) => {
-        setFilter(e.target.value)
+        const {value} = e.target
+        setFilter(value.toLowerCase())
+        setPage(1)
     }
 
     useEffect(() => {
-        handleFilters()
-        buscarArticulos()
-    }, [articulos, filter])
+        if(activeFilters.length === 0) buscarArticulos()
+    }, [filter, articulos, filteredArticles])
 
     return (
         <div className='articlesList'>
@@ -82,8 +87,11 @@ const ArticlesList = () => {
                     onChange={handleFilterChange}
                 />
             </div>
-            {filteredArticles !== null ? (
-                filteredArticles.length > 0 ? (
+            {articulos !== null ? (
+                filteredArticles
+                .filter(el =>{
+                    return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                }).length > 0 ? (
                     <>
                         <div className="articlesPagination">
                             <Pagination
@@ -92,10 +100,17 @@ const ArticlesList = () => {
                             page={page}
                             className={classes.root}
                             onChange={(e, pageNumber) => setPage(pageNumber)}
-                            count={Math.round(filteredArticles.length/10)}
+                            count={Math.round([...filteredArticles]
+                                .filter(el =>{
+                                    return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                                }).length/10)}
                             shape="rounded" />
                         </div>
-                        {[...filteredArticles].slice((page-1)*10, (page-1)*10+10).map(articulo => {
+                        {[...filteredArticles]
+                        .filter(el =>{
+                            return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                        })
+                        .slice((page-1)*10, (page-1)*10+10).map(articulo => {
                             return (
                                 <Article key={articulo.idArticulo} articulo={articulo} />
                             )
@@ -107,13 +122,17 @@ const ArticlesList = () => {
                             className={classes.root}
                             page={page}
                             onChange={(e, pageNumber) => setPage(pageNumber)}
-                            count={Math.round(filteredArticles.length/10)}
+                            count={Math.round([...filteredArticles]
+                                .filter(el =>{
+                                    return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                                }).length/10)}
                             shape="rounded" />
                         </div>
                     </>
                 ) : (
                     <div className='loadingSpinner'>
-                        <h1>No se encontraron resultados :(</h1>
+                        <img src="https://i.ibb.co/5vhhNRm/b81055909c88d9f7dfd6a49ff6d8f63f-removebg-preview-1.png" alt="storange no results" />
+                        <h1>No se encontraron resultados</h1>
                     </div>
                 )
             ) : (

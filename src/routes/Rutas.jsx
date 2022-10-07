@@ -7,10 +7,12 @@ import RecogerEnviarView from '../views/RecogerEnviarView'
 import RecoveryView from '../views/RecoveryView'
 import RegisterView from '../views/RegisterView'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ScrollToTop from '../tools/ScrollToTop'
 
 const Rutas = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop>
         <Routes>
             <Route path='/' element={<LoginView/>}/>
             <Route path='/recovery' element={<RecoveryView/>}/>
@@ -24,6 +26,7 @@ const Rutas = () => {
               <Route index element={<RecogerEnviarView/>}/>
             </Route>
         </Routes>
+      </ScrollToTop>
     </BrowserRouter>
   )
 }

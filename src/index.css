@@ -2,6 +2,8 @@
 
 :root{
   --color-storange: #F94700;
+  --toastify-color-light: #F94700 !important;
+  --toastify-text-color-light: #fff !important;
 }
 
 * {
@@ -9,6 +11,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+}
+
+body{
+  overflow-x: hidden;
+}
+
+.Toastify__close-button--light {
+  color: #fff !important;
+  opacity: 1 !important;
 }
 
 ::-webkit-scrollbar-track{

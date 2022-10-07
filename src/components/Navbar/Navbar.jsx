@@ -13,14 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTruckFast, faCirclePlus, faFaceLaugh } from '@fortawesome/free-solid-svg-icons'
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalStateContext';
 
 const pages = ['Recoger/Enviar', 'Mis articulos', 'Perfil'];
 
 const Navbar = () => {
 
-    const { propietario } = useContext(GlobalContext);
+    const { propietario, setChange, change, setLoaderState } = useContext(GlobalContext)
+    const navigate = useNavigate()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -45,12 +46,12 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <div className='navbarLogo'>
-                <img src="https://app.storange.pe/wp-content/themes/storange/app/static/images/logo-white.svg?key=1659564954838" alt="storange logo" />
-            </div>
+            {/* <div className='navbarLogo'>
+                
+            </div> */}
             <AppBar position="static" className='appbar'>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+                    <Toolbar disableGutters style={{justifyContent: 'space-between'}}>
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                                 size="large"
@@ -58,7 +59,7 @@ const Navbar = () => {
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleOpenNavMenu}
-                                style={{color: '#000'}}
+                                style={{ color: '#000' }}
                             >
                                 <MenuIcon />
                             </IconButton>
@@ -87,34 +88,48 @@ const Navbar = () => {
                                 ))}
                             </Menu>
                         </Box>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-                            <NavLink
-                                className={ ({isActive}) => isActive ? 'navLink activeNavLink' : 'navLink'}
-                                to={'/pickup_send'}
+                        <img src="https://app.storange.pe/wp-content/themes/storange/app/static/images/logo-white.svg?key=1659564954838" alt="storange logo" />
+                        <Box
+                        sx={{flexGrow: 'initial', display: { xs: 'none', md: 'flex' } }}
+                        >
+                            <div
+                                className={'navLink'}
+                                onClick={() => {
+                                    setChange(!change)
+                                    setLoaderState(0)
+                                    setTimeout(() => navigate('/pickup_send'), 500)
+                                }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <FontAwesomeIcon className='menuIcon' icon={faTruckFast}/>
+                                <FontAwesomeIcon className='menuIcon' icon={faTruckFast} />
                                 <div>Recoger/Enviar</div>
-                            </NavLink>
+                            </div>
 
-                            <NavLink
-                                className={ ({isActive}) => isActive ? 'navLink activeNavLink' : 'navLink'}
-                                to={'/dashboard'}
+                            <div
+                                className={'navLink'}
+                                onClick={() => {
+                                    setChange(!change)
+                                    setLoaderState(0)
+                                    setTimeout(() => navigate('/dashboard'), 500)
+                                }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <FontAwesomeIcon className='menuIcon' icon={faCirclePlus}/>
+                                <FontAwesomeIcon className='menuIcon' icon={faCirclePlus} />
                                 <div>Mis articulos</div>
-                            </NavLink>
+                            </div>
 
-                            <NavLink
-                                className={ ({isActive}) => isActive ? 'navLink activeNavLink' : 'navLink'}
-                                to={'/perfil'}
+                            <div
+                                className={'navLink'}
+                                onClick={() => {
+                                    setChange(!change)
+                                    setLoaderState(0)
+                                    setTimeout(() => navigate('/perfil'), 500)
+                                }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <FontAwesomeIcon className='menuIcon' icon={faFaceLaugh}/>
+                                <FontAwesomeIcon className='menuIcon' icon={faFaceLaugh} />
                                 <div>Perfil</div>
-                            </NavLink>
+                            </div>
 
                         </Box>
 
@@ -123,7 +138,7 @@ const Navbar = () => {
                                 <>
                                     <Tooltip title="Open settings">
                                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar className='avatar' alt={propietario.nombre} src="/static/images/avatar/2.jpg"/>
+                                            <Avatar className='avatar' alt={propietario.nombre} src="/static/images/avatar/2.jpg" />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -145,7 +160,7 @@ const Navbar = () => {
                                     >
                                         <div className="menuItem">
                                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar style={{backgroundColor: '#795548'}} alt={propietario.nombre} src="/static/images/avatar/2.jpg"/>
+                                                <Avatar style={{ backgroundColor: '#795548' }} alt={propietario.nombre} src="/static/images/avatar/2.jpg" />
                                             </IconButton>
                                             <h3 className='name'>
                                                 {`${propietario.nombre} ${propietario?.apellido}`}

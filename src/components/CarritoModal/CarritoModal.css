@@ -1,0 +1,49 @@
+.carritoModal{
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* color: #fff; */
+    /* font-weight: bold; */
+    z-index: 60;
+    /* transition: .3s; */
+}
+
+.carritoModal.activeModal{
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carritoModal .modalContainer{
+    border-radius: 10px;
+    padding: 30px;
+    width: 40%;
+    height: 70%;
+    background-color: #fff;
+    overflow: overlay;
+}
+
+.carritoModal .articleList{
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.carritoModal .articulosCarrito{
+    padding: 0 20px;
+}
+
+.carritoModal .buttonContainer{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;  
+}
+
+.carritoModal .closeModalIcon{
+    cursor: pointer;
+    font-size: 30px;
+    color: var(--color-storange);
+}

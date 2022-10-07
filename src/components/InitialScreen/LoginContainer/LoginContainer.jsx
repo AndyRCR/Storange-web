@@ -53,7 +53,7 @@ const LoginContainer = () => {
 
     const classes = useStyles()
 
-    const {encodePetition, setUserIsTrusted, buscarPropietario, buscarArticulos} = useContext(GlobalContext)
+    const {encodePetition, buscarDireccion, setUserIsTrusted, buscarPropietario, buscarArticulos} = useContext(GlobalContext)
 
     const navigate = useNavigate()
 
@@ -93,6 +93,7 @@ const LoginContainer = () => {
             if(res.length > 0){
               setUserIsTrusted(true)
               buscarPropietario()
+              buscarDireccion()
               buscarArticulos()
               navigate('/dashboard')
             }

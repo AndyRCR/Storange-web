@@ -8,7 +8,11 @@ import dayjs from 'dayjs'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
+import { ToastContainer } from 'react-toastify'
+import FormEnvio from '../FormEnvio/FormEnvio'
 import './RecogerEnviar.css'
+import { useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalStateContext'
 
 const CssTextField = withStyles({
     root: {
@@ -49,8 +53,8 @@ const useStyles = makeStyles({
         textTransform: 'none !important',
         fontWeight: 'bold !important',
         color: '#fff !important',
-        width: '150px !important',
-        margin: '0 20px !important',
+        width: '200px !important',
+        margin: '20px 0 !important',
         height: 'fit-content !important'
     },
     buttonWhite: {
@@ -70,13 +74,17 @@ const useStyles = makeStyles({
     },
     buttonBorder: {
         textTransform: 'none !important',
-        borderRadius: '0 !important',
         color: '#383838 !important',
-        width: 'calc(100% / 3)'
+        width: 'calc(100% / 3)',
+        backgroundColor: '#F1F1F1 !important',
+        fontWeight: 'bold !important',
+        borderRadius: '4px 4px 0 0 !important'
     },
     buttonBorderActive: {
-        color: '#f94700 !important',
-        borderBottom: '2px solid #f94700 !important'
+        color: '#fff !important',
+        fontWeight: 'bold !important',
+        backgroundColor: '#f94700 !important',
+        borderRadius: '4px 4px 0 0 !important'
     },
     root: {
         '&': {
@@ -107,23 +115,18 @@ const isWeekend = (date) => {
 const RecoverEnviarContainer = () => {
 
     const classes = useStyles()
+    const { direcciones, setActiveDireccionModal } = useContext(GlobalContext)
 
-    const [buttonState, setButtonState] = useState([true, false, false])
+    const [buttonState, setButtonState] = useState([false, true, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
-
-    const pixelToInt = (pixels) => {
-        return parseInt(pixels.slice(0, pixels.indexOf('p')))
-    }
+    const [direccionSelect, setDireccionSelect] = useState("default")
 
     useEffect(() => {
-        const style = window.getComputedStyle(document.querySelector('.sectionRecoger .section'))
-        const width = style.getPropertyValue('width')
+        const width = document.querySelector('.navbarRecoger').clientWidth
 
         document.querySelectorAll('.sectionRecoger .section').forEach(el => {
-            el.style.transform = `translateX(-${pixelToInt(width) * buttonState.indexOf(true)}px)`
+            el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
         })
-        return () => {
-        }
     }, [buttonState])
 
 
@@ -151,15 +154,30 @@ const RecoverEnviarContainer = () => {
                                 </div>
                                 <div className="formItem">
                                     <p>Seleccione la dirección de envío</p>
-                                    <Select
-                                        name='direccion'
-                                        className={`customSelect ${classes.root}`}
-                                    >
-                                        <MenuItem value="1">Direccion</MenuItem>
-                                        <MenuItem value="2">Direccion</MenuItem>
-                                        <MenuItem value="3">Direccion</MenuItem>
-                                        <MenuItem value="4">Direccion</MenuItem>
-                                    </Select>
+                                    {direcciones !== null ? (
+                                        <>
+                                            <Select
+                                                name='direccion'
+                                                className={`customSelect ${classes.root}`}
+                                                value={direccionSelect}
+                                                onChange={ e => setDireccionSelect(e.target.value)}
+                                            >
+                                                <MenuItem value="default">Seleccione su dirección</MenuItem>
+                                                {direcciones.map((dir, index) =>{
+                                                    return (
+                                                        <MenuItem key={`direccion${index}`} value={dir.direccion}>{dir.direccion}</MenuItem>
+                                                    )
+                                                })}
+                                            </Select>
+                                            <Button
+                                            onClick={() => setActiveDireccionModal(true)}
+                                            className={classes.button}>
+                                                Agregar nueva dirección
+                                            </Button>
+                                        </>
+                                    ):(
+                                        <>Cargando</>
+                                    )}
                                 </div>
                             </div>
                             <div className="subform">
@@ -190,31 +208,31 @@ const RecoverEnviarContainer = () => {
                         </div>
                     </div>
                 </div>
+                <FormEnvio />
                 <div className="section">
                     <div className='alert'>
                         <div className='border'></div>
                         <div className='icon'>
                             <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
                         </div>
-                        <div className='text'>No hay artículos agregados al carrito</div>
-                        <Button className={classes.button}>
-                            Agregar
-                        </Button>
-                    </div>
-                </div>
-                <div className="section">
-                    <div className='alert'>
-                        <div className='border'></div>
-                        <div className='icon'>
-                            <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
-                        </div>
-                        <div className='text'>No hay artículos agregados al carrito</div>
+                        <div className='text'>No hay ordenes en progreso</div>
                     </div>
                 </div>
             </div>
             <div className='footerRecoger'>
                 Cualquier duda o consulta por favor comuníquese con nuestra área de atención al cliente por WhatsApp al teléfono 951612957
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={1000}
+                hideProgressBar
+                theme='light'
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </div>
     )
 }
