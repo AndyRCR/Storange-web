@@ -42,7 +42,7 @@ const CarritoDeEnvio = () => {
 
     const classes = useStyles()
     const navigate = useNavigate()
-    const { carrito, setFormEnvioPage, setActiveModal } = useContext(GlobalContext)
+    const { carrito, setFormEnvioPage, setActiveModal, actualizarEstadoEnvio, isLoading, ids, setIds } = useContext(GlobalContext)
 
     useEffect(() => {
     }, [carrito])
@@ -50,63 +50,61 @@ const CarritoDeEnvio = () => {
     return (
         <div className='test'>
             <div className='carritoDeEnvio articlesList'>
-                {carrito !== null ? (
+                {carrito !== null && carrito.length !== 0 ? (
                     <>
-                        {carrito.length !== 0 ? (
-                            <>
-                                <h3>Carrito de envio</h3>
-                                <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
-                                    <div className='step'>1</div>
-                                    <div>
-                                        <h4 style={{ fontWeight: 'bold' }}>Articulos seleccionados</h4>
-                                        <p>Esta es la lista de artículos para el envío</p>
-                                    </div>
-                                </div>
-                                <div className='articulosCarrito'>
-                                    {carrito.map(articulo => {
-                                        return (
-                                            <ArticuloCarrito key={articulo.idArticulo} articulo={articulo} />
-                                        )
-                                    })}
-                                </div>
-                                <div className='formButtons' style={{justifyContent: 'space-between'}}>
-                                    <Button
-                                    onClick={() => {
-                                        document.querySelector('.carritoModal').style.top = `${window.scrollY}px`
-                                        document.body.style.overflowY = "hidden"
-                                        setActiveModal(true)
-                                    }}
-                                    className={classes.buttonModal}>
-                                        Agregar más articulos
-                                    </Button>
-                                    <Button onClick={() => setFormEnvioPage(0)} className={classes.button}>
-                                        <FontAwesomeIcon style={{margin: '0 8px'}} icon={faArrowDown}/>
-                                        Siguiente
-                                    </Button>
-                                    <Button
-                                    style={{visibility: 'hidden'}}
-                                    className={classes.buttonModal}>
-                                        Agregar más articulos
-                                    </Button>
-                                </div>
-                            </>
-                        ) : (
-                            <div className='alert'>
-                                <div className='border'></div>
-                                <div className='icon'>
-                                    <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
-                                </div>
-                                <div className='text'>No hay artículos agregados al carrito</div>
-                                <Button onClick={() => navigate('/dashboard')} className={classes.button}>
-                                    Agregar
-                                </Button>
+                        <h3>Carrito de envio</h3>
+                        <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
+                            <div className='step'>1</div>
+                            <div>
+                                <h4 style={{ fontWeight: 'bold' }}>Articulos seleccionados</h4>
+                                <p>Esta es la lista de artículos para el envío</p>
                             </div>
-                        )}
+                        </div>
+                        <div className='articulosCarrito'>
+                            {carrito.map(articulo => {
+                                return (
+                                    <ArticuloCarrito key={articulo.idArticulo} articulo={articulo} />
+                                )
+                            })}
+                        </div>
+                        <div className='formButtons' style={{ justifyContent: 'space-between' }}>
+                            <Button
+                                onClick={() => {
+                                    if (!isLoading) {
+                                        ids.forEach(id => actualizarEstadoEnvio(0, id))
+                                        setIds([])
+                                    }
+                                }}
+                                className={classes.buttonModal}>
+                                Borrar seleccionados
+                            </Button>
+
+                            <Button onClick={() => setFormEnvioPage(0)} className={classes.button}>
+                                <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
+                                Siguiente
+                            </Button>
+
+                            <Button
+                                onClick={() => {
+                                    document.querySelector('.carritoModal').style.top = `${window.scrollY}px`
+                                    document.body.style.overflowY = "hidden"
+                                    setActiveModal(true)
+                                }}
+                                className={classes.buttonModal}>
+                                Agregar más articulos
+                            </Button>
+                        </div>
                     </>
                 ) : (
-                    <div className='loadingSpinner'>
-                        <ClimbingBoxLoader size={20} color={'#F94700'} />
-                        <h3>Cargando...</h3>
+                    <div className='alert carritoDeEnvio'>
+                        <div className='border'></div>
+                        <div className='icon'>
+                            <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
+                        </div>
+                        <div className='text'>No hay artículos agregados al carrito</div>
+                        <Button onClick={() => setActiveModal(true)} className={classes.button}>
+                            Agregar
+                        </Button>
                     </div>
                 )}
             </div>

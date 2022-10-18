@@ -93,7 +93,7 @@ const ArticlesList = () => {
                     return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
                 }).length > 0 ? (
                     <>
-                        <div className="articlesPagination">
+                        <div className="articlesPagination" style={{display: 'flex', justifyContent: 'center'}}>
                             <Pagination
                             showFirstButton
                             showLastButton
@@ -102,13 +102,13 @@ const ArticlesList = () => {
                             onChange={(e, pageNumber) => setPage(pageNumber)}
                             count={Math.round([...filteredArticles]
                                 .filter(el =>{
-                                    return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
                                 }).length/10)}
                             shape="rounded" />
                         </div>
                         {[...filteredArticles]
                         .filter(el =>{
-                            return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                            return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
                         })
                         .slice((page-1)*10, (page-1)*10+10).map(articulo => {
                             return (
@@ -124,7 +124,7 @@ const ArticlesList = () => {
                             onChange={(e, pageNumber) => setPage(pageNumber)}
                             count={Math.round([...filteredArticles]
                                 .filter(el =>{
-                                    return el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)
+                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
                                 }).length/10)}
                             shape="rounded" />
                         </div>

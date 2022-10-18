@@ -53,7 +53,7 @@ const LoginContainer = () => {
 
     const classes = useStyles()
 
-    const {encodePetition, buscarDireccion, setUserIsTrusted, buscarPropietario, buscarArticulos} = useContext(GlobalContext)
+    const {encodePetition, setUserIsTrusted } = useContext(GlobalContext)
 
     const navigate = useNavigate()
 
@@ -92,9 +92,6 @@ const LoginContainer = () => {
           .then((res) => {
             if(res.length > 0){
               setUserIsTrusted(true)
-              buscarPropietario()
-              buscarDireccion()
-              buscarArticulos()
               navigate('/dashboard')
             }
             else{
@@ -108,7 +105,7 @@ const LoginContainer = () => {
     <div className='loginContainer initialContainer'>
         <div className='formContainer'>
             <div className='logo'>
-                <img src="https://app.storange.pe/wp-content/themes/storange/app/static/images/logo.svg?key=1659564954838" alt="storange logo" />
+                <img src="https://i.ibb.co/ZSmpfkP/105915933-111271107309597-8501797870112202615-n-removebg-preview.png" style={{width: '100px'}} alt="storange logo" />
             </div>
             <div className="title">
                 <h1>Bienvenido de nuevo</h1>

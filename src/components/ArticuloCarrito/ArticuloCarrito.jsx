@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Button, CircularProgress } from '@mui/material'
+import { Button, Checkbox, CircularProgress } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
 import { GlobalContext } from '../../context/GlobalStateContext'
 import { useContext } from 'react'
 import './ArticuloCarrito.css'
+import { useState } from 'react'
 
 const useStyles = makeStyles({
     button: {
@@ -43,19 +44,35 @@ const ArticuloCarrito = ({ articulo }) => {
 
     const classes = useStyles()
 
-    const { actualizarEstadoEnvio, isLoading } = useContext(GlobalContext)
+    const { actualizarEstadoEnvio, isLoading, ids, setIds } = useContext(GlobalContext)
 
     return (
         <div className='articuloCarrito'>
             <div className='articleImage'>
                 <img src={articulo.imagenRecogida} alt={articulo.titulo} />
-                <Button
-                onClick={() => {
-                    if(!isLoading) actualizarEstadoEnvio(0, articulo.idArticulo)
-                }}
-                className={classes.button}>
-                    Borrar
-                </Button>
+                <div className='articleOptions'>
+                    <Checkbox
+                    sx={{
+                        '&.Mui-checked': {
+                            color: '#F94700',
+                        },
+                    }}
+                    onClick={(e) =>{
+                        if(e.target.checked){
+                            setIds([...ids, articulo.idArticulo])
+                        }else{
+                            setIds([...(ids.filter(el => el !== articulo.idArticulo))])
+                        }
+                    }}
+                    />
+                    <Button
+                    onClick={() => {
+                        if(!isLoading) actualizarEstadoEnvio(0, articulo.idArticulo)
+                    }}
+                    className={classes.button}>
+                        Borrar
+                    </Button>
+                </div>
             </div>
             <div className='articleInfo'>
                 <div>

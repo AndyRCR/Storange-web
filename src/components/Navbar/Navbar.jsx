@@ -88,7 +88,7 @@ const Navbar = () => {
                                 ))}
                             </Menu>
                         </Box>
-                        <img src="https://app.storange.pe/wp-content/themes/storange/app/static/images/logo-white.svg?key=1659564954838" alt="storange logo" />
+                        <img src="https://i.ibb.co/kgC6qMt/image.webp" style={{width: '350px'}} alt="storange logo" />
                         <Box
                         sx={{flexGrow: 'initial', display: { xs: 'none', md: 'flex' } }}
                         >

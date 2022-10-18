@@ -10,9 +10,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
 import { ToastContainer } from 'react-toastify'
 import FormEnvio from '../FormEnvio/FormEnvio'
-import './RecogerEnviar.css'
 import { useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalStateContext'
+import './RecogerEnviar.css'
+import OrdenesEnProgreso from '../OrdenesEnProgreso/OrdenesEnProgreso'
 
 const CssTextField = withStyles({
     root: {
@@ -115,13 +116,16 @@ const isWeekend = (date) => {
 const RecoverEnviarContainer = () => {
 
     const classes = useStyles()
-    const { direcciones, setActiveDireccionModal } = useContext(GlobalContext)
+    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos } = useContext(GlobalContext)
 
-    const [buttonState, setButtonState] = useState([false, true, false])
+    const [buttonState, setButtonState] = useState([true, false, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
     const [direccionSelect, setDireccionSelect] = useState("default")
 
     useEffect(() => {
+        if(direcciones === null) buscarDireccion()
+        if(articulos === null) buscarArticulos()
+
         const width = document.querySelector('.navbarRecoger').clientWidth
 
         document.querySelectorAll('.sectionRecoger .section').forEach(el => {
@@ -133,13 +137,15 @@ const RecoverEnviarContainer = () => {
     return (
         <div className='recogerEnviarContainer'>
             <div className='navbarRecoger'>
-                <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
-                <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
-                <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
+                <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
+                <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
+                <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
             </div>
             <div className='sectionRecoger'>
+                <FormEnvio />
+                <OrdenesEnProgreso />
                 <div className="section">
-                    <div className='formRecogida'>
+                    {/* <div className='formRecogida'>
                         <div className="form">
                             <div className="subform">
                                 <h3>Formulario de Recogida</h3>
@@ -170,7 +176,10 @@ const RecoverEnviarContainer = () => {
                                                 })}
                                             </Select>
                                             <Button
-                                            onClick={() => setActiveDireccionModal(true)}
+                                            onClick={() => {
+                                                document.body.style.overflowY = "hidden"
+                                                setActiveDireccionModal(true)
+                                            }}
                                             className={classes.button}>
                                                 Agregar nueva dirección
                                             </Button>
@@ -206,16 +215,13 @@ const RecoverEnviarContainer = () => {
                                 Solicitar
                             </Button>
                         </div>
-                    </div>
-                </div>
-                <FormEnvio />
-                <div className="section">
+                    </div> */}
                     <div className='alert'>
                         <div className='border'></div>
                         <div className='icon'>
                             <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
                         </div>
-                        <div className='text'>No hay ordenes en progreso</div>
+                        <div className='text'>Para solicitar una recogida de artículos, comunicarse por WhatsApp con el número 951612957</div>
                     </div>
                 </div>
             </div>

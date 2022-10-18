@@ -3,14 +3,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalStateContext'
+import Places from '../Places/Places'
 import './DireccionModal.css'
-import Places from '../Map/Places'
-
-const location = {
-    address: '1600 Amphitheatre Parkway, Mountain View, california.',
-    lat: 37.42216,
-    lng: -122.08427,
-}
 
 const DireccionModal = () => {
 

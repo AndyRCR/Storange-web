@@ -1,0 +1,103 @@
+.perfilContainer{
+    margin-top: 88px;
+    display: flex;
+}
+
+
+
+.perfilContainer .menuPerfil,
+.perfilContainer .menuSelected{
+    padding-top: 40px;
+    height: calc(100vh - 88px);
+}
+
+.perfilContainer .menuPerfil{
+    width: 25%;
+    box-shadow: 5px 0px 6px -1px rgba(0,0,0,0.35);
+}
+
+.perfilContainer .menuPerfil p{
+    font-size: 14px;
+    height: 40px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: rgba(0,0,0,.6);
+}
+
+.perfilContainer .menuItem{
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.perfilContainer .menuItem.menuItemActive{
+    color: var(--color-storange);
+    background-color: #FEE9E1;
+}
+
+.perfilContainer .menuItem:not(.menuItemActive):hover{
+    background-color: #F6F6F6;
+}
+
+.perfilContainer .menuIcon{
+    width: 30px;
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.perfilContainer .menuInfo{
+    width: 75%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfilContainer .menuHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.perfilContainer .menuInfo .menuArea{
+    margin-bottom: 40px;
+    padding: 20px 40px;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.perfilContainer .menuInputs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+.perfilContainer .menuDireccion{
+    width: 75%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.perfilContainer .menuDireccion .menuArea{
+    margin-bottom: 40px;
+    padding: 20px 40px;
+    width: 50%;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.perfilContainer .menuDireccion h2{
+    margin: 10px 0;
+}
+
+.perfilContainer .menuDireccion .direccionItem{
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    color: #707070;
+    background-color: #F5F5F5;
+}

@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { GlobalContext } from '../../../context/GlobalStateContext'
 import ArticlesList from '../ArticlesList/ArticlesList'
 import Filters from '../Filters/Filters'
 import './DashboardContainer.css'
 
 const DashboardContainer = () => {
+
+  const {buscarPropietario, propietario} = useContext(GlobalContext)
+
+  useEffect(() => {
+    if(propietario === null) buscarPropietario()
+  }, [])
+
   return (
     <div className='dashboardContainer'>
         <Filters/>

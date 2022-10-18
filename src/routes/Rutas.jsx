@@ -8,6 +8,7 @@ import RecoveryView from '../views/RecoveryView'
 import RegisterView from '../views/RegisterView'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from '../tools/ScrollToTop'
+import PerfilContainer from '../components/PerfilContainer/PerfilContainer'
 
 const Rutas = () => {
   return (
@@ -20,10 +21,12 @@ const Rutas = () => {
             <Route path='/dashboard' element={<Layout/>}>
                 <Route index element={<DashboardView/>}/>
                 <Route path='/dashboard/item/:id' element={<ArticleView/>}/>
-                {/* <Route index element={<Dashboard/>}/> */}
             </Route>
             <Route path='/pickup_send' element={<Layout/>}>
               <Route index element={<RecogerEnviarView/>}/>
+            </Route>
+            <Route path='/perfil' element={<Layout/>}>
+              <Route index element={<PerfilContainer/>}/>
             </Route>
         </Routes>
       </ScrollToTop>

@@ -1,5 +1,7 @@
+import { collection, getDocs, setDoc } from "firebase/firestore";
 import React, { createContext, useState } from "react";
 import { toast } from "react-toastify";
+import { db } from "../service/Firebase";
 
 export const GlobalContext = createContext()
 
@@ -22,12 +24,22 @@ const GlobalStateContext = ({ children }) => {
   const [carrito, setCarrito] = useState(null)
   const [activeFilters, setActiveFilters] = useState([])
   const [filteredArticles, setFilteredArticles] = useState([])
+  const [ids, setIds] = useState([])
+  const [ordenesEnProgreso, setOrdenesEnProgreso] = useState([])
 
   const [filter, setFilter] = useState('')
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
   const [formEnvioPage, setFormEnvioPage] = useState(1)
+
+  const [oe, setOe] = useState({
+    m3: '',
+    direccion: '',
+    tipoServicio: 'normal',
+    fecha: '',
+    total: ''
+  })
 
   const handleFilters = () => {
     if(activeFilters.length === 0){
@@ -143,7 +155,9 @@ const GlobalStateContext = ({ children }) => {
         setIsLoading(false)
         setArticulos(res)
         setFilteredArticles(res)
-        setCarrito(res.filter(art => art.estadoEnvio === 1))
+        setCarrito(res.filter(art => {
+          return art.estadoEnvio === 1 && art.estadoOrden === 0
+        }))
         if(showToast === 1) toast("Se agregó al carrito de envío")
         if(showToast === 2) toast("Articulo retirado del carrito de envío")
       })
@@ -213,6 +227,53 @@ const GlobalStateContext = ({ children }) => {
       })
   }
 
+  const agregarDireccion = (lat, lng, direction) => {
+    let details = { lat, lng, direction, idPropietario}
+
+    setIsLoading(true)
+
+    fetch("http://localhost:3306/agregarDireccion", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    })
+      .then(() => {
+        setIsLoading(false)
+        setActiveDireccionModal(false)
+        buscarDireccion()
+        toast("Dirección agregada correctamente")
+      })
+  }
+
+  const buscarOrdenes = async () =>{
+    const col = collection(db, propietario.idPropietario)
+    try {
+      const data = await getDocs(col)
+      const res = data.docs.map(doc => doc = {id: doc.id, ...doc.data()} )
+      setOrdenesEnProgreso(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const actualizarOrdenes = () =>{
+    let details = { estadoEnvio: 1, estadoOrden: 0}
+    fetch("http://localhost:3306/actualizarOrdenes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    })
+    .then(() => {
+      setFormEnvioPage(-1)
+      buscarArticulos()
+      buscarOrdenes()
+    })
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -238,7 +299,12 @@ const GlobalStateContext = ({ children }) => {
         activeModal, setActiveModal,
         direcciones, setDirecciones,
         buscarDireccion,
-        activeDireccionModal, setActiveDireccionModal
+        activeDireccionModal, setActiveDireccionModal,
+        agregarDireccion,
+        oe, setOe,
+        ids, setIds,
+        ordenesEnProgreso, setOrdenesEnProgreso,
+        buscarOrdenes, actualizarOrdenes
       }}
     >
       {children}

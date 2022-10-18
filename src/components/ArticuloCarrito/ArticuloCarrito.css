@@ -64,3 +64,7 @@
 .articuloCarrito .trashIcon{
     margin: 0 8px;
 }
+
+.articuloCarrito .articleOptions{
+    display: flex;
+}

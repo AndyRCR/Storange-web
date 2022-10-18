@@ -1,0 +1,20 @@
+.section.accordionSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    padding: 40px;
+}
+
+.accordionList{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.css-o4b71y-MuiAccordionSummary-content{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.section.accordionSection .articleInfo{
+    height: auto;
+}
