@@ -3,7 +3,7 @@ import LoginContainer from '../components/InitialScreen/LoginContainer/LoginCont
 
 const LoginView = () => {
   return (
-    <div className='loginView'>
+    <div className='loginView' style={{overflow: 'hidden'}}>
         <LoginContainer/>
     </div>
   )

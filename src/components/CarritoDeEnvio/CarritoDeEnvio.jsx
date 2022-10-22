@@ -53,7 +53,7 @@ const CarritoDeEnvio = () => {
                 {carrito !== null && carrito.length !== 0 ? (
                     <>
                         <h3>Carrito de envio</h3>
-                        <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
+                        <div className='stepItem'>
                             <div className='step'>1</div>
                             <div>
                                 <h4 style={{ fontWeight: 'bold' }}>Articulos seleccionados</h4>
@@ -79,11 +79,6 @@ const CarritoDeEnvio = () => {
                                 Borrar seleccionados
                             </Button>
 
-                            <Button onClick={() => setFormEnvioPage(0)} className={classes.button}>
-                                <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
-                                Siguiente
-                            </Button>
-
                             <Button
                                 onClick={() => {
                                     document.querySelector('.carritoModal').style.top = `${window.scrollY}px`
@@ -92,6 +87,11 @@ const CarritoDeEnvio = () => {
                                 }}
                                 className={classes.buttonModal}>
                                 Agregar más articulos
+                            </Button>
+
+                            <Button onClick={() => setFormEnvioPage(0)} className={classes.button}>
+                                <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
+                                Siguiente
                             </Button>
                         </div>
                     </>

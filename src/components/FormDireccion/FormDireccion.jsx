@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         textTransform: 'none !important',
         fontWeight: 'bold !important',
         color: '#fff !important',
-        width: '300px !important',
+        width: '200px !important',
         height: 'fit-content !important',
         margin: '20px 0 !important'
     },
@@ -97,7 +97,7 @@ const FormDireccion = () => {
                 </div>
                 <div>
                     <h3>Carrito de envio</h3>
-                    <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
+                    <div className='stepItem'>
                         <div className='step'>2</div>
                         <div>
                             <h4 style={{ fontWeight: 'bold' }}>Dirección de envío</h4>
@@ -150,7 +150,7 @@ const FormDireccion = () => {
                             <FormControlLabel value="normal" control={<Radio className={classes.radio} />} label="Normal (Mínimo de 48 horas para el despacho)" />
                             <FormControlLabel value="express" control={<Radio className={classes.radio} />} label="Express (Te lo enviaremos entre las 24 y 48 horas siguientes)" />
                         </RadioGroup> */}
-                        <div style={{width:'40%'}}>
+                        <div className='direccionContainer'>
                             {tipoEnvio === 'normal' && (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <StaticDatePicker

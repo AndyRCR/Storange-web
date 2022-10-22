@@ -13,7 +13,7 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     align-items: center;
     /* border: 1px dashed black; */
     box-sizing: border-box;
@@ -58,4 +58,22 @@
 
 .swal2-styled.swal2-confirm:focus {
     box-shadow: 0 0 0 3px rgba(212, 139, 55, 0.5) !important;
+}
+
+@media (max-width: 1400px){
+    .recogerEnviarContainer .fluxSection .test {
+        padding: 20px 10px;
+    }
+}
+
+@media (max-width: 700px){
+    .recogerEnviarContainer .resumen p {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .recogerEnviarContainer .resumen p span:nth-child(2) {
+        justify-content: center;
+    }
 }

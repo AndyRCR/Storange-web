@@ -1,7 +1,7 @@
 .articuloCarrito{
     border-radius: 4px;
     margin: 20px 0;
-    padding: 16px;
+    /* padding: 16px; */
     display: flex;
     height: fit-content;
 }
@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 320px;
+    /* height: 320px; */
 }
 
 .articuloCarrito p{
@@ -24,7 +24,7 @@
     margin-top: 0;
     font-size: 20px;
     font-weight: bold;
-    line-height: 2rem;
+    line-height: normal;
 }
 
 .articuloCarrito .info{
@@ -67,4 +67,15 @@
 
 .articuloCarrito .articleOptions{
     display: flex;
+}
+
+@media (max-width: 450px){
+    .carritoDeEnvio .articuloCarrito {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .carritoDeEnvio .articuloCarrito .title {
+        text-align: center;
+    }
 }

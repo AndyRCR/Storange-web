@@ -13,3 +13,22 @@
     display: flex;
     justify-content: center;
 }
+
+@media (max-width: 1000px){
+    .articlesList{
+        margin: 40px 0 0 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px){
+    .articlesList nav li button{
+        width: 25px !important;
+        height: 25px !important;
+        min-width: auto;
+    }
+
+    .MuiPaginationItem-previousNext{
+        display: none !important;
+    }
+}

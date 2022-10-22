@@ -28,6 +28,7 @@
     font-size: 16px;
     margin-right: 60px;
     cursor: pointer;
+    text-align: center;
 }
 
 .navbar .menuIcon{
@@ -44,7 +45,7 @@
     color: #000;
 }
 
-.navbar .menuItem{
+.menu .menuItem{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,29 +53,42 @@
     padding: 10px 25px;
     height: 36px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.navbar .menuItem:nth-child(1){
+.menu .menuItem:nth-child(1){
     height: fit-content;
 }
 
-.navbar .menuItem:nth-child(2){
+.menu .menuItem:nth-child(2){
     border-top: 1px solid rgba(0,0,0,.12);
     border-bottom: 1px solid rgba(0,0,0,.12);
     font-size: 14px;
     color: rgba(0, 0, 0, 0.87);
 }
 
-.navbar .menuItem:nth-child(3){
+.menu .menuItem:nth-child(3){
     font-size: 14px;
     color: #f44336;
 }
 
-.navbar .menuItem .name{
+.menu .menuItem .name{
     margin-bottom: 0;
 }
 
-.navbar .menuItem .email{
+.menu .menuItem .email{
     font-size: 12px;
     font-weight: normal;
+}
+
+@media (max-width: 970px){
+    .navbar .appbar{
+        padding: 12px 40px;
+    }
+}
+
+@media (max-width: 450px){
+    .navbar .appbar{
+        padding: 12px 5px;
+    }
 }

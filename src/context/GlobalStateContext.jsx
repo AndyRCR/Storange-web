@@ -1,6 +1,7 @@
 import { collection, getDocs, setDoc } from "firebase/firestore";
 import React, { createContext, useState } from "react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { db } from "../service/Firebase";
 
 export const GlobalContext = createContext()
@@ -13,12 +14,12 @@ const GlobalStateContext = ({ children }) => {
   const [activeModal, setActiveModal] = useState(false)
   const [activeDireccionModal, setActiveDireccionModal] = useState(false)
 
-  const [idPropietario, setIdPropietario] = useState('ddd67238')
+  const [idPropietario, setIdPropietario] = useState(null || localStorage.getItem('trustedUser'))
   const [direcciones, setDirecciones] = useState(null)
   const [propietario, setPropietario] = useState(null)
   const [fotos, setFotos] = useState(null)
   const [userIsTrusted, setUserIsTrusted] = useState(null)
-  
+
   const [articulos, setArticulos] = useState(null)
   const [articulo, setArticulo] = useState(null)
   const [carrito, setCarrito] = useState(null)
@@ -41,28 +42,65 @@ const GlobalStateContext = ({ children }) => {
     total: ''
   })
 
+  const restartAll = () => {
+    localStorage.removeItem('trustedUser')
+
+    setIsLoading(false)
+    setLoaderState(1)
+    setChange(true)
+    setActiveModal(false)
+    setActiveDireccionModal(false)
+
+    setIdPropietario(null || localStorage.getItem('trustedUser'))
+    setDirecciones(null)
+    setPropietario(null)
+    setFotos(null)
+    setUserIsTrusted(null)
+
+    setArticulos(null)
+    setArticulo(null)
+    setCarrito(null)
+    setActiveFilters([])
+    setFilteredArticles([])
+    setIds([])
+    setOrdenesEnProgreso([])
+
+    setFilter('')
+    setCajaFilter(false)
+    setSueltoFilter(false)
+
+    setFormEnvioPage(1)
+    setOe({
+      m3: '',
+      direccion: '',
+      tipoServicio: 'normal',
+      fecha: '',
+      total: ''
+    })
+  }
+
   const handleFilters = () => {
-    if(activeFilters.length === 0){
+    if (activeFilters.length === 0) {
       setFilteredArticles(articulos)
-    }else if(
+    } else if (
       (activeFilters.indexOf('caja') !== -1 ||
-      activeFilters.indexOf('suelto') !== -1) === false &&
+        activeFilters.indexOf('suelto') !== -1) === false &&
       (activeFilters.indexOf(1) !== -1 ||
-      activeFilters.indexOf(2) !== -1 ||
-      activeFilters.indexOf(3) !== -1 ||
-      activeFilters.indexOf(5) !== -1) === true
-    ){
+        activeFilters.indexOf(2) !== -1 ||
+        activeFilters.indexOf(3) !== -1 ||
+        activeFilters.indexOf(5) !== -1) === true
+    ) {
       setFilteredArticles(articulos.filter(el => activeFilters.indexOf(el.idEstadoArticulo) !== -1))
-    }else if(
+    } else if (
       (activeFilters.indexOf('caja') !== -1 ||
-      activeFilters.indexOf('suelto') !== -1) === true &&
+        activeFilters.indexOf('suelto') !== -1) === true &&
       (activeFilters.indexOf(1) !== -1 ||
-      activeFilters.indexOf(2) !== -1 ||
-      activeFilters.indexOf(3) !== -1 ||
-      activeFilters.indexOf(5) !== -1) === false
-    ){
+        activeFilters.indexOf(2) !== -1 ||
+        activeFilters.indexOf(3) !== -1 ||
+        activeFilters.indexOf(5) !== -1) === false
+    ) {
       setFilteredArticles(articulos.filter(el => activeFilters.indexOf(el.tipoArticulo.toLowerCase()) !== -1))
-    }else{
+    } else {
       setFilteredArticles(articulos.filter(el => {
         return activeFilters.indexOf(el.idEstadoArticulo) !== -1 && activeFilters.indexOf(el.tipoArticulo.toLowerCase()) !== -1
       }))
@@ -158,8 +196,8 @@ const GlobalStateContext = ({ children }) => {
         setCarrito(res.filter(art => {
           return art.estadoEnvio === 1 && art.estadoOrden === 0
         }))
-        if(showToast === 1) toast("Se agregó al carrito de envío")
-        if(showToast === 2) toast("Articulo retirado del carrito de envío")
+        if (showToast === 1) toast("Se agregó al carrito de envío")
+        if (showToast === 2) toast("Articulo retirado del carrito de envío")
       })
   }
 
@@ -198,14 +236,14 @@ const GlobalStateContext = ({ children }) => {
         setIsLoading(false)
         setArticulo(
           descripcion === ''
-          ? { ...articulo, descripcionPropietario: null }
-          : { ...articulo, descripcionPropietario: descripcion })
+            ? { ...articulo, descripcionPropietario: null }
+            : { ...articulo, descripcionPropietario: descripcion })
         setEditDescription(false)
       })
   }
 
   const actualizarEstadoEnvio = (estadoEnvio, idArticulo) => {
-    let details = { estadoEnvio, idArticulo}
+    let details = { estadoEnvio, idArticulo }
 
     setIsLoading(true)
 
@@ -218,17 +256,19 @@ const GlobalStateContext = ({ children }) => {
     })
       .then(() => {
         setArticulo(
-          {...articulo,
-          estadoEnvio}
+          {
+            ...articulo,
+            estadoEnvio
+          }
         )
         estadoEnvio === 1
-        ? buscarArticulos(1)
-        : buscarArticulos(2)
+          ? buscarArticulos(1)
+          : buscarArticulos(2)
       })
   }
 
   const agregarDireccion = (lat, lng, direction) => {
-    let details = { lat, lng, direction, idPropietario}
+    let details = { lat, lng, direction, idPropietario }
 
     setIsLoading(true)
 
@@ -247,19 +287,19 @@ const GlobalStateContext = ({ children }) => {
       })
   }
 
-  const buscarOrdenes = async () =>{
+  const buscarOrdenes = async () => {
     const col = collection(db, propietario.idPropietario)
     try {
       const data = await getDocs(col)
-      const res = data.docs.map(doc => doc = {id: doc.id, ...doc.data()} )
+      const res = data.docs.map(doc => doc = { id: doc.id, ...doc.data() })
       setOrdenesEnProgreso(res)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const actualizarOrdenes = () =>{
-    let details = { estadoEnvio: 1, estadoOrden: 0}
+  const actualizarOrdenes = () => {
+    let details = { estadoEnvio: 1, estadoOrden: 0 }
     fetch("http://localhost:3306/actualizarOrdenes", {
       method: "POST",
       headers: {
@@ -267,11 +307,90 @@ const GlobalStateContext = ({ children }) => {
       },
       body: encodePetition(details)
     })
-    .then(() => {
-      setFormEnvioPage(-1)
-      buscarArticulos()
-      buscarOrdenes()
+      .then(() => {
+        setFormEnvioPage(-1)
+        buscarArticulos()
+        buscarOrdenes()
+      })
+  }
+
+  const borrarDireccion = async (idDireccion) => {
+    let details = { idDireccion }
+
+    fetch("http://localhost:3306/borrarDireccion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
     })
+      .then(() => {
+        buscarDireccion()
+        Swal.fire({
+          title: 'Dirección borrada',
+          text: 'La dirección se borró correctamente',
+          icon: 'success'
+        })
+      })
+  }
+
+  const crearDetalleOGL = (idOGL, idArticulo) =>{
+    let details = {idOGL, idArticulo}
+
+    fetch("http://localhost:3306/crearDetalleOGL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    })
+  }
+
+  const crearOGL = (idServicio) =>{
+    let details = {
+      idPropietario: propietario.idPropietario,
+      idServicio,
+      fechaSolicitado: oe.fecha,
+      direccion: oe.direccion,
+      volumen: carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2)))
+    }
+
+    fetch("http://localhost:3306/crearOGL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    })
+    .then(res => res.json())
+    .then(data => {
+      carrito.forEach(art => crearDetalleOGL(data.idOGL, art.idArticulo))
+    })
+  }
+
+  const obtenerServicio = () =>{
+    fetch("http://localhost:3306/obtenerServicio", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.length > 0) crearOGL(data[0].idServicio)
+      else crearServicio()
+    })
+  }
+
+  const crearServicio = () =>{
+
+    fetch("http://localhost:3306/crearServicio", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      }
+    })
+    .then(() => obtenerServicio())
   }
 
   return (
@@ -304,7 +423,9 @@ const GlobalStateContext = ({ children }) => {
         oe, setOe,
         ids, setIds,
         ordenesEnProgreso, setOrdenesEnProgreso,
-        buscarOrdenes, actualizarOrdenes
+        buscarOrdenes, actualizarOrdenes,
+        restartAll, borrarDireccion,
+        obtenerServicio
       }}
     >
       {children}

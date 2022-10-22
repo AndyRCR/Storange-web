@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #fff;
 }
 
 .initialContainer img{
@@ -48,6 +49,7 @@
     margin: 20px 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .initialContainer .options{
@@ -61,4 +63,25 @@
 .initialContainer a{
     font-size: 14px;
     color: var(--color-storange);
+}
+
+@media (max-width: 570px){
+    .initialContainer .formContainer {
+        width: 90%;
+    }
+
+    .loginContainer::before {
+        width: 300%;
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media (max-width: 420px){
+    .initialContainer .formContainer {
+        padding-top: 100px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
 }

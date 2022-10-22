@@ -13,6 +13,13 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     margin-bottom: 30px;
+    padding: 15px;
+}
+
+.carritoDeEnvio .stepItem{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
 }
 
 .carritoDeEnvio .step{
@@ -43,4 +50,47 @@
     width: fit-content;
     padding: 0 20px;
     margin: auto;
+}
+
+@media (max-width: 1400px){
+    .carritoDeEnvio .articulosCarrito {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px){
+    .carritoDeEnvio .articulosCarrito {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .carritoDeEnvio {
+        padding: 20px 10px 10px;
+    }
+}
+
+@media (max-width: 750px){
+    .fluxSection .formButtons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 450px){
+    .carritoDeEnvio .stepItem{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .carritoDeEnvio h3{
+        text-align: center;
+    }
+
+    .carritoDeEnvio .step{
+        margin-bottom: 5px;
+    }
+
+    .carritoDeEnvio .articulosCarrito {
+        height: 450px;
+    }
 }

@@ -10,20 +10,20 @@ const ImageCarousel = ({ fotos }) => {
   const moveLeft = () => {
     setPosition(position + 1 > fotos.length-1 ? 0 : position + 1)
     document.querySelectorAll('.card').forEach(card => {
-      card.style.transform = `translateX(-${420 * position}px)`
+      card.style.transform = `translateX(-${document.querySelector('.card').offsetWidth * position}px)`
     })
   }
 
   const moveRight = () => {
     setPosition(position - 1 < 0 ? fotos.length-1 : position - 1)
     document.querySelectorAll('.card').forEach(card => {
-      card.style.transform = `translateX(-${420 * position}px)`
+      card.style.transform = `translateX(-${document.querySelector('.card').offsetWidth * position}px)`
     })
   }
 
   useEffect(() => {
     document.querySelectorAll('.card').forEach(card => {
-      card.style.transform = `translateX(-${420 * position}px)`
+      card.style.transform = `translateX(-${document.querySelector('.card').offsetWidth * position}px)`
     })
   }, [position])
 

@@ -113,24 +113,33 @@ const isWeekend = (date) => {
     return day === 0 || day === 6
 }
 
-const RecoverEnviarContainer = () => {
+const RecogerEnviarContainer = () => {
 
     const classes = useStyles()
-    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos } = useContext(GlobalContext)
+    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario } = useContext(GlobalContext)
 
     const [buttonState, setButtonState] = useState([true, false, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
     const [direccionSelect, setDireccionSelect] = useState("default")
 
-    useEffect(() => {
-        if(direcciones === null) buscarDireccion()
-        if(articulos === null) buscarArticulos()
-
+    const handleResize = () =>{
         const width = document.querySelector('.navbarRecoger').clientWidth
 
         document.querySelectorAll('.sectionRecoger .section').forEach(el => {
             el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
         })
+    }
+
+    useEffect(() => {
+        if (direcciones === null) buscarDireccion()
+        if (articulos === null) buscarArticulos()
+        if (propietario === null) buscarPropietario()
+
+        handleResize()
+
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
     }, [buttonState])
 
 
@@ -142,7 +151,22 @@ const RecoverEnviarContainer = () => {
                 <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
             </div>
             <div className='sectionRecoger'>
-                <FormEnvio />
+                {carrito !== null && carrito.length > 0 ? (
+                    <FormEnvio />
+                ) : (
+                    <div className="section">
+                        <div className='alert carritoDeEnvio'>
+                            <div className='border'></div>
+                            <div className='icon'>
+                                <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
+                            </div>
+                            <div className='text'>No hay artículos agregados al carrito</div>
+                            <Button onClick={() => setActiveModal(true)} className={classes.button}>
+                                Agregar
+                            </Button>
+                        </div>
+                    </div>
+                )}
                 <OrdenesEnProgreso />
                 <div className="section">
                     {/* <div className='formRecogida'>
@@ -243,4 +267,4 @@ const RecoverEnviarContainer = () => {
     )
 }
 
-export default RecoverEnviarContainer
+export default RecogerEnviarContainer

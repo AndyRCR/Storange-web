@@ -3,8 +3,6 @@
     display: flex;
 }
 
-
-
 .perfilContainer .menuPerfil,
 .perfilContainer .menuSelected{
     padding-top: 40px;
@@ -59,6 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 25px 0;
 }
 
 .perfilContainer .menuInfo .menuArea{
@@ -97,7 +96,95 @@
 .perfilContainer .menuDireccion .direccionItem{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 30px;
     color: #707070;
     background-color: #F5F5F5;
+}
+
+.perfilContainer .menuDireccion .direccionItem > div{
+    display: flex;
+    align-items: center;
+}
+
+.perfilContainer .menuFooter{
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 1000px){
+    .perfilContainer{
+        flex-direction: column;
+    }
+
+    .perfilContainer .menuHeader {
+        display: block;
+        text-align: center;
+    }
+
+    .perfilContainer .menuPerfil, .perfilContainer .menuSelected {
+        width: 100%;
+        padding-top: 10px;
+        height: auto;
+        box-shadow: none;
+        border-bottom: 1px solid rgb(209, 209, 209);
+    }
+
+    .perfilContainer .menuInfo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 750px){
+    .perfilContainer .menuInputs {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+
+    .perfilContainer .menuInfo .menuArea {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .perfilContainer .menuInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .perfilContainer .menuFooter {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px){
+    .perfilContainer .menuInputs {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .perfilContainer .menuHeader h2{
+        font-size: 18px;
+    }
+
+    .perfilContainer .menuInfo .menuArea {
+        padding: 20px 10px;
+    }
+
+    .perfilContainer .menuInfo {
+        padding: 20px;
+    }
+
+    .perfilContainer .menuItem {
+        font-size: 14px;
+    }
+
+    .perfilContainer .menuPerfil p {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
 }

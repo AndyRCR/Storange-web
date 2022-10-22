@@ -1,10 +1,10 @@
 import React from 'react'
-import RecoverEnviarContainer from '../components/RecogerEnviarContainer/RecoverEnviarContainer';
+import RecogerEnviarContainer from '../components/RecogerEnviarContainer/RecogerEnviarContainer';
 
 const RecogerEnviarView = () => {
   return (
     <div className='recogerEnviarView'>
-        <RecoverEnviarContainer/>
+        <RecogerEnviarContainer/>
     </div>
   )
 }

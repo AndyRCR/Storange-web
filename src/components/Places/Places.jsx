@@ -61,7 +61,7 @@ const Places = () => {
             <GoogleMap
               mapContainerStyle={{ height: '100%' }}
               zoom={16}
-              center={selected === null ? { lat: parseFloat(direcciones[direcciones.length-1].lat), lng: parseFloat(direcciones[direcciones.length-1].lng) } : selected}
+              center={selected === null ? { lat: parseFloat(direcciones[direcciones.length-1]?.lat), lng: parseFloat(direcciones[direcciones.length-1]?.lng) } : selected}
               mapContainerClassName="map-container"
             >
               {selected && <Marker position={selected} />}

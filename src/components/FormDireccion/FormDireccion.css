@@ -8,6 +8,17 @@
     justify-content: space-between;
 }
 
+.formDireccion .stepItem{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.formDireccion .direccionContainer{
+    width: 40%;
+    margin-bottom: 20px;
+}
+
 .formDireccion .step{
     width: 30px;
     height: 30px;
@@ -24,4 +35,52 @@
 .formDireccion .step h4,
 .formDireccion .step p{
     margin: 0;
+}
+
+@media (max-width: 1600px){
+    .formDireccion .direccionContainer{
+        width: 50%;
+    }
+}
+
+@media (max-width: 1200px){
+    .formDireccion .direccionContainer{
+        width: 60%;
+    }
+}
+
+@media (max-width: 1000px){
+    .formDireccion .direccionContainer{
+        width: 80%;
+    }
+}
+
+@media (max-width: 800px){
+    .formDireccion .direccionContainer{
+        width: 100%;
+    }
+
+    .css-1tbq6mc-MuiPickersToolbar-root-MuiDatePickerToolbar-root{
+        display: none !important;
+    }
+}
+
+@media (max-width: 450px){
+    .formDireccion .stepItem{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .formDireccion h3{
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .formDireccion .step{
+        margin-bottom: 5px;
+    }
+
+    .formDireccion {
+        padding: 20px 10px;
+    }
 }

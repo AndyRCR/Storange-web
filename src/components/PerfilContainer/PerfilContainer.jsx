@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faMapLocationDot, faMapPin, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faMapLocationDot, faMapPin, faLocationDot, faTrash } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react'
 import { Button, TextField } from '@mui/material'
 import { makeStyles, withStyles } from '@mui/styles'
@@ -64,11 +64,13 @@ const useStyles = makeStyles({
   }
 })
 
+const regex = /^(?=\w*\d)(?=\w*[a-z])(?=\w*[a-z])\S{8,16}$/
+
 const PerfilContainer = () => {
 
   const classes = useStyles()
 
-  const { propietario, buscarPropietario, setIsLoading, encodePetition, direcciones, setActiveDireccionModal, buscarDireccion } = useContext(GlobalContext)
+  const { propietario, buscarPropietario, setIsLoading, encodePetition, direcciones, setActiveDireccionModal, buscarDireccion, borrarDireccion } = useContext(GlobalContext)
 
   const [section, setSection] = useState(1)
 
@@ -85,8 +87,9 @@ const PerfilContainer = () => {
   const [phoneAction, setPhoneAction] = useState(false)
 
   const [pass, setPass] = useState('')
-
+  
   const [newPass, setNewPass] = useState('')
+  const [newPassAction, setNewPassAction] = useState(false)
 
   const [newPassConfirm, setNewPassConfirm] = useState('')
 
@@ -109,6 +112,7 @@ const PerfilContainer = () => {
       setPass(value)
     } else if (name === 'newPass') {
       setNewPass(value)
+      setNewPassAction(true)
     } else {
       setNewPassConfirm(value)
     }
@@ -173,11 +177,15 @@ const PerfilContainer = () => {
             text: 'Los datos fueron actualizados',
             icon: 'success'
           })
+          setPass('')
+          setNewPass('')
+          setNewPassConfirm('')
+          setNewPassAction(false)
         })
     }else{
       Swal.fire({
         title: 'Confirmación',
-        text: 'Las contraseñas deben coincidir y tener mas de 6 carácteres',
+        text: 'Las contraseñas deben coincidir y tener entre 8 a 16 carácteres alfanuméricos',
         icon: 'info'
       })
     }
@@ -234,10 +242,6 @@ const PerfilContainer = () => {
           <div className='menuArea'>
             <div className='menuHeader'>
               <h2>Información Personal Privada</h2>
-              <Button
-                className={classes.button}
-                onClick={actualizarInfo}
-              >Guardar</Button>
             </div>
             {propietario !== null ? (
               <div className='menuInputs'>
@@ -289,13 +293,16 @@ const PerfilContainer = () => {
             ) : (
               <h1>Cargando...</h1>
             )}
+            <div className='menuFooter'>
+              <Button
+                className={classes.button}
+                onClick={actualizarInfo}
+              >Guardar</Button>
+            </div>
           </div>
           <div className='menuArea'>
             <div className='menuHeader'>
               <h2>Cambiar Contraseña</h2>
-              <Button
-              onClick={verificarContraseña}
-              className={classes.button}>Guardar</Button>
             </div>
             <div className='menuInputs'>
               <CssTextField
@@ -316,7 +323,8 @@ const PerfilContainer = () => {
                 name="newPass"
                 onChange={handleChange}
                 onBlur={handleChange}
-                helperText={' '}
+                error={regex.test(newPass) === false && newPassAction}
+                helperText={regex.test(newPass) === false && newPassAction ? 'De 8 a 16 carácteres entre números y letras' : ' '}
                 value={newPass}
                 style={{ marginBottom: '16px' }}
               />
@@ -332,6 +340,11 @@ const PerfilContainer = () => {
                 value={newPassConfirm}
                 style={{ marginBottom: '16px' }}
               />
+            </div>
+            <div className='menuFooter'>
+              <Button
+              onClick={verificarContraseña}
+              className={classes.button}>Guardar</Button>
             </div>
           </div>
         </div>
@@ -353,8 +366,14 @@ const PerfilContainer = () => {
               direcciones.map((dir, i) => {
                 return (
                   <div key={`direccion${i}`} className='direccionItem'>
-                    <FontAwesomeIcon style={{ marginRight: '30px', fontSize: '25px' }} icon={faMapPin} />
-                    <p>{dir.direccion}</p>
+                    <div>
+                      <FontAwesomeIcon style={{ marginRight: '30px', fontSize: '25px' }} icon={faMapPin} />
+                      <p>{dir.direccion}</p>
+                    </div>
+                    <FontAwesomeIcon
+                    style={{ marginLeft: '30px', fontSize: '18px', color: 'red', cursor: 'pointer' }}
+                    icon={faTrash}
+                    onClick={() => borrarDireccion(dir.idDireccion)}/>
                   </div>
                 )
               })

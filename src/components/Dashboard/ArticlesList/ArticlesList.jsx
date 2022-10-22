@@ -77,7 +77,7 @@ const ArticlesList = () => {
     return (
         <div className='articlesList'>
             <div className='articlesFilter'>
-                <h1>Articulos</h1>
+                <h3>Buscar Articulos</h3>
                 <CssTextField
                     label="Buscar"
                     variant="outlined"

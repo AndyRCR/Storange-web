@@ -13,9 +13,9 @@
     margin: 0 7px;
 }
 
-.articleContainer .info{
+/* .articleContainer .info{
     min-width: 400px;
-}
+} */
 
 .articleContainer .article{
     display: flex;
@@ -144,4 +144,87 @@
 
 .articleContainer .descripcionPropietario p{
     margin: 0;
+}
+
+@media (max-width : 1250px){
+    .articleContainer .title h1 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .articleContainer .caracteristicas h3 {
+        font-size: 18px;
+    }
+
+    .articleContainer p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width : 1080px){
+    .articleContainer {
+        padding: 130px 30px 0;
+    }
+
+    .imageCarousel .container {
+        max-width: 300px;
+    }
+
+    .imageCarousel .card {
+        width: 300px;
+    }
+
+    .article .images, .article .info {
+        padding: 0 20px;
+    }
+
+    .articleContainer .article {
+        margin-top: 20px;
+        padding: 0;
+    }
+}
+
+@media (max-width : 700px){
+    .articleContainer{
+        padding: 110px 15px 0;
+    }
+
+    .articleContainer .article{
+        flex-direction: column-reverse;
+    }
+
+    .article .images, .article .info {
+        width: 100%;
+    }
+
+    .article .images{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width : 400px){
+    .imageCarousel .container {
+        max-width: 200px;
+    }
+
+    .imageCarousel .card {
+        width: 200px;
+    }
+
+    .articleContainer .secondaryButtons.secondaryFix {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .articleContainer .secondaryButtons button,
+    .makeStyles-buttonAction-6{
+        margin-bottom: 10px;
+        height: 30px !important;
+    }
+
+    .articleContainer .secondaryButtons {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
 }
