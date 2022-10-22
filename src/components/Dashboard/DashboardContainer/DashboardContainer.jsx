@@ -6,10 +6,11 @@ import './DashboardContainer.css'
 
 const DashboardContainer = () => {
 
-  const {buscarPropietario, propietario} = useContext(GlobalContext)
+  const {buscarPropietario, propietario, buscarOrdenes, ordenesEnProgreso} = useContext(GlobalContext)
 
   useEffect(() => {
     if(propietario === null) buscarPropietario()
+    if(ordenesEnProgreso === null) buscarOrdenes()
   }, [])
 
   return (

@@ -116,7 +116,7 @@ const isWeekend = (date) => {
 const RecogerEnviarContainer = () => {
 
     const classes = useStyles()
-    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario } = useContext(GlobalContext)
+    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario, buscarOrdenes, ordenesEnProgreso } = useContext(GlobalContext)
 
     const [buttonState, setButtonState] = useState([true, false, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
@@ -134,6 +134,7 @@ const RecogerEnviarContainer = () => {
         if (direcciones === null) buscarDireccion()
         if (articulos === null) buscarArticulos()
         if (propietario === null) buscarPropietario()
+        if (ordenesEnProgreso === null) buscarOrdenes()
 
         handleResize()
 

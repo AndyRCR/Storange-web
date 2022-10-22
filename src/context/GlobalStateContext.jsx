@@ -26,7 +26,7 @@ const GlobalStateContext = ({ children }) => {
   const [activeFilters, setActiveFilters] = useState([])
   const [filteredArticles, setFilteredArticles] = useState([])
   const [ids, setIds] = useState([])
-  const [ordenesEnProgreso, setOrdenesEnProgreso] = useState([])
+  const [ordenesEnProgreso, setOrdenesEnProgreso] = useState(null)
 
   const [filter, setFilter] = useState('')
   const [cajaFilter, setCajaFilter] = useState(false)

@@ -15,12 +15,12 @@ const OrdenesEnProgreso = () => {
     const { ordenesEnProgreso, buscarOrdenes } = useContext(GlobalContext)
 
     useEffect(() => {
-        if (ordenesEnProgreso.length === 0) buscarOrdenes()
+        if (ordenesEnProgreso === null) buscarOrdenes()
     }, [ordenesEnProgreso])
 
     return (
         <>
-            {ordenesEnProgreso.length > 0 ? (
+            {ordenesEnProgreso !== null ? (
                 <div className="section accordionSection">
                     <h3 style={{ margin: '10px 0' }}>Estas son tus ordenes en progreso: </h3>
                     {ordenesEnProgreso.map((orden, i) => {
