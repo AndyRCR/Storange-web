@@ -1,4 +1,4 @@
-import { collection, getDocs, setDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import React, { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -13,6 +13,7 @@ const GlobalStateContext = ({ children }) => {
   const [change, setChange] = useState(true)
   const [activeModal, setActiveModal] = useState(false)
   const [activeDireccionModal, setActiveDireccionModal] = useState(false)
+  const [page, setPage] = useState(1)
 
   const [idPropietario, setIdPropietario] = useState(null || localStorage.getItem('trustedUser'))
   const [direcciones, setDirecciones] = useState(null)
@@ -80,6 +81,7 @@ const GlobalStateContext = ({ children }) => {
   }
 
   const handleFilters = () => {
+    setPage(1)
     if (activeFilters.length === 0) {
       setFilteredArticles(articulos)
     } else if (
@@ -425,7 +427,8 @@ const GlobalStateContext = ({ children }) => {
         ordenesEnProgreso, setOrdenesEnProgreso,
         buscarOrdenes, actualizarOrdenes,
         restartAll, borrarDireccion,
-        obtenerServicio
+        obtenerServicio,
+        page, setPage
       }}
     >
       {children}

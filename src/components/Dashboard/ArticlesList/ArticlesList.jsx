@@ -59,9 +59,8 @@ const ArticlesList = () => {
 
     const classes = useStyles()
 
-    const { articulos, filteredArticles, buscarArticulos, activeFilters } = useContext(GlobalContext)
+    const { articulos, filteredArticles, buscarArticulos, activeFilters, page, setPage } = useContext(GlobalContext)
 
-    const [page, setPage] = useState(1)
     const [filter, setFilter] = useState('')
 
     const handleFilterChange = (e) => {
