@@ -95,7 +95,7 @@ const LoginContainer = () => {
 
     setIsLoading(true)
 
-    fetch("http://localhost:3306/login", {
+    fetch("https://storange-back.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",

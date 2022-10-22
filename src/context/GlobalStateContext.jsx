@@ -119,7 +119,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarPropietario = () => {
     let details = { idPropietario }
 
-    fetch("http://localhost:3306/propietarioPorId", {
+    fetch("https://storange-back.onrender.com/propietarioPorId", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -135,7 +135,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarDireccion = () => {
     let details = { idPropietario }
 
-    fetch("http://localhost:3306/direcciones", {
+    fetch("https://storange-back.onrender.com/direcciones", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -153,7 +153,7 @@ const GlobalStateContext = ({ children }) => {
     setFotos(null)
     let details = { idArticulo }
 
-    fetch("http://localhost:3306/fotos", {
+    fetch("https://storange-back.onrender.com/fotos", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -165,7 +165,7 @@ const GlobalStateContext = ({ children }) => {
         setFotos(res)
       })
 
-    fetch("http://localhost:3306/articuloPorId", {
+    fetch("https://storange-back.onrender.com/articuloPorId", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -181,7 +181,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarArticulos = (showToast) => {
     showToast = showToast || null
     let details = { idPropietario, filter }
-    fetch("http://localhost:3306/articulovirtual", {
+    fetch("https://storange-back.onrender.com/articulovirtual", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -206,7 +206,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("http://localhost:3306/actualizarTitulo", {
+    fetch("https://storange-back.onrender.com/actualizarTitulo", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -225,7 +225,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("http://localhost:3306/actualizarDescripcion", {
+    fetch("https://storange-back.onrender.com/actualizarDescripcion", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -247,7 +247,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("http://localhost:3306/actualizarEstadoEnvio", {
+    fetch("https://storange-back.onrender.com/actualizarEstadoEnvio", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -272,7 +272,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("http://localhost:3306/agregarDireccion", {
+    fetch("https://storange-back.onrender.com/agregarDireccion", {
       method: "PUT",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -300,7 +300,7 @@ const GlobalStateContext = ({ children }) => {
 
   const actualizarOrdenes = () => {
     let details = { estadoEnvio: 1, estadoOrden: 0 }
-    fetch("http://localhost:3306/actualizarOrdenes", {
+    fetch("https://storange-back.onrender.com/actualizarOrdenes", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -317,7 +317,7 @@ const GlobalStateContext = ({ children }) => {
   const borrarDireccion = async (idDireccion) => {
     let details = { idDireccion }
 
-    fetch("http://localhost:3306/borrarDireccion", {
+    fetch("https://storange-back.onrender.com/borrarDireccion", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -337,7 +337,7 @@ const GlobalStateContext = ({ children }) => {
   const crearDetalleOGL = (idOGL, idArticulo) =>{
     let details = {idOGL, idArticulo}
 
-    fetch("http://localhost:3306/crearDetalleOGL", {
+    fetch("https://storange-back.onrender.com/crearDetalleOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -355,7 +355,7 @@ const GlobalStateContext = ({ children }) => {
       volumen: carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2)))
     }
 
-    fetch("http://localhost:3306/crearOGL", {
+    fetch("https://storange-back.onrender.com/crearOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -369,7 +369,7 @@ const GlobalStateContext = ({ children }) => {
   }
 
   const obtenerServicio = () =>{
-    fetch("http://localhost:3306/obtenerServicio", {
+    fetch("https://storange-back.onrender.com/obtenerServicio", {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -384,7 +384,7 @@ const GlobalStateContext = ({ children }) => {
 
   const crearServicio = () =>{
 
-    fetch("http://localhost:3306/crearServicio", {
+    fetch("https://storange-back.onrender.com/crearServicio", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
