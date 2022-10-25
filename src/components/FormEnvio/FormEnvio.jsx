@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import { Button } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
 import { useContext } from 'react'
@@ -36,9 +36,11 @@ const FormEnvio = () => {
 
   const classes = useStyles()
 
-  const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio } = useContext(GlobalContext)
+  const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading } = useContext(GlobalContext)
 
   const sendData = async () => {
+    setIsLoading(true)
+    
     const col = collection(db, propietario.idPropietario)
 
     const order = await addDoc(col, {
@@ -48,7 +50,7 @@ const FormEnvio = () => {
         ? 40
         : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40,
       articulos: carrito
-    })
+    }).finally(() => setIsLoading(false))
 
     Swal.fire(
       'Se realizo la orden de envío',
@@ -105,7 +107,7 @@ const FormEnvio = () => {
           </div>
           <div>
             <Button className={classes.button} onClick={sendData}>
-              Finalizar
+              {isLoading ? <CircularProgress style={{width: '20px', height: '20px', color:'#fff'}}/> : 'Finalizar'}
             </Button>
           </div>
         </div>

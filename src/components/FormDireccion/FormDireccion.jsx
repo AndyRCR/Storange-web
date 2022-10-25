@@ -80,10 +80,14 @@ const FormDireccion = () => {
     const { setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe } = useContext(GlobalContext)
 
     const [direccionSelect, setDireccionSelect] = useState("default")
+    const [direccionName, setdireccionName] = useState(null)
     const [tipoEnvio, setTipoEnvio] = useState("normal")
     const [value, setValue] = useState(dayjs(new Date(Date.now()).toISOString().slice(0,10)))
 
     useEffect(() => {
+        if(direcciones !== null){
+            setdireccionName(Array.from(new Set(direcciones.map(el => el.direccion))))
+        }
     }, [direcciones])
 
     return (
@@ -106,7 +110,7 @@ const FormDireccion = () => {
                     </div>
                     <div>
                         <p>Seleccione la dirección de envío</p>
-                        {direcciones !== null ? (
+                        {direccionName !== null ? (
                             <>
                                 <Select
                                     name='direccion'
@@ -121,14 +125,15 @@ const FormDireccion = () => {
                                     }}
                                 >
                                     <MenuItem value="default">Seleccione su dirección</MenuItem>
-                                    {direcciones.map((dir, index) => {
+                                    {direccionName.map((dir, index) => {
                                         return (
-                                            <MenuItem key={`direccion${index}`} value={dir.direccion}>{dir.direccion}</MenuItem>
+                                            <MenuItem key={`direccion${index}`} value={dir}>{dir}</MenuItem>
                                         )
                                     })}
                                 </Select>
                                 <Button
                                     onClick={() => {
+                                        window.scrollTo(0, 0)
                                         document.body.style.overflowY = "hidden"
                                         setActiveDireccionModal(true)
                                     }}
@@ -158,6 +163,7 @@ const FormDireccion = () => {
                                         // openTo="day"
                                         value={value}
                                         shouldDisableDate={isWeekend}
+                                        renderInput={(params) => <TextField {...params} />}
                                         onChange={(newValue) => {
                                             setValue(newValue)
                                             setOe({

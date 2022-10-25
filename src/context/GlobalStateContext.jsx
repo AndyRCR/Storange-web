@@ -40,7 +40,8 @@ const GlobalStateContext = ({ children }) => {
     direccion: '',
     tipoServicio: 'normal',
     fecha: '',
-    total: ''
+    total: '',
+    fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
   })
 
   const restartAll = () => {
@@ -76,7 +77,8 @@ const GlobalStateContext = ({ children }) => {
       direccion: '',
       tipoServicio: 'normal',
       fecha: '',
-      total: ''
+      total: '',
+      fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
     })
   }
 
@@ -290,11 +292,13 @@ const GlobalStateContext = ({ children }) => {
   }
 
   const buscarOrdenes = async () => {
-    const col = collection(db, propietario.idPropietario)
+    const col = collection(db, idPropietario)
     try {
       const data = await getDocs(col)
       const res = data.docs.map(doc => doc = { id: doc.id, ...doc.data() })
-      setOrdenesEnProgreso(res)
+      setOrdenesEnProgreso(res.sort((a, b) => {
+        return a.fechaServicio.localeCompare(b.fechaServicio) && a.fecha.localeCompare(b.fecha)
+      }))
     } catch (error) {
       console.log(error)
     }

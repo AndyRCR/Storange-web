@@ -356,7 +356,10 @@ const PerfilContainer = () => {
             </div>
             <p>Agrega o escoge una dirección como principal</p>
             <Button
-              onClick={() => setActiveDireccionModal(true)}
+              onClick={() => {
+                document.body.style.overflowY = "hidden"
+                setActiveDireccionModal(true)
+              }}
               className={classes.buttonDireccion}
             >
               <FontAwesomeIcon style={{ marginRight: '10px' }} icon={faLocationDot} />

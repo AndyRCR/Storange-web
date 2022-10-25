@@ -20,7 +20,7 @@
 .articuloModal .title{
     font-size: 20px;
     font-weight: bold;
-    line-height: 2rem;
+    line-height: normal;
 }
 
 .articuloModal .info{

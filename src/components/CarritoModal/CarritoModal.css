@@ -47,3 +47,70 @@
     font-size: 30px;
     color: var(--color-storange);
 }
+
+.css-wjh20t-MuiPagination-ul{
+    justify-content: center !important;
+}
+
+@media (max-width: 1500px){
+    .carritoModal .modalContainer {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1300px){
+    .carritoModal .modalContainer {
+        width: 60%;
+    }
+}
+
+@media (max-width: 900px){
+    .carritoModal .modalContainer {
+        width: 85%;
+        height: 85%;
+    }
+}
+
+@media (max-width: 750px){
+    /* .carritoModal .buttonContainer h2{
+        
+    } */
+}
+
+@media (max-width: 600px){
+    .carritoModal .modalContainer {
+        width: 95%;
+        height: 95%;
+    }
+
+    .articuloModal {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .articuloModal .articleInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .articuloModal .title {
+        margin: 10px 0;
+    }
+
+    .carritoModal .modalContainer {
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 400px){
+    .carritoModal .modalContainer {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .carritoModal .modalContainer {
+        padding: 20px 5px;
+    }
+}

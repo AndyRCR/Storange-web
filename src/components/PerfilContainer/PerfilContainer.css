@@ -60,6 +60,12 @@
     padding: 25px 0;
 }
 
+.perfilContainer .menuHeader h2,
+.perfilContainer .menuArea > p{
+    text-align: center;
+    width: 100%;
+}
+
 .perfilContainer .menuInfo .menuArea{
     margin-bottom: 40px;
     padding: 20px 40px;
@@ -112,9 +118,25 @@
     justify-content: flex-end;
 }
 
+@media (max-width: 1500px){
+    .perfilContainer .menuDireccion .menuArea {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1300px){
+    .perfilContainer .menuDireccion .menuArea {
+        width: 90%;
+    }
+}
+
 @media (max-width: 1000px){
     .perfilContainer{
         flex-direction: column;
+    }
+
+    .perfilContainer .menuDireccion {
+        width: 100%;
     }
 
     .perfilContainer .menuHeader {
@@ -142,16 +164,36 @@
         width: 70%;
     }
 
+    .perfilContainer .menuDireccion h2 {
+        font-size: 20px;
+    }
+
+    .perfilContainer .direccionItem p{
+        font-size: 14px;
+    }
+
+    .perfilContainer .menuArea > p {
+        font-size: 14px;
+    }
+
     .perfilContainer .menuInfo .menuArea {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
+    .perfilContainer .menuDireccion .menuArea {
+        width: 100%;
+    }
+
     .perfilContainer .menuInfo {
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .perfilContainer .menuHeader {
+        padding: 10px 0;
     }
 
     .perfilContainer .menuFooter {
@@ -164,6 +206,18 @@
         display: flex;
         flex-direction: column;
         width: 90%;
+    }
+
+    .perfilContainer .menuDireccion .direccionItem {
+        padding: 25x 15px;
+    }
+
+    .perfilContainer .menuDireccion {
+        padding: 25px 15px;
+    }
+
+    .perfilContainer .menuDireccion .menuArea {
+        padding: 20px;
     }
 
     .perfilContainer .menuHeader h2{
@@ -186,5 +240,19 @@
         width: 100%;
         display: inline-block;
         text-align: center;
+    }
+}
+
+@media (max-width: 420px){
+    .perfilContainer .direccionItem p {
+        font-size: 12px;
+    }
+
+    .perfilContainer .menuArea > p {
+        font-size: 12px;
+    }
+
+    .perfilContainer .menuDireccion .direccionItem {
+        padding: 20px;
     }
 }

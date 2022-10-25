@@ -162,7 +162,11 @@ const RecogerEnviarContainer = () => {
                                 <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
                             </div>
                             <div className='text'>No hay artículos agregados al carrito</div>
-                            <Button onClick={() => setActiveModal(true)} className={classes.button}>
+                            <Button onClick={() => {
+                                document.querySelector('.carritoModal').style.top = `${window.scrollY}px`
+                                document.body.style.overflowY = "hidden"
+                                setActiveModal(true)
+                                }} className={classes.button}>
                                 Agregar
                             </Button>
                         </div>
