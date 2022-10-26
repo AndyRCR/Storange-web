@@ -97,6 +97,7 @@ const Navbar = () => {
                                     <MenuItem
                                     key={page.text}
                                     onClick={() => {
+                                        window.scrollTo(0, 0)
                                         handleCloseNavMenu()
                                         setChange(!change)
                                         setLoaderState(0)
@@ -121,6 +122,7 @@ const Navbar = () => {
                             <div
                                 className={'navLink'}
                                 onClick={() => {
+                                    window.scrollTo(0, 0)
                                     setChange(!change)
                                     setLoaderState(0)
                                     setTimeout(() => navigate('/pickup_send'), 500)
@@ -134,6 +136,7 @@ const Navbar = () => {
                             <div
                                 className={'navLink'}
                                 onClick={() => {
+                                    window.scrollTo(0, 0)
                                     setChange(!change)
                                     setLoaderState(0)
                                     setTimeout(() => navigate('/dashboard'), 500)
@@ -147,6 +150,7 @@ const Navbar = () => {
                             <div
                                 className={'navLink'}
                                 onClick={() => {
+                                    window.scrollTo(0, 0)
                                     setChange(!change)
                                     setLoaderState(0)
                                     setTimeout(() => navigate('/perfil'), 500)
@@ -196,12 +200,14 @@ const Navbar = () => {
                                             </p>
                                         </div>
                                         <div onClick={() =>{
+                                            window.scrollTo(0, 0)
                                             setChange(!change)
                                             setLoaderState(0)
                                             handleCloseUserMenu()
                                             setTimeout(() => navigate('/perfil'), 500)
                                         }} className="menuItem">Editar Perfil</div>
                                         <div onClick={() =>{
+                                            window.scrollTo(0, 0)
                                             handleCloseUserMenu()
                                             setTimeout(() => {
                                                 navigate('/')

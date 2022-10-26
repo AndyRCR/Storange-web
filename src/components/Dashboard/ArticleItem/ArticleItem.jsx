@@ -30,6 +30,7 @@ const ArticleItem = ({ articulo }) => {
         </div>
         <div
           onClick={() => {
+            window.scrollTo(0, 0)
             setChange(!change)
             setLoaderState(0)
             setTimeout(() => navigate(`/dashboard/item/${articulo.idArticulo}`), 500)
