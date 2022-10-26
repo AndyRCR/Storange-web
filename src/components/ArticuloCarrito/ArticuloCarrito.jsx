@@ -49,7 +49,7 @@ const ArticuloCarrito = ({ articulo }) => {
     return (
         <div className='articuloCarrito'>
             <div className='articleImage'>
-                <img src={articulo.imagenRecogida} alt={articulo.titulo} />
+                <img src={`https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`} alt={articulo.titulo} />
                 <div className='articleOptions'>
                     <Checkbox
                     sx={{

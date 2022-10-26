@@ -57,7 +57,7 @@ const LoginContainer = () => {
 
   const classes = useStyles()
 
-  const { encodePetition, setUserIsTrusted, setIdPropietario, setIsLoading, isLoading } = useContext(GlobalContext)
+  const { encodePetition, setUserIsTrusted, setIdPropietario, setIsLoading, isLoading, setSwalCambio } = useContext(GlobalContext)
 
   const navigate = useNavigate()
 
@@ -71,6 +71,8 @@ const LoginContainer = () => {
   const [captchaValue, setCaptchaValue] = useState(null)
 
   const [credentialsError, setCredentialsError] = useState(false)
+
+  const [error, setError] = useState('Usuario incorrecto, revise el email o contraseña ingresada')
 
   const handleChange = (evt) => {
     const { name, value } = evt.target
@@ -86,7 +88,7 @@ const LoginContainer = () => {
   }
 
   const verifyCaptcha = () => {
-    if (captchaState == 1) verifyUser()
+    if (captchaState == 1) verifyExistence()
     else setCaptchaState(captchaValue !== null)
   }
 
@@ -106,11 +108,13 @@ const LoginContainer = () => {
       .then((res) => {
         if (res.length > 0) {
           setUserIsTrusted(true)
+          setSwalCambio(true)
           navigate('/dashboard')
           setIdPropietario(res[0].idPropietario)
           localStorage.setItem('trustedUser', res[0].idPropietario)
         }
         else {
+          setError('Usuario incorrecto, revise el email o contraseña ingresada')
           setCredentialsError(true)
           setUserIsTrusted(false)
         }
@@ -123,6 +127,42 @@ const LoginContainer = () => {
         })
       })
       .finally(() => setIsLoading(false))
+  }
+
+  const createUser = (newUser) =>{
+    fetch("https://storange-back.onrender.com/crearUsuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(newUser)
+    }).then( () => verifyUser())
+  }
+
+  const verifyExistence = () =>{
+    let details = { email }
+
+    fetch("https://storange-back.onrender.com/verificarUsuarioExistente", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    }).then( res => res.json())
+    .then(data => {
+      if(data.length > 0){
+        data[0].uIdPropietario === null
+        ? createUser({
+          idPropietario: data[0].pIdPropietario,
+          email: data[0].email,
+          documento: data[0].documento
+        })
+        : verifyUser()
+      }else{
+        setError('El correo ingresado no se encuentra entre nuestros registros')
+        setCredentialsError(true)
+      }
+    })
   }
 
   return (
@@ -140,7 +180,7 @@ const LoginContainer = () => {
           <div className='icon'>
             <FontAwesomeIcon className='alertIcon' icon={faTriangleExclamation} />
           </div>
-          <div className='text'>Usuario incorrecto, revise el email o contraseña ingresada</div>
+          <div className='text'>{error}</div>
         </div>
         <div className="form">
           <CssTextField

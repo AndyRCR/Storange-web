@@ -130,7 +130,7 @@ const ArticlesList = () => {
                     </>
                 ) : (
                     <div className='loadingSpinner'>
-                        <img src="https://i.ibb.co/5vhhNRm/b81055909c88d9f7dfd6a49ff6d8f63f-removebg-preview-1.png" alt="storange no results" />
+                        <img src="https://storange-images.s3.amazonaws.com/Storange_1001322067/no+results.png" alt="storange no results" />
                         <h1>No se encontraron resultados</h1>
                     </div>
                 )

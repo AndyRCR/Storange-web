@@ -14,6 +14,8 @@ const GlobalStateContext = ({ children }) => {
   const [activeModal, setActiveModal] = useState(false)
   const [activeDireccionModal, setActiveDireccionModal] = useState(false)
   const [page, setPage] = useState(1)
+  const [filtersDisplayed, setFiltersDisplayed] = useState(false)
+  const [swalCambio, setSwalCambio] = useState(true)
 
   const [idPropietario, setIdPropietario] = useState(null || localStorage.getItem('trustedUser'))
   const [direcciones, setDirecciones] = useState(null)
@@ -432,7 +434,9 @@ const GlobalStateContext = ({ children }) => {
         buscarOrdenes, actualizarOrdenes,
         restartAll, borrarDireccion,
         obtenerServicio,
-        page, setPage
+        page, setPage,
+        filtersDisplayed, setFiltersDisplayed,
+        swalCambio, setSwalCambio
       }}
     >
       {children}

@@ -42,7 +42,7 @@ const OrdenesEnProgreso = () => {
                                             return (
                                                 <div className='articuloCarrito' key={`articulo${index}`}>
                                                     <div className='articleImage'>
-                                                        <img src={articulo.imagenRecogida} alt={articulo.titulo} />
+                                                        <img src={`https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`} alt={articulo.titulo} />
                                                     </div>
                                                     <div className='articleInfo'>
                                                         <div>

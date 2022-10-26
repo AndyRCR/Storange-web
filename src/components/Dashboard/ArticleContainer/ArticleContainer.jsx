@@ -114,7 +114,7 @@ const ArticleContainer = () => {
         {fotos !== null && articulo !== null ? (
           <>
             <div className='images'>
-              <ImageCarousel fotos={fotos} />
+              <ImageCarousel fotos={fotos} fotoRecogida={articulo.ImagenRecogida} />
             </div>
             <div className="info">
               <div className='titleContainer'>

@@ -10,7 +10,11 @@ const ArticuloModal = ({ articulo }) => {
     return (
         <div className='articuloModal'>
             <div className='articleImage'>
-                <img src={articulo.imagenRecogida !== null ? articulo.imagenRecogida : 'http://pad.minem.gob.pe/Proyecta_CMS/Recursos/ProyectoImg/SinImagen.png'} alt={articulo.titulo} />
+                <img
+                src={articulo.imagenRecogida !== null
+                    ? `https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`
+                    : 'http://pad.minem.gob.pe/Proyecta_CMS/Recursos/ProyectoImg/SinImagen.png'}
+                alt={articulo.titulo} />
             </div>
             <div className='articleInfo'>
                 <p className='title'>{articulo.titulo}</p>

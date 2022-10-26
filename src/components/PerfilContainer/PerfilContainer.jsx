@@ -87,7 +87,7 @@ const PerfilContainer = () => {
   const [phoneAction, setPhoneAction] = useState(false)
 
   const [pass, setPass] = useState('')
-  
+
   const [newPass, setNewPass] = useState('')
   const [newPassAction, setNewPassAction] = useState(false)
 
@@ -159,8 +159,8 @@ const PerfilContainer = () => {
 
   }
 
-  const actualizarContraseña = () =>{
-    if(newPass === newPassConfirm && newPass.length > 6){
+  const actualizarContraseña = () => {
+    if (newPass === newPassConfirm && newPass.length > 6) {
       let details = { idPropietario: propietario.idPropietario, pass: newPass }
 
       fetch("http://localhost:3306/actualizarContrasena", {
@@ -182,7 +182,7 @@ const PerfilContainer = () => {
           setNewPassConfirm('')
           setNewPassAction(false)
         })
-    }else{
+    } else {
       Swal.fire({
         title: 'Confirmación',
         text: 'Las contraseñas deben coincidir y tener entre 8 a 16 carácteres alfanuméricos',
@@ -191,7 +191,7 @@ const PerfilContainer = () => {
     }
   }
 
-  const verificarContraseña = () =>{
+  const verificarContraseña = () => {
     let details = { email: propietario.email, password: pass }
 
     setIsLoading(true)
@@ -204,10 +204,19 @@ const PerfilContainer = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if(res.length > 0){
+        if (res.length > 0) {
           actualizarContraseña()
+          if (propietario.primerCambio === 0) {
+            fetch("http://localhost:3306/actualizarPrimerCambio", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+              },
+              body: encodePetition({idPropietario: propietario.idPropietario})
+            })
+          }
         }
-        else{
+        else {
           setIsLoading(false)
           Swal.fire({
             title: 'Contraseña incorrecta',
@@ -343,8 +352,8 @@ const PerfilContainer = () => {
             </div>
             <div className='menuFooter'>
               <Button
-              onClick={verificarContraseña}
-              className={classes.button}>Guardar</Button>
+                onClick={verificarContraseña}
+                className={classes.button}>Guardar</Button>
             </div>
           </div>
         </div>
@@ -374,9 +383,9 @@ const PerfilContainer = () => {
                       <p>{dir.direccion}</p>
                     </div>
                     <FontAwesomeIcon
-                    style={{ marginLeft: '30px', fontSize: '18px', color: 'red', cursor: 'pointer' }}
-                    icon={faTrash}
-                    onClick={() => borrarDireccion(dir.idDireccion)}/>
+                      style={{ marginLeft: '30px', fontSize: '18px', color: 'red', cursor: 'pointer' }}
+                      icon={faTrash}
+                      onClick={() => borrarDireccion(dir.idDireccion)} />
                   </div>
                 )
               })

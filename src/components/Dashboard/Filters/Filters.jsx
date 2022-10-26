@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faX } from '@fortawesome/free-solid-svg-icons'
+import { faAnglesDown, faAnglesUp, faFilter, faX } from '@fortawesome/free-solid-svg-icons'
 import { SyncLoader } from 'react-spinners'
 import { GlobalContext } from '../../../context/GlobalStateContext'
 import { useState } from 'react'
@@ -31,9 +31,12 @@ const Filters = () => {
 
     const classes = useStyles()
 
-    const { articulos, setActiveFilters, activeFilters, handleFilters } = useContext(GlobalContext)
+    const { articulos, setActiveFilters, activeFilters, handleFilters, filtersDisplayed, setFiltersDisplayed } = useContext(GlobalContext)
 
     const [checks, setChecks] = useState([false, false, false, false, false, false])
+    const [resize, setResize] = useState(window.innerWidth < 1000)
+
+    const handleResize = () => setResize(window.innerWidth < 1000)
 
     const clearFilters = () => {
         setActiveFilters([])
@@ -41,7 +44,12 @@ const Filters = () => {
     }
 
     useEffect(() => {
-    }, [articulos, checks])
+        window.addEventListener('resize', handleResize)
+      
+        return () => {
+          window.removeEventListener('resize', handleResize)
+        }
+    }, [articulos, checks, resize])
 
     return (
         <div className='filters'>
@@ -193,6 +201,18 @@ const Filters = () => {
                         <FontAwesomeIcon className='filterIcon' icon={faFilter} />
                         Filtrar articulos
                     </Button>
+                </div>
+            </div>
+
+            <div className='filterDisplayButton' style={{ display: resize ? 'flex' : 'none' }}>
+                <div>
+                    <p onClick={() => setFiltersDisplayed(!filtersDisplayed)}>
+                        {!filtersDisplayed ? 'Ocultar filtros' : 'Mostrar filtros'}
+                    </p>
+                    <FontAwesomeIcon
+                        onClick={() => setFiltersDisplayed(!filtersDisplayed)}
+                        className={!filtersDisplayed ? 'showFilterIcon pressed' : 'showFilterIcon'}
+                        icon={!filtersDisplayed ? faAnglesUp : faAnglesDown} />
                 </div>
             </div>
         </div>

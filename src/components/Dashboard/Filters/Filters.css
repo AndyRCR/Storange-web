@@ -29,6 +29,46 @@
     max-width: 250px;
 }
 
+.filters .filterDisplayButton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.filters .filterDisplayButton > div{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filters .showFilterIcon{
+    margin: 0 10px;
+    animation: showFilterIcon 1.3s linear infinite;
+}
+
+.filters .showFilterIcon.pressed{
+    transform: rotate(180deg);
+}
+
+@keyframes showFilterIcon {
+    0%{
+        transform: translateY(0)
+    }
+    25%{
+        transform: translateY(3px);
+    }
+    50%{
+        transform: translateY(0px);
+    }
+    75%{
+        transform: translateY(-3px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 1350px){
     .filters span{
         font-size: 15px !important;
