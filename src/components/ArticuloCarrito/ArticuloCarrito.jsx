@@ -49,27 +49,29 @@ const ArticuloCarrito = ({ articulo }) => {
     return (
         <div className='articuloCarrito'>
             <div className='articleImage'>
-                <img src={`https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`} alt={articulo.titulo} />
+                <img src={articulo.imagenRecogida !== null
+                    ? `https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`
+                    : 'https://pad.minem.gob.pe/Proyecta_CMS/Recursos/ProyectoImg/SinImagen.png'} alt={articulo.titulo} />
                 <div className='articleOptions'>
                     <Checkbox
-                    sx={{
-                        '&.Mui-checked': {
-                            color: '#F94700',
-                        },
-                    }}
-                    onClick={(e) =>{
-                        if(e.target.checked){
-                            setIds([...ids, articulo.idArticulo])
-                        }else{
-                            setIds([...(ids.filter(el => el !== articulo.idArticulo))])
-                        }
-                    }}
+                        sx={{
+                            '&.Mui-checked': {
+                                color: '#F94700',
+                            },
+                        }}
+                        onClick={(e) => {
+                            if (e.target.checked) {
+                                setIds([...ids, articulo.idArticulo])
+                            } else {
+                                setIds([...(ids.filter(el => el !== articulo.idArticulo))])
+                            }
+                        }}
                     />
                     <Button
-                    onClick={() => {
-                        if(!isLoading) actualizarEstadoEnvio(0, articulo.idArticulo)
-                    }}
-                    className={classes.button}>
+                        onClick={() => {
+                            if (!isLoading) actualizarEstadoEnvio(0, articulo.idArticulo)
+                        }}
+                        className={classes.button}>
                         Borrar
                     </Button>
                 </div>
@@ -85,7 +87,7 @@ const ArticuloCarrito = ({ articulo }) => {
                     <p className="info">Materiales: {articulo.material}</p>
                     <p className="info">Color: {articulo.color}</p>
                 </div>
-                
+
             </div>
         </div>
     )

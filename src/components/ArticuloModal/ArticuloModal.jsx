@@ -13,7 +13,7 @@ const ArticuloModal = ({ articulo }) => {
                 <img
                 src={articulo.imagenRecogida !== null
                     ? `https://storange-images.s3.amazonaws.com/appsheet/data/StorangeGestionLogistica_5361150/${articulo.imagenRecogida}`
-                    : 'http://pad.minem.gob.pe/Proyecta_CMS/Recursos/ProyectoImg/SinImagen.png'}
+                    : 'https://pad.minem.gob.pe/Proyecta_CMS/Recursos/ProyectoImg/SinImagen.png'}
                 alt={articulo.titulo} />
             </div>
             <div className='articleInfo'>
