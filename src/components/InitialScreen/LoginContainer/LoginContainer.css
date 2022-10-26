@@ -12,7 +12,7 @@
     top: -50%;
     left: -50%;
     z-index: -1;
-    background: url('https://i.ibb.co/2NyS7K4/9002bf50.png') repeat 0 0;
+    background: url('https://storange-images.s3.amazonaws.com/Storange_1001322067/storange_patern.png') repeat 0 0;
     animation: bg-scrolling-reverse 20s infinite;
     animation-timing-function: linear;
     background-size: 181px;

@@ -169,7 +169,7 @@ const LoginContainer = () => {
     <div className='loginContainer initialContainer'>
       <div className='formContainer'>
         <div className='logo' style={{ padding: '30px' }}>
-          <img src="https://i.ibb.co/N9xRLT5/image-23.png" alt="storange logo" />
+          <img src="https://storange-images.s3.amazonaws.com/Storange_1001322067/storangelogo.png" alt="storange logo" />
         </div>
         <div className="title">
           <h1>Bienvenido de nuevo</h1>
