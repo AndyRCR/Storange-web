@@ -41,7 +41,7 @@ const GlobalStateContext = ({ children }) => {
     m3: '',
     direccion: '',
     tipoServicio: 'normal',
-    fecha: '',
+    fecha: new Date(Date.now()).toISOString().slice(0,10),
     total: '',
     fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
   })
@@ -78,7 +78,7 @@ const GlobalStateContext = ({ children }) => {
       m3: '',
       direccion: '',
       tipoServicio: 'normal',
-      fecha: '',
+      fecha: new Date(Date.now()).toISOString().slice(0,10),
       total: '',
       fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
     })
