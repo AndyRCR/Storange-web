@@ -41,9 +41,8 @@ const DashboardContainer = () => {
               setChange(!change)
               setLoaderState(0)
               setTimeout(() => navigate('/perfil'), 500)
-            } else if (result.isDenied || result.isDismissed){
-              setSwalCambio(false)
             }
+            setSwalCambio(false)
           })
         }, 1500)
       }

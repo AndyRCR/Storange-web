@@ -19,23 +19,25 @@ import { GlobalContext } from "../../context/GlobalStateContext";
 
 const useStyles = makeStyles({
   button: {
-      '&.Mui-disabled':{
-        backgroundColor: '#E5E5E5 !important',
-        color: '#ABABAB !important'
-      },
-      backgroundColor: '#f94700 !important',
-      textTransform: 'none !important',
-      fontWeight: 'bold !important',
-      color: '#fff !important',
-      width: '300px !important',
-      margin: '20px 0 !important',
-      height: 'fit-content !important'
+    '&.Mui-disabled': {
+      backgroundColor: '#E5E5E5 !important',
+      color: '#ABABAB !important'
+    },
+    backgroundColor: '#f94700 !important',
+    textTransform: 'none !important',
+    fontWeight: 'bold !important',
+    color: '#fff !important',
+    width: '300px !important',
+    margin: '20px 0 !important',
+    height: 'fit-content !important'
   }
 })
 
 const options = {
   googleMapsApiKey: 'AIzaSyDIlf2x7KJR-KkSTUnPgsQZwLbgLTrqLXY',
-  libraries: ["places"]
+  libraries: ["places"],
+  id: 'ChIJ9RRZwFDIBZERSAYheRIBnvI',
+  region: 'PE'
 }
 
 const Places = () => {
@@ -43,7 +45,7 @@ const Places = () => {
   const [direction, setDirection] = useState(null)
 
   const { isLoaded } = useLoadScript(options)
-  const {direcciones, agregarDireccion} = useContext(GlobalContext)
+  const { direcciones, agregarDireccion } = useContext(GlobalContext)
   const classes = useStyles()
 
   useEffect(() => {
@@ -61,21 +63,21 @@ const Places = () => {
             <GoogleMap
               mapContainerStyle={{ height: '100%' }}
               zoom={16}
-              center={selected === null ? { lat: parseFloat(direcciones[direcciones.length-1]?.lat), lng: parseFloat(direcciones[direcciones.length-1]?.lng) } : selected}
+              center={selected === null ? { lat: parseFloat(direcciones[direcciones.length - 1]?.lat), lng: parseFloat(direcciones[direcciones.length - 1]?.lng) } : selected}
               mapContainerClassName="map-container"
             >
               {selected && <Marker position={selected} />}
             </GoogleMap>
 
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button
-              className = {classes.button}
-              disabled = {selected === null}
-              onClick = {() => {
-                agregarDireccion(selected.lat, selected.lng, direction)
-                setSelected(null)
-                setDirection(null)
-              }}>
+                className={classes.button}
+                disabled={selected === null}
+                onClick={() => {
+                  agregarDireccion(selected.lat, selected.lng, direction)
+                  setSelected(null)
+                  setDirection(null)
+                }}>
                 Agregar dirección seleccionada
               </Button>
             </div>
@@ -94,8 +96,14 @@ const PlacesAutocomplete = ({ setSelected, setDirection }) => {
     value,
     setValue,
     suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete()
+    clearSuggestions
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      componentRestrictions: {
+        country: "pe",
+      }
+    }
+  })
 
   const handleSelect = async (address) => {
     setValue(address, false)
@@ -112,6 +120,7 @@ const PlacesAutocomplete = ({ setSelected, setDirection }) => {
       <ComboboxInput
         value={value}
         onChange={(e) => {
+          sessionStorage.removeItem('upa')
           setSelected(null)
           setDirection(null)
           setValue(e.target.value)
