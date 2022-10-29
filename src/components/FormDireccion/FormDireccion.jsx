@@ -70,20 +70,17 @@ const useStyles = makeStyles({
         '& .MuiPickersToolbar-penIconButton': {
             display: 'none !important'
         },
-        '& .css-hlj6pa-MuiDialogActions-root':{
+        '& .MuiDialogActions-root':{
             display: 'none !important'
         },
-        '& .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected': {
+        '& .MuiButtonBase-root.Mui-selected': {
             backgroundColor: 'var(--color-storange) !important'
         },
-        '& .css-3eghsz-PrivatePickersYear-button.Mui-selected': {
-            backgroundColor: 'var(--color-storange) !important'
-        },
-        '& .css-1tbq6mc-MuiPickersToolbar-root-MuiDatePickerToolbar-root':{
+        '& .MuiPickersToolbar-root':{
             backgroundColor: 'var(--color-storange) !important',
             color: 'white !important'
         },
-        '& .css-1hbyad5-MuiTypography-root': {
+        '& .MuiTypography-overline': {
             display: 'none !important'
         },
         '&':{
