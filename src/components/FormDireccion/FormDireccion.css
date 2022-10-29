@@ -59,10 +59,6 @@
     .formDireccion .direccionContainer{
         width: 100%;
     }
-
-    .css-1tbq6mc-MuiPickersToolbar-root-MuiDatePickerToolbar-root{
-        display: none !important;
-    }
 }
 
 @media (max-width: 450px){

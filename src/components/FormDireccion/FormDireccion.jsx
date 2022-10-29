@@ -78,7 +78,10 @@ const useStyles = makeStyles({
         },
         '& .MuiPickersToolbar-root':{
             backgroundColor: 'var(--color-storange) !important',
-            color: 'white !important'
+            color: 'white !important',
+            ['@media (max-width:800px)']: {
+                display: 'none !important'
+            }
         },
         '& .MuiTypography-overline': {
             display: 'none !important'

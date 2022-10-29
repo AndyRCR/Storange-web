@@ -9,6 +9,10 @@
     font-weight: bold;
 }
 
+.articleContainer .secondaryButtons.secondaryFix > div{
+    font-size: 14px;
+}
+
 .articleContainer .volverIcon{
     margin: 0 7px;
 }
@@ -217,9 +221,10 @@
     }
 
     .articleContainer .secondaryButtons button,
-    .makeStyles-buttonAction-6{
+    .articleContainer .secondaryButtons.secondaryFix > div{
         margin-bottom: 10px;
         height: 30px !important;
+        font-size: 12px;
     }
 
     .articleContainer .secondaryButtons {
@@ -227,4 +232,6 @@
         flex-direction: column;
         margin: 0;
     }
+
+
 }
