@@ -97,7 +97,7 @@ const LoginContainer = () => {
 
     setIsLoading(true)
 
-    fetch("http://52.55.149.82:3306/login", {
+    fetch("https://52.55.149.82/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -130,7 +130,7 @@ const LoginContainer = () => {
   }
 
   const createUser = (newUser) =>{
-    fetch("http://52.55.149.82:3306/crearUsuario", {
+    fetch("https://52.55.149.82/crearUsuario", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -142,7 +142,7 @@ const LoginContainer = () => {
   const verifyExistence = () =>{
     let details = { email }
 
-    fetch("http://52.55.149.82:3306/verificarUsuarioExistente", {
+    fetch("https://52.55.149.82/verificarUsuarioExistente", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
