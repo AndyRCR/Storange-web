@@ -49,32 +49,8 @@
     background-color: #fff;
 }
 
-.css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton {
-    display: none !important;
-}
-
-.css-hlj6pa-MuiDialogActions-root{
-    display: none !important;
-}
-
-.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
-.css-3eghsz-PrivatePickersYear-button.Mui-selected{
-    background-color: var(--color-storange) !important;
-}
-
-.css-1tbq6mc-MuiPickersToolbar-root-MuiDatePickerToolbar-root{
-    background-color: var(--color-storange) !important;
-    color: white !important;
-}
-
-.css-1hbyad5-MuiTypography-root{
-    display: none !important;
-}
-
-.css-u0soqy-MuiPickerStaticWrapper-root{
-    overflow: hidden !important;
-    border-radius: 4px !important;
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12) !important;
+.datePicker{
+    display: none;
 }
 
 .recogerEnviarContainer h3{

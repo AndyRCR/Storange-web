@@ -65,6 +65,32 @@ const useStyles = makeStyles({
         '&.Mui-checked': {
             color: 'var(--color-storange) !important'
         }
+    },
+    picker: {
+        '& .MuiPickersToolbar-penIconButton': {
+            display: 'none !important'
+        },
+        '& .css-hlj6pa-MuiDialogActions-root':{
+            display: 'none !important'
+        },
+        '& .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected': {
+            backgroundColor: 'var(--color-storange) !important'
+        },
+        '& .css-3eghsz-PrivatePickersYear-button.Mui-selected': {
+            backgroundColor: 'var(--color-storange) !important'
+        },
+        '& .css-1tbq6mc-MuiPickersToolbar-root-MuiDatePickerToolbar-root':{
+            backgroundColor: 'var(--color-storange) !important',
+            color: 'white !important'
+        },
+        '& .css-1hbyad5-MuiTypography-root': {
+            display: 'none !important'
+        },
+        '&':{
+            overflow: 'hidden !important',
+            borderRadius: '4px !important',
+            boxShadow: '0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12) !important'
+        }
     }
 })
 
@@ -159,6 +185,7 @@ const FormDireccion = () => {
                             {tipoEnvio === 'normal' && (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <StaticDatePicker
+                                        className={classes.picker}
                                         orientation="landscape"
                                         // openTo="day"
                                         value={value}
