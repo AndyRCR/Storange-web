@@ -133,7 +133,7 @@ const RecogerEnviarContainer = () => {
     useEffect(() => {
         if (direcciones === null) buscarDireccion()
         if (articulos === null) buscarArticulos()
-        if (propietario === null) buscarPropietario()
+        if (propietario === null || localStorage.getItem('trustedUser')) buscarPropietario()
         if (ordenesEnProgreso === null) buscarOrdenes()
 
         handleResize()

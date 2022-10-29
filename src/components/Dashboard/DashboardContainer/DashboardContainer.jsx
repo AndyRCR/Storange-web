@@ -21,7 +21,7 @@ const DashboardContainer = () => {
   }
 
   useEffect(() => {
-    if (propietario === null){
+    if (propietario === null || localStorage.getItem('trustedUser')){
       buscarPropietario()
     }
     else{

@@ -97,7 +97,7 @@ const LoginContainer = () => {
 
     setIsLoading(true)
 
-    fetch("https://storange-back.onrender.com/login", {
+    fetch("http://52.55.149.82:3306/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -130,7 +130,7 @@ const LoginContainer = () => {
   }
 
   const createUser = (newUser) =>{
-    fetch("https://storange-back.onrender.com/crearUsuario", {
+    fetch("http://52.55.149.82:3306/crearUsuario", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -142,7 +142,7 @@ const LoginContainer = () => {
   const verifyExistence = () =>{
     let details = { email }
 
-    fetch("https://storange-back.onrender.com/verificarUsuarioExistente", {
+    fetch("http://52.55.149.82:3306/verificarUsuarioExistente", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
