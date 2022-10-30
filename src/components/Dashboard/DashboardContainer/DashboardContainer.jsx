@@ -21,7 +21,7 @@ const DashboardContainer = () => {
   }
 
   useEffect(() => {
-    if (propietario === null || localStorage.getItem('trustedUser')){
+    if (propietario === null ^ localStorage.getItem('trustedUser')){
       buscarPropietario()
     }
     else{
@@ -47,6 +47,7 @@ const DashboardContainer = () => {
         }, 1500)
       }
     }
+    
     if (ordenesEnProgreso === null) buscarOrdenes()
 
     window.addEventListener('resize', handleResize)
