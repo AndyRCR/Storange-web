@@ -36,7 +36,7 @@ const FormEnvio = () => {
 
   const classes = useStyles()
 
-  const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading } = useContext(GlobalContext)
+  const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
 
   const sendData = async () => {
     setIsLoading(true)
@@ -50,7 +50,17 @@ const FormEnvio = () => {
         ? 40
         : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40,
       articulos: carrito
-    }).finally(() => setIsLoading(false))
+    }).finally(() => {
+      setIsLoading(false)
+      setOe({
+        m3: '',
+        direccion: '',
+        tipoServicio: 'normal',
+        fecha: new Date(Date.now()).toISOString().slice(0,10),
+        total: '',
+        fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
+      })
+    })
 
     Swal.fire(
       'Se realizo la orden de envío',

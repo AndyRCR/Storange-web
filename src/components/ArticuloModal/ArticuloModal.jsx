@@ -5,7 +5,7 @@ import './ArticuloModal.css'
 
 const ArticuloModal = ({ articulo }) => {
 
-    const { actualizarEstadoEnvio, isLoading } = useContext(GlobalContext)
+    const { actualizarEstadoEnvio, isLoading, setFormEnvioPage } = useContext(GlobalContext)
 
     return (
         <div className='articuloModal'>
@@ -31,6 +31,7 @@ const ArticuloModal = ({ articulo }) => {
                 <div
                     onClick={() => {
                         if (!isLoading) actualizarEstadoEnvio(1, articulo.idArticulo)
+                        setFormEnvioPage(1)
                     }}
                     className='estado'>
                     Agregar al carrito
