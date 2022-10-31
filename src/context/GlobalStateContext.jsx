@@ -125,7 +125,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarPropietario = () => {
     let details = { idPropietario }
 
-    fetch("https://52.55.149.82/propietarioPorId", {
+    fetch("https://api.storange.website/propietarioPorId", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -141,7 +141,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarDireccion = () => {
     let details = { idPropietario }
 
-    fetch("https://52.55.149.82/direcciones", {
+    fetch("https://api.storange.website/direcciones", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -159,7 +159,7 @@ const GlobalStateContext = ({ children }) => {
     setFotos(null)
     let details = { idArticulo }
 
-    fetch("https://52.55.149.82/fotos", {
+    fetch("https://api.storange.website/fotos", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -171,7 +171,7 @@ const GlobalStateContext = ({ children }) => {
         setFotos(res)
       })
 
-    fetch("https://52.55.149.82/articuloPorId", {
+    fetch("https://api.storange.website/articuloPorId", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -187,7 +187,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarArticulos = (showToast) => {
     showToast = showToast || null
     let details = { idPropietario, filter }
-    fetch("https://52.55.149.82/articulovirtual", {
+    fetch("https://api.storange.website/articulovirtual", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -212,7 +212,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("https://52.55.149.82/actualizarTitulo", {
+    fetch("https://api.storange.website/actualizarTitulo", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -231,7 +231,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("https://52.55.149.82/actualizarDescripcion", {
+    fetch("https://api.storange.website/actualizarDescripcion", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -253,7 +253,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("https://52.55.149.82/actualizarEstadoEnvio", {
+    fetch("https://api.storange.website/actualizarEstadoEnvio", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -278,7 +278,7 @@ const GlobalStateContext = ({ children }) => {
 
     setIsLoading(true)
 
-    fetch("https://52.55.149.82/agregarDireccion", {
+    fetch("https://api.storange.website/agregarDireccion", {
       method: "PUT",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -308,7 +308,7 @@ const GlobalStateContext = ({ children }) => {
 
   const actualizarOrdenes = () => {
     let details = { estadoEnvio: 1, estadoOrden: 0 }
-    fetch("https://52.55.149.82/actualizarOrdenes", {
+    fetch("https://api.storange.website/actualizarOrdenes", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -325,7 +325,7 @@ const GlobalStateContext = ({ children }) => {
   const borrarDireccion = async (idDireccion) => {
     let details = { idDireccion }
 
-    fetch("https://52.55.149.82/borrarDireccion", {
+    fetch("https://api.storange.website/borrarDireccion", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -345,7 +345,7 @@ const GlobalStateContext = ({ children }) => {
   const crearDetalleOGL = (idOGL, idArticulo) =>{
     let details = {idOGL, idArticulo}
 
-    fetch("https://52.55.149.82/crearDetalleOGL", {
+    fetch("https://api.storange.website/crearDetalleOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -363,7 +363,7 @@ const GlobalStateContext = ({ children }) => {
       volumen: carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2)))
     }
 
-    fetch("https://52.55.149.82/crearOGL", {
+    fetch("https://api.storange.website/crearOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -377,7 +377,7 @@ const GlobalStateContext = ({ children }) => {
   }
 
   const obtenerServicio = () =>{
-    fetch("https://52.55.149.82/obtenerServicio", {
+    fetch("https://api.storange.website/obtenerServicio", {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -392,7 +392,7 @@ const GlobalStateContext = ({ children }) => {
 
   const crearServicio = () =>{
 
-    fetch("https://52.55.149.82/crearServicio", {
+    fetch("https://api.storange.website/crearServicio", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
