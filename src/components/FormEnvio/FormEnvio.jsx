@@ -12,6 +12,7 @@ import { db } from '../../service/Firebase'
 import { addDoc, collection, doc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import './FormEnvio.css'
+import FormFecha from '../FormFecha/FormFecha'
 
 const useStyles = makeStyles({
   button: {
@@ -94,10 +95,11 @@ const FormEnvio = () => {
     <div className="section fluxSection">
       <CarritoDeEnvio />
       <FormDireccion />
+      <FormFecha />
       <div className='test'>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(0)} className={classes.buttonWhite}>
+            <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.buttonWhite}>
               <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
               Atrás
             </Button>

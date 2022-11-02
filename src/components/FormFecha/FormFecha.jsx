@@ -10,7 +10,6 @@ import { useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalStateContext'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
-import './FormDireccion.css'
 
 const useStyles = makeStyles({
     button: {
@@ -99,7 +98,7 @@ const isWeekend = (date) => {
     return day === 0 || day === 6
 }
 
-const FormDireccion = () => {
+const FormFecha = () => {
 
     const classes = useStyles()
 
@@ -120,60 +119,55 @@ const FormDireccion = () => {
         <div className='test'>
             <div className='formDireccion'>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(1.5)} className={classes.buttonWhite}>
+                    <Button onClick={() => setFormEnvioPage(0.5)} className={classes.buttonWhite}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
                         Atrás
                     </Button>
                 </div>
                 <div>
                     <div className='stepItem'>
-                        <div className='step'>2</div>
+                        <div className='step'>3</div>
                         <div>
-                            <h4 style={{ fontWeight: 'bold' }}>Dirección de envío</h4>
-                            <p>¿Cuál es la dirección donde enviaremos tus cosas?</p>
+                            <h4 style={{ fontWeight: 'bold' }}>Fecha de envío</h4>
+                            <p>¿Cuando desea que recojamos sus cosas?</p>
                         </div>
                     </div>
-                    <div>
-                        <p>Seleccione la dirección de envío</p>
-                        {direccionName !== null ? (
-                            <>
-                                <Select
-                                    name='direccion'
-                                    className={`customSelect ${classes.root}`}
-                                    value={direccionSelect}
-                                    onChange={e => {
-                                        setDireccionSelect(e.target.value)
-                                        setOe({
-                                            ...oe,
-                                            direccion: e.target.value
-                                        })
-                                    }}
-                                >
-                                    <MenuItem value="default">Seleccione su dirección</MenuItem>
-                                    {direccionName.map((dir, index) => {
-                                        return (
-                                            <MenuItem key={`direccion${index}`} value={dir}>{dir}</MenuItem>
-                                        )
-                                    })}
-                                </Select>
-                                <Button
-                                    onClick={() => {
-                                        window.scrollTo(0, 0)
-                                        document.body.style.overflowY = "hidden"
-                                        setActiveDireccionModal(true)
-                                    }}
-                                    className={classes.buttonDireccion}>
-                                    Agregar nueva dirección
-                                </Button>
-                            </>
-                        ) : (
-                            <>Cargando</>
-                        )}
-                    </div>
 
+                    <div>
+                        <p>Fecha de envio:</p>
+                        {/* <RadioGroup
+                            name="tipoEnvio"
+                            value={tipoEnvio}
+                            onChange={(e) => setTipoEnvio(e.target.value)}
+                        >
+                            <FormControlLabel value="normal" control={<Radio className={classes.radio} />} label="Normal (Mínimo de 48 horas para el despacho)" />
+                            <FormControlLabel value="express" control={<Radio className={classes.radio} />} label="Express (Te lo enviaremos entre las 24 y 48 horas siguientes)" />
+                        </RadioGroup> */}
+                        <div className='direccionContainer'>
+                            {tipoEnvio === 'normal' && (
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <StaticDatePicker
+                                        className={classes.picker}
+                                        orientation="landscape"
+                                        // openTo="day"
+                                        value={value}
+                                        shouldDisableDate={isWeekend}
+                                        renderInput={(params) => <TextField {...params} />}
+                                        onChange={(newValue) => {
+                                            setValue(newValue)
+                                            setOe({
+                                                ...oe,
+                                                fecha: newValue.$d.toISOString().slice(0,10)
+                                            })
+                                        }}
+                                    />
+                                </LocalizationProvider>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
+                    <Button onClick={() => setFormEnvioPage(-1.5)} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
                         Siguiente
                     </Button>
@@ -183,4 +177,4 @@ const FormDireccion = () => {
     )
 }
 
-export default FormDireccion
+export default FormFecha

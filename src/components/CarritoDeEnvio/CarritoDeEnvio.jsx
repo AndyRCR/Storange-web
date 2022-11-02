@@ -89,7 +89,7 @@ const CarritoDeEnvio = () => {
                                 Agregar más articulos
                             </Button>
 
-                            <Button onClick={() => setFormEnvioPage(0)} className={classes.button}>
+                            <Button onClick={() => setFormEnvioPage(0.5)} className={classes.button}>
                                 <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
                                 Siguiente
                             </Button>

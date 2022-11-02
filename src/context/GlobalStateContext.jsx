@@ -35,7 +35,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(1)
+  const [formEnvioPage, setFormEnvioPage] = useState(1.5)
 
   const [oe, setOe] = useState({
     m3: '',

@@ -30,7 +30,7 @@ const DashboardContainer = () => {
         setTimeout(() => {
           Swal.fire({
             title: `Hola ${propietario.nombre}!`,
-            text: 'Su cuenta nueva tiene una contraseña autogenerada, es recomendable realizar un cambio de contraseña',
+            text: 'Su cuenta nueva tiene como contraseña predeterminada su número de documento, es recomendable realizar un cambio de contraseña',
             icon: 'info',
             showDenyButton: true,
             showCancelButton: false,
