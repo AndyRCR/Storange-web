@@ -134,7 +134,7 @@ const PerfilContainer = () => {
       ((propietario !== null && !phoneAction) || phone !== '')
     ) {
       setIsLoading(true)
-      fetch("https://api.storange.website/actualizarPropietario", {
+      fetch("https://api.storange.pe/actualizarPropietario", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -163,7 +163,7 @@ const PerfilContainer = () => {
     if (newPass === newPassConfirm && newPass.length > 6) {
       let details = { idPropietario: propietario.idPropietario, pass: newPass }
 
-      fetch("https://api.storange.website/actualizarContrasena", {
+      fetch("https://api.storange.pe/actualizarContrasena", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -195,7 +195,7 @@ const PerfilContainer = () => {
     let details = { email: propietario.email, password: pass }
 
     setIsLoading(true)
-    fetch("https://api.storange.website/login", {
+    fetch("https://api.storange.pe/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -207,7 +207,7 @@ const PerfilContainer = () => {
         if (res.length > 0) {
           actualizarContraseña()
           if (propietario.primerCambio === 0) {
-            fetch("https://api.storange.website/actualizarPrimerCambio", {
+            fetch("https://api.storange.pe/actualizarPrimerCambio", {
               method: "POST",
               headers: {
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
