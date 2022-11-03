@@ -95,7 +95,7 @@ const useStyles = makeStyles({
 
 const isWeekend = (date) => {
     const day = date.day()
-    return day === 0 || day === 6
+    return day === 0 || day === 6 || date.$d < new Date(Date.now())
 }
 
 const FormFecha = () => {
@@ -167,7 +167,12 @@ const FormFecha = () => {
                     </div>
                 </div>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(-1.5)} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
+                    <Button
+                        onClick={() => {
+                        window.scrollTo(0, 0)
+                        setFormEnvioPage(-1.5)
+                        }}
+                        className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
                         Siguiente
                     </Button>

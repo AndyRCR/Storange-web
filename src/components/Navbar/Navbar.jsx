@@ -24,7 +24,7 @@ const pages = [
 
 const Navbar = () => {
 
-    const { propietario, setChange, change, setLoaderState, restartAll } = useContext(GlobalContext)
+    const { propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito } = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -101,7 +101,15 @@ const Navbar = () => {
                                         handleCloseNavMenu()
                                         setChange(!change)
                                         setLoaderState(0)
-                                        setTimeout(() => navigate(page.path), 500)
+                                        setTimeout(() => {
+                                            navigate(page.path)
+                                            setOe({
+                                                ...oe,
+                                                direccion: ''
+                                            })
+                                            setDireccionSelect('default')
+                                            setFormEnvioPage(1.5)
+                                        }, 500)
                                     }}>
                                         <Typography textAlign="center">{page.text}</Typography>
                                     </MenuItem>
@@ -125,11 +133,26 @@ const Navbar = () => {
                                     window.scrollTo(0, 0)
                                     setChange(!change)
                                     setLoaderState(0)
-                                    setTimeout(() => navigate('/pickup_send'), 500)
+                                    setTimeout(() => {
+                                        navigate('/pickup_send')
+                                        setOe({
+                                            ...oe,
+                                            direccion: ''
+                                        })
+                                        setDireccionSelect('default')
+                                        setFormEnvioPage(1.5)
+                                    }, 500)
                                 }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <FontAwesomeIcon className='menuIcon' icon={faTruckFast} />
+                                <div style={{position: 'relative', width: '100%', display: 'flex', justifyContent: 'center'}}>
+                                    <FontAwesomeIcon className='menuIcon' icon={faTruckFast} />
+                                    {carrito !== null ? (
+                                        <div className='indicator'>
+                                            {carrito.length}
+                                        </div>
+                                    ) : false}
+                                </div>
                                 <div>Recoger/Enviar</div>
                             </div>
 

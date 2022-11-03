@@ -78,7 +78,7 @@ const ArticleContainer = () => {
   const navigate = useNavigate()
   const classes = useStyles()
 
-  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading, actualizarEstadoEnvio, setChange, change, setLoaderState } = useContext(GlobalContext)
+  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading, actualizarEstadoEnvio, setChange, change, setLoaderState, formatStrings } = useContext(GlobalContext)
 
   const [editTitle, setEditTitle] = useState(false)
   const [editDescription, setEditDescription] = useState(false)
@@ -144,11 +144,11 @@ const ArticleContainer = () => {
                   </div>
                 ) : (
                   <div className='title'>
-                    <h1>{articulo.Titulo}</h1>
+                    <h1>{formatStrings(articulo.Titulo)}</h1>
                     <FontAwesomeIcon
                       className='editIcon'
                       onClick={() => {
-                        setNewTitle(articulo.Titulo)
+                        setNewTitle(formatStrings(articulo.Titulo))
                         setEditTitle(true)
                       }}
                       icon={faPen} />
@@ -159,15 +159,15 @@ const ArticleContainer = () => {
               <div className='caracteristicas'>
                 <h3>Características</h3>
                 <p>ID: {articulo.QRCode}</p>
-                <p>Estado: {articulo.Conservacion}</p>
+                <p>Estado: {articulo.Conservacion !== null ? formatStrings(articulo.Conservacion) : false}</p>
                 <p>Medidas: {`${articulo.MedidaLargo} x ${articulo.MedidaProfundidad} x ${articulo.MedidaAltura} metros`}</p>
                 <p>Volumen: {articulo.Volumen}</p>
-                <p>Materiales: {articulo.Material}</p>
-                <p>Color: {articulo.Color}</p>
+                <p>Materiales: {articulo.Material !== null ? formatStrings(articulo.Material) : false}</p>
+                <p>Color: {articulo.Color !== null ? formatStrings(articulo.Color) : false}</p>
               </div>
               <div className='descripcion'>
                 <h3>Descripción Storange:</h3>
-                <p>{articulo.Descripcion}</p>
+                <p>{formatStrings(articulo.Descripcion)}</p>
               </div>
               <div className='propietario'>
                 <h3>Descripcion propietario:</h3>
@@ -246,6 +246,7 @@ const ArticleContainer = () => {
                       </Button>
                       <div
                       onClick={() => {
+                        window.scrollTo(0, 0)
                         setChange(!change)
                         setLoaderState(0)
                         setTimeout(() => navigate('/pickup_send'), 500)
@@ -255,14 +256,14 @@ const ArticleContainer = () => {
                       </div>
                     </div>
                   )}
-                  <div className='secondaryButtons'>
+                  {/* <div className='secondaryButtons'>
                     <Button className={classes.buttonAction}>
                       Vender
                     </Button>
                     <Button className={classes.buttonAction}>
                       Eliminar
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ import './ArticuloModal.css'
 
 const ArticuloModal = ({ articulo }) => {
 
-    const { actualizarEstadoEnvio, isLoading, setFormEnvioPage } = useContext(GlobalContext)
+    const { actualizarEstadoEnvio, isLoading, setFormEnvioPage, formatStrings } = useContext(GlobalContext)
 
     return (
         <div className='articuloModal'>
@@ -17,7 +17,7 @@ const ArticuloModal = ({ articulo }) => {
                 alt={articulo.titulo} />
             </div>
             <div className='articleInfo'>
-                <p className='title'>{articulo.titulo}</p>
+                <p className='title'>{formatStrings(articulo.titulo)}</p>
                 <div>
                     {/* <p className='info'>{articulo.qrCode}</p> */}
                     <p className='info'>Estado articulo: {articulo.estadoArticulo}</p>
@@ -25,8 +25,8 @@ const ArticuloModal = ({ articulo }) => {
                     {/* <p className="info">Estado: {articulo.conservacion}</p> */}
                     <p className="info">Medidas: {`${articulo.medidaLargo} x ${articulo.medidaProfundidad} x ${articulo.medidaAltura}`} metros</p>
                     <p className="info">Volumen: {articulo.volumen} m3</p>
-                    <p className="info">Materiales: {articulo.material}</p>
-                    <p className="info">Color: {articulo.color}</p>
+                    <p className="info">Materiales: {articulo.material !== null ? formatStrings(articulo.material) : false}</p>
+                    <p className="info">Color: {articulo.color !== null ? formatStrings(articulo.color) : false}</p>
                 </div>
                 <div
                     onClick={() => {

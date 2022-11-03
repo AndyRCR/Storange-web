@@ -4,6 +4,7 @@ import CarritoModal from './CarritoModal/CarritoModal'
 import DireccionModal from './DireccionModal/DireccionModal'
 import Loader from './Loader/Loader'
 import Navbar from './Navbar/Navbar'
+import SecondaryNavbar from './SecondaryNavbar/SecondaryNavbar'
 
 const Layout = () => {
 
@@ -14,6 +15,7 @@ const Layout = () => {
       <CarritoModal/>
       <DireccionModal/>
       <Outlet/>
+      <SecondaryNavbar/>
     </div>
   )
 }

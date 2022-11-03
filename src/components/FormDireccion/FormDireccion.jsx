@@ -103,16 +103,11 @@ const FormDireccion = () => {
 
     const classes = useStyles()
 
-    const { setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe } = useContext(GlobalContext)
-
-    const [direccionSelect, setDireccionSelect] = useState("default")
-    const [direccionName, setdireccionName] = useState(null)
-    const [tipoEnvio, setTipoEnvio] = useState("normal")
-    const [value, setValue] = useState(dayjs(new Date(Date.now()).toISOString().slice(0,10)))
+    const { setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe, direccionSelect, setDireccionSelect, direccionName, setDireccionName } = useContext(GlobalContext)
 
     useEffect(() => {
         if(direcciones !== null){
-            setdireccionName(Array.from(new Set(direcciones.map(el => el.direccion))))
+            setDireccionName(Array.from(new Set(direcciones.map(el => el.direccion))))
         }
     }, [direcciones])
 
@@ -173,7 +168,10 @@ const FormDireccion = () => {
 
                 </div>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
+                    <Button onClick={() => {
+                        window.scrollTo(0, 0)
+                        setFormEnvioPage(-0.5)
+                        }} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
                         Siguiente
                     </Button>

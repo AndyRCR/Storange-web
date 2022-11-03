@@ -6,7 +6,7 @@ import './ArticleItem.css'
 
 const ArticleItem = ({ articulo }) => {
 
-  const { setChange, change, setLoaderState } = useContext(GlobalContext)
+  const { setChange, change, setLoaderState, formatStrings } = useContext(GlobalContext)
   const navigate = useNavigate()
 
   return (
@@ -18,15 +18,15 @@ const ArticleItem = ({ articulo }) => {
       </div>
       <div className='articleInfo'>
         <div>
-          <p className='title'>{articulo.titulo}</p>
+          <p className='title'>{formatStrings(articulo.titulo)}</p>
           {/* <p className='info'>{articulo.qrCode}</p> */}
           <p className='info'>Estado articulo: {articulo.estadoArticulo}</p>
           <p className='info'>Tipo articulo: {articulo.tipoArticulo}</p>
           {/* <p className="info">Estado: {articulo.conservacion}</p> */}
           <p className="info">Medidas: {`${articulo.medidaLargo} x ${articulo.medidaProfundidad} x ${articulo.medidaAltura}`} metros</p>
           <p className="info">Volumen: {articulo.volumen} m3</p>
-          <p className="info">Materiales: {articulo.material}</p>
-          <p className="info">Color: {articulo.color}</p>
+          <p className="info">Materiales: {articulo.material !== null ? formatStrings(articulo.material) : false}</p>
+          <p className="info">Color: {articulo.color !== null ? formatStrings(articulo.color) : false}</p>
         </div>
         <div
           onClick={() => {

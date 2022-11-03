@@ -45,7 +45,7 @@ const Places = () => {
   const [direction, setDirection] = useState(null)
 
   const { isLoaded } = useLoadScript(options)
-  const { direcciones, agregarDireccion } = useContext(GlobalContext)
+  const { direcciones, agregarDireccion, setDireccionAutoSelect } = useContext(GlobalContext)
   const classes = useStyles()
 
   useEffect(() => {
@@ -74,6 +74,8 @@ const Places = () => {
                 className={classes.button}
                 disabled={selected === null}
                 onClick={() => {
+                  document.body.style.overflowY = "visible"
+                  setDireccionAutoSelect(true)
                   agregarDireccion(selected.lat, selected.lng, direction)
                   setSelected(null)
                   setDirection(null)

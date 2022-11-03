@@ -36,6 +36,9 @@ const GlobalStateContext = ({ children }) => {
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
   const [formEnvioPage, setFormEnvioPage] = useState(1.5)
+  const [direccionSelect, setDireccionSelect] = useState("default")
+  const [direccionName, setDireccionName] = useState(null)
+  const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
 
   const [oe, setOe] = useState({
     m3: '',
@@ -82,6 +85,14 @@ const GlobalStateContext = ({ children }) => {
       total: '',
       fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
     })
+  }
+
+  const formatStrings = (str) =>{
+    return str
+    .replaceAll('Ã±','ñ')
+    .replaceAll('Ã¡','á')
+    .replaceAll('Ã','í')
+    .replaceAll('í³','ó')
   }
 
   const handleFilters = () => {
@@ -151,6 +162,9 @@ const GlobalStateContext = ({ children }) => {
       .then((res) => res.json())
       .then((res) => {
         setDirecciones(res)
+        if(direccionAutoSelect){
+          setDireccionSelect(res.at(-1).direccion || 'default')
+        }
       })
   }
 
@@ -436,7 +450,11 @@ const GlobalStateContext = ({ children }) => {
         obtenerServicio,
         page, setPage,
         filtersDisplayed, setFiltersDisplayed,
-        swalCambio, setSwalCambio
+        swalCambio, setSwalCambio,
+        direccionSelect, setDireccionSelect,
+        direccionName, setDireccionName,
+        direccionAutoSelect, setDireccionAutoSelect,
+        formatStrings
       }}
     >
       {children}
