@@ -24,7 +24,7 @@ const pages = [
 
 const Navbar = () => {
 
-    const { propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito } = useContext(GlobalContext)
+    const { propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito, formatStrings } = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -216,7 +216,7 @@ const Navbar = () => {
                                                 <Avatar style={{ backgroundColor: '#795548' }} alt={propietario.nombre} src="/static/images/avatar/2.jpg" />
                                             </IconButton>
                                             <h3 className='name'>
-                                                {`${propietario.nombre} ${propietario?.apellido}`}
+                                                {`${formatStrings(propietario.nombre)} ${formatStrings(propietario?.apellido)}`}
                                             </h3>
                                             <p className='email'>
                                                 {propietario.email}

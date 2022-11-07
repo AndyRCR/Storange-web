@@ -3,7 +3,7 @@
     overflow: hidden;
     background-color: rgba(0,0,0,0.5);
 }
-
+/* 
 .loginContainer::before {
     content: "";
     position: absolute;
@@ -23,7 +23,7 @@
     100% {
       background-position: 362px 0px;
     }
-  }
+  } */
 
 .loginContainer .alert{
     width: 100%;
