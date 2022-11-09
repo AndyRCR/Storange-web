@@ -1,24 +1,25 @@
 .loginContainer{
     position: relative;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.5);
+    background-color: var(--color-storange);
 }
+
 /* 
 .loginContainer::before {
     content: "";
     position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     z-index: -1;
+    background-color: var(--color-storange);
     background: url('https://storange-images.s3.amazonaws.com/Storange_1001322067/storange_patern.png') repeat 0 0;
     animation: bg-scrolling-reverse 20s infinite;
     animation-timing-function: linear;
     background-size: 181px;
     transform: rotate(45deg);
-  }
-
+}
   @keyframes bg-scrolling-reverse {
     100% {
       background-position: 362px 0px;

@@ -101,13 +101,13 @@ const ArticlesList = () => {
                             onChange={(e, pageNumber) => setPage(pageNumber)}
                             count={Math.round([...filteredArticles]
                                 .filter(el =>{
-                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
+                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
                                 }).length/10)}
                             shape="rounded" />
                         </div>
                         {[...filteredArticles]
                         .filter(el =>{
-                            return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
+                            return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
                         })
                         .slice((page-1)*10, (page-1)*10+10).map(articulo => {
                             return (
@@ -123,7 +123,7 @@ const ArticlesList = () => {
                             onChange={(e, pageNumber) => setPage(pageNumber)}
                             count={Math.round([...filteredArticles]
                                 .filter(el =>{
-                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter)) && el.estadoOrden === 0
+                                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
                                 }).length/10)}
                             shape="rounded" />
                         </div>

@@ -162,9 +162,6 @@ const GlobalStateContext = ({ children }) => {
       .then((res) => res.json())
       .then((res) => {
         setDirecciones(res)
-        if(direccionAutoSelect){
-          setDireccionSelect(res.at(-1).direccion || 'default')
-        }
       })
   }
 
@@ -214,7 +211,7 @@ const GlobalStateContext = ({ children }) => {
         setArticulos(res)
         setFilteredArticles(res)
         setCarrito(res.filter(art => {
-          return art.estadoEnvio === 1 && art.estadoOrden === 0
+          return art.estadoEnvio === 1 && art.idEstadoArticulo !== 3
         }))
         if (showToast === 1) toast("Se agregó al carrito de envío")
         if (showToast === 2) toast("Articulo retirado del carrito de envío")
@@ -289,7 +286,6 @@ const GlobalStateContext = ({ children }) => {
 
   const agregarDireccion = (lat, lng, direction) => {
     let details = { lat, lng, direction, idPropietario }
-
     setIsLoading(true)
 
     fetch("https://api.storange.pe/agregarDireccion", {
@@ -321,7 +317,7 @@ const GlobalStateContext = ({ children }) => {
   }
 
   const actualizarOrdenes = () => {
-    let details = { estadoEnvio: 1, estadoOrden: 0 }
+    let details = { idPropietario }
     fetch("https://api.storange.pe/actualizarOrdenes", {
       method: "POST",
       headers: {
