@@ -303,17 +303,22 @@ const GlobalStateContext = ({ children }) => {
       })
   }
 
-  const buscarOrdenes = async () => {
-    const col = collection(db, idPropietario)
-    try {
-      const data = await getDocs(col)
-      const res = data.docs.map(doc => doc = { id: doc.id, ...doc.data() })
-      setOrdenesEnProgreso(res.sort((a, b) => {
-        return a.fechaServicio.localeCompare(b.fechaServicio) && a.fecha.localeCompare(b.fecha)
+  const buscarOrdenes = () => {
+    let details = { idPropietario }
+
+    fetch("https://api.storange.pe/obtenerOGL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: encodePetition(details)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setOrdenesEnProgreso(data.sort((a, b) => {
+        return a.FechaSolicitado.localeCompare(b.FechaSolicitado)
       }))
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
 
   const actualizarOrdenes = () => {

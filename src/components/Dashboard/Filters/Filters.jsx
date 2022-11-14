@@ -76,7 +76,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`Almacenado (${articulos.filter(el => el.idEstadoArticulo === 1 && el.estadoOrden === 0).length})`} />
+                                label={`Almacenado (${articulos.filter(el => el.idEstadoArticulo === 1).length})`} />
                             <FormControlLabel
                                 control={<Checkbox
                                     onChange={e => {
@@ -94,7 +94,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`En venta (${articulos.filter(el => el.idEstadoArticulo === 2 && el.estadoOrden === 0).length})`} />
+                                label={`En venta (${articulos.filter(el => el.idEstadoArticulo === 2).length})`} />
                             <FormControlLabel
                                 control={<Checkbox
                                     onChange={e => {
@@ -112,7 +112,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`Proceso de envio (${articulos.filter(el => el.idEstadoArticulo === 3 && el.estadoOrden === 0).length})`} />
+                                label={`Proceso de envio (${articulos.filter(el => el.idEstadoArticulo === 3).length})`} />
                             <FormControlLabel
                                 control={<Checkbox
                                     onChange={e => {
@@ -130,7 +130,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`Eliminados (${articulos.filter(el => el.idEstadoArticulo === 5 && el.estadoOrden === 0).length})`} />
+                                label={`Eliminados (${articulos.filter(el => el.idEstadoArticulo === 5).length})`} />
                         </FormGroup>
                     ) : (
                         <div className='filterSpinner'>
@@ -159,7 +159,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`Caja (${articulos.filter(el => el.tipoArticulo.toLowerCase() === 'caja' && el.estadoOrden === 0).length})`} />
+                                label={`Caja (${articulos.filter(el => el.tipoArticulo.toLowerCase() === 'caja').length})`} />
                             <FormControlLabel
                                 control={<Checkbox
                                     onChange={e => {
@@ -177,7 +177,7 @@ const Filters = () => {
                                             color: '#F94700',
                                         },
                                     }} />}
-                                label={`Suelto (${articulos.filter(el => el.tipoArticulo.toLowerCase() === 'suelto' && el.estadoOrden === 0).length})`} />
+                                label={`Suelto (${articulos.filter(el => el.tipoArticulo.toLowerCase() === 'suelto').length})`} />
                         </FormGroup>
                     ) : (
                         <div className='filterSpinner'>

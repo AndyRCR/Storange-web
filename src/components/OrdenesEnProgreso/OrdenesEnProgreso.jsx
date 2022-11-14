@@ -32,8 +32,8 @@ const OrdenesEnProgreso = () => {
                                     id="panel1a-header"
                                     style={{ padding: '10px' }}
                                 >
-                                    <h3>Dirección: <span style={{ fontWeight: 'normal' }}>{orden.direccion}</span></h3>
-                                    <h4>Fecha programada: <span style={{ fontWeight: 'normal' }}>{orden.fecha}</span></h4>
+                                    <h3>Dirección: <span style={{ fontWeight: 'normal' }}>{orden.Direccion}</span></h3>
+                                    <h4>Fecha programada: <span style={{ fontWeight: 'normal' }}>{orden.FechaSolicitado}</span></h4>
                                 </AccordionSummary>
                                 <AccordionDetails className='accordionDetails'>
                                     <p>Articulos de la orden:</p>

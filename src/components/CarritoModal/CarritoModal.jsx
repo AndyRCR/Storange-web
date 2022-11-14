@@ -50,7 +50,7 @@ const CarritoModal = () => {
                     {articulos !== null ? (
                         <>
                             <div className='articulosCarrito'>
-                                {[...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.estadoOrden === 0}).slice((page-1)*10, (page-1)*10+10).map(articulo => {
+                                {[...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.idEstadoArticulo !== 3}).slice((page-1)*10, (page-1)*10+10).map(articulo => {
                                     return (
                                         <ArticuloModal key={articulo.idArticulo} articulo={articulo} />
                                     )
@@ -75,7 +75,7 @@ const CarritoModal = () => {
                         className={classes.root}
                         page={page}
                         onChange={(e, pageNumber) => setPage(pageNumber)}
-                        count={Math.round([...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.estadoOrden === 0}).length / 10)}
+                        count={Math.round([...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.idEstadoArticulo !== 3}).length / 10)}
                         shape="rounded" />
                     ) : (
                         <div className='loadingSpinner'>
