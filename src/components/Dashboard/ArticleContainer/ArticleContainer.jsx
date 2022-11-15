@@ -92,19 +92,19 @@ const ArticleContainer = () => {
     obtenerArticulo(id)
   }, [])
 
-  useEffect(()=>{ 
+  useEffect(() => {
   }, [articulo])
 
   return (
     <div className='articleContainer'>
       <div className='homeButton'>
         <div
-        onClick={() => {
-          setChange(!change)
-          setLoaderState(0)
-          setTimeout(() => navigate(`/dashboard`), 500)
-        }}
-        className='volver'>
+          onClick={() => {
+            setChange(!change)
+            setLoaderState(0)
+            setTimeout(() => navigate(`/dashboard`), 500)
+          }}
+          className='volver'>
           <FontAwesomeIcon className='volverIcon' icon={faArrowLeft} />
           Volver
         </div>
@@ -167,7 +167,7 @@ const ArticleContainer = () => {
               </div>
               <div className='descripcion'>
                 <h3>Descripción Storange:</h3>
-                <p>{formatStrings(articulo.Descripcion)}</p>
+                <p>{articulo.Descripcion !== null ? formatStrings(articulo.Descripcion) : false}</p>
               </div>
               <div className='propietario'>
                 <h3>Descripcion propietario:</h3>
@@ -230,33 +230,36 @@ const ArticleContainer = () => {
               </div>
               <div className='acciones'>
                 <h3>Acciones</h3>
-                <div className='buttons'>
-                  {articulo.estadoEnvio === 0 ? (
-                    <Button
-                    onClick={() => actualizarEstadoEnvio(1, articulo.idArticulo)}
-                    className={classes.buttonAction}>
-                      {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Seleccionar para envío'}
-                    </Button>
-                  ):(
-                    <div className='secondaryButtons secondaryFix'>
+                {articulo.idEstadoArticulo === 3 ? (
+                  <>El artículo se encuentra en proceso de envío</>
+                ) : (
+                  <div className='buttons'>
+                    {articulo.estadoEnvio === 0 ? (
                       <Button
-                      onClick={() => actualizarEstadoEnvio(0, articulo.idArticulo)}
-                      className={classes.buttonAction}>
-                        {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Quitar del carrito'}
+                        onClick={() => actualizarEstadoEnvio(1, articulo.idArticulo)}
+                        className={classes.buttonAction}>
+                        {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Seleccionar para envío'}
                       </Button>
-                      <div
-                      onClick={() => {
-                        window.scrollTo(0, 0)
-                        setChange(!change)
-                        setLoaderState(0)
-                        setTimeout(() => navigate('/pickup_send'), 500)
-                      }}
-                      className={classes.buttonAction}>
-                        Ver carrito
+                    ) : (
+                      <div className='secondaryButtons secondaryFix'>
+                        <Button
+                          onClick={() => actualizarEstadoEnvio(0, articulo.idArticulo)}
+                          className={classes.buttonAction}>
+                          {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Quitar del carrito'}
+                        </Button>
+                        <div
+                          onClick={() => {
+                            window.scrollTo(0, 0)
+                            setChange(!change)
+                            setLoaderState(0)
+                            setTimeout(() => navigate('/pickup_send'), 500)
+                          }}
+                          className={classes.buttonAction}>
+                          Ver carrito
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {/* <div className='secondaryButtons'>
+                    )}
+                    {/* <div className='secondaryButtons'>
                     <Button className={classes.buttonAction}>
                       Vender
                     </Button>
@@ -264,7 +267,8 @@ const ArticleContainer = () => {
                       Eliminar
                     </Button>
                   </div> */}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </>
@@ -276,16 +280,16 @@ const ArticleContainer = () => {
         )}
       </div>
       <ToastContainer
-      position="bottom-right"
-      autoClose={1000}
-      hideProgressBar
-      theme='light'
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover/>
+        position="bottom-right"
+        autoClose={1000}
+        hideProgressBar
+        theme='light'
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover />
     </div>
   )
 }

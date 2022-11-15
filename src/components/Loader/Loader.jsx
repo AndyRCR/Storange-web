@@ -18,7 +18,7 @@ const Loader = () => {
             setTimeout(()=> {
                 setLoaderState(2)
                 document.body.style.overflowY = "visible"
-            }, 1500)
+            }, 800)
         }
     }, [change])
 
