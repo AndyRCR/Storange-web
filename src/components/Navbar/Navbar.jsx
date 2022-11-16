@@ -118,7 +118,7 @@ const Navbar = () => {
                         </Box>
 
                         <img
-                        src={'https://storange-images.s3.amazonaws.com/Storange_1001322067/storangelogo_white.webp'}
+                        src={'https://storange-images.s3.amazonaws.com/img/storangelogo_white.webp'}
                         style={{
                             width: innerWidth < 450 ? '150px' : '200px'
                         }}
