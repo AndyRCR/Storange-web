@@ -315,9 +315,7 @@ const GlobalStateContext = ({ children }) => {
     })
     .then(res => res.json())
     .then(data => {
-      setOrdenesEnProgreso(data.sort((a, b) => {
-        return a.FechaSolicitado.localeCompare(b.FechaSolicitado)
-      }))
+      setOrdenesEnProgreso(data)
     })
   }
 
