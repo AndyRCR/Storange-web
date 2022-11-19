@@ -92,7 +92,7 @@ const CarritoDeEnvio = () => {
                             <Button
                                 onClick={() => {
                                 window.scrollTo(0, 0)
-                                setFormEnvioPage(0.5)
+                                setFormEnvioPage(1)
                                 }}
                                 className={classes.button}>
                                 <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />

@@ -35,7 +35,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(1.5)
+  const [formEnvioPage, setFormEnvioPage] = useState(2)
   const [direccionSelect, setDireccionSelect] = useState("default")
   const [direccionName, setDireccionName] = useState(null)
   const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
@@ -306,7 +306,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarOrdenes = () => {
     let details = { idPropietario }
 
-    fetch("https://api.storange.pe/obtenerOGL", {
+    fetch("http://localhost:3000/obtenerOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",

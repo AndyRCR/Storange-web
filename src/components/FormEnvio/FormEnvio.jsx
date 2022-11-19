@@ -99,7 +99,7 @@ const FormEnvio = () => {
       <div className='test'>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.buttonWhite}>
+            <Button onClick={() => setFormEnvioPage(0)} className={classes.buttonWhite}>
               <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
               Atrás
             </Button>

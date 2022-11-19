@@ -119,7 +119,7 @@ const FormFecha = () => {
         <div className='test'>
             <div className='formDireccion'>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(0.5)} className={classes.buttonWhite}>
+                    <Button onClick={() => setFormEnvioPage(1)} className={classes.buttonWhite}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
                         Atrás
                     </Button>
@@ -170,7 +170,7 @@ const FormFecha = () => {
                     <Button
                         onClick={() => {
                         window.scrollTo(0, 0)
-                        setFormEnvioPage(-1.5)
+                        setFormEnvioPage(-1)
                         }}
                         className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
