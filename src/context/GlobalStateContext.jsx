@@ -306,7 +306,7 @@ const GlobalStateContext = ({ children }) => {
   const buscarOrdenes = () => {
     let details = { idPropietario }
 
-    fetch("http://localhost:3000/obtenerOGL", {
+    fetch("https://api.storange.pe/obtenerOGL", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
