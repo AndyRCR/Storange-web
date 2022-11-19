@@ -13,6 +13,7 @@ import { addDoc, collection, doc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 import './FormEnvio.css'
 import FormFecha from '../FormFecha/FormFecha'
+import { useState } from 'react'
 
 const useStyles = makeStyles({
   button: {
@@ -38,6 +39,8 @@ const FormEnvio = () => {
   const classes = useStyles()
 
   const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
+
+  const [interaction, setInteraction] = useState(true)
 
   const sendData = async () => {
     setIsLoading(true)
@@ -84,6 +87,11 @@ const FormEnvio = () => {
   }
 
   useEffect(() => {
+    if(interaction){
+      setFormEnvioPage(2)
+      setInteraction(false)
+    }
+
     handleResize()
 
     window.addEventListener('resize', handleResize)
