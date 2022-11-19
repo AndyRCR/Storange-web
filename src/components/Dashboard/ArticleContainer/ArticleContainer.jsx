@@ -114,7 +114,11 @@ const ArticleContainer = () => {
         {fotos !== null && articulo !== null ? (
           <>
             <div className='images'>
-              <ImageCarousel fotos={fotos} fotoRecogida={articulo.ImagenRecogida} />
+              <ImageCarousel fotos={fotos.map(el => {
+                return {
+                  enlaceRef: el.enlaceRef.replaceAll(" ", "")
+                }
+              })} fotoRecogida={articulo.ImagenRecogida} />
             </div>
             <div className="info">
               <div className='titleContainer'>
