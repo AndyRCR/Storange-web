@@ -20,7 +20,7 @@ const OrdenesEnProgreso = () => {
 
     return (
         <>
-            {ordenesEnProgreso !== null ? (
+            {ordenesEnProgreso !== null && ordenesEnProgreso?.length > 0 ? (
                 <div className="section accordionSection">
                     <h3 style={{ margin: '10px 0' }}>Estas son tus ordenes en progreso: </h3>
                     {ordenesEnProgreso.map((orden, i) => {
