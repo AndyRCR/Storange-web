@@ -21,6 +21,7 @@ const DashboardContainer = () => {
   }
 
   useEffect(() => {
+    alert('Safari v1')
     if (propietario === null ^ localStorage.getItem('trustedUser')){
       buscarPropietario()
     }
