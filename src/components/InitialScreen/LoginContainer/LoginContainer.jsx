@@ -167,7 +167,7 @@ const LoginContainer = () => {
   }
 
   useEffect(() => {
-    alert('Safari v3')
+    alert('Safari v4')
   }, [])
 
   return (
