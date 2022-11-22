@@ -35,7 +35,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(0)
+  const [formEnvioPage, setFormEnvioPage] = useState(-1)
   const [direccionSelect, setDireccionSelect] = useState("default")
   const [direccionName, setDireccionName] = useState(null)
   const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
