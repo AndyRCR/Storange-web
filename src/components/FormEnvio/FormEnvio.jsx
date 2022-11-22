@@ -87,8 +87,8 @@ const FormEnvio = () => {
   }
 
   useEffect(() => {
-    setFormEnvioPage(2)
     if(interaction){
+      setFormEnvioPage(2)
       setInteraction(false)
     }
 

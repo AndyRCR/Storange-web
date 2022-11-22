@@ -9,8 +9,6 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import './LoginContainer.css'
 import '../InitialScreen.css'
 import Swal from 'sweetalert2'
-import { text } from '@fortawesome/fontawesome-svg-core'
-import { useEffect } from 'react'
 
 const CssTextField = withStyles({
   root: {
@@ -165,10 +163,6 @@ const LoginContainer = () => {
       }
     })
   }
-
-  useEffect(() => {
-    alert('Safari v4')
-  }, [])
 
   return (
     <div className='loginContainer initialContainer'>
