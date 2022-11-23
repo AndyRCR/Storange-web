@@ -75,7 +75,7 @@ const FormEnvio = () => {
 
   useEffect(() => {
     if(interaction){
-      setFormEnvioPage(browser === 'Safari' ? -1 :  2)
+      setFormEnvioPage(browser === 'Safari' ? -2 :  2)
       setInteraction(false)
     }
 
