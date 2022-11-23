@@ -92,7 +92,7 @@ const CarritoDeEnvio = () => {
                             <Button
                                 onClick={() => {
                                 window.scrollTo(0, 0)
-                                setFormEnvioPage(browser === webkitBrowser ? 1 :  1)
+                                setFormEnvioPage(1)
                                 }}
                                 className={classes.button}>
                                 Siguiente

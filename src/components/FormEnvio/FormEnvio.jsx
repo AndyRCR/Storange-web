@@ -52,20 +52,12 @@ const FormEnvio = () => {
     actualizarOrdenes()
   }
 
-  const handleResize = () =>{
-    
-    if(browser === webkitBrowser){
-      const width = document.querySelector('.fluxSection').clientWidth
-      document.querySelector('.fluxSection').style.width = `${width}px`
-  
-      document.querySelectorAll('.fluxSection .test').forEach(el => {
-        el.style.width = `${width}px`
-        el.style.transform = `translateX(${width * formEnvioPage}px)`
-      })
-    } else{
+  const handleResize = () => {
+
+    if (browser !== webkitBrowser) {
       const height = Array.from(document.querySelectorAll('.fluxSection .test')).map(el => el.clientHeight).sort().at(-1)
       document.querySelector('.fluxSection').style.height = `${height}px`
-  
+
       document.querySelectorAll('.fluxSection .test').forEach(el => {
         el.style.height = `${height}px`
         el.style.transform = `translateY(${height * formEnvioPage}px)`
@@ -74,8 +66,8 @@ const FormEnvio = () => {
   }
 
   useEffect(() => {
-    if(interaction){
-      setFormEnvioPage(browser === webkitBrowser ? 0 :  2)
+    if (interaction) {
+      setFormEnvioPage(2)
       setInteraction(false)
     }
 
@@ -87,37 +79,77 @@ const FormEnvio = () => {
   }, [formEnvioPage])
 
   return (
-    <div className={`section fluxSection ${browser === webkitBrowser ? 'safari' :''}`}>
-      <CarritoDeEnvio />
-      <FormDireccion />
-      <FormFecha />
-      <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
-        <div className="resumen">
-          <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(browser === webkitBrowser ? 2 :  0)} className={classes.buttonWhite}>
-              Atrás
-            </Button>
+    <div className={`section fluxSection ${browser === webkitBrowser ? 'safari' : ''}`}>
+      {browser === webkitBrowser ? (
+        formEnvioPage === 2
+          ? <CarritoDeEnvio />
+          : formEnvioPage === 1
+            ? <FormDireccion />
+            : formEnvioPage === 0
+              ? <FormFecha />
+              : (
+                <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
+                  <div className="resumen">
+                    <div className='formButtons'>
+                      <Button onClick={() => setFormEnvioPage(0)} className={classes.buttonWhite}>
+                        Atrás
+                      </Button>
+                    </div>
+                    <div>
+                      {carrito !== null && carrito.length > 0 ? (
+                        <>
+                          <p><span>m³ Totales: </span><span>{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4)))} m³</span></p>
+                          <p><span>Dirección de envio: </span><span>{oe.direccion}</span></p>
+                          <p><span>Tipo de servicio: </span><span>Normal</span></p>
+                          <p><span>Fecha de envio: </span><span>{oe.fecha}</span></p>
+                          <p><span>Total a pagar: </span><span>S/.{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4))) < 1 ? 40 : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40}</span></p>
+                        </>
+                      ) : (
+                        <h1>Cargando</h1>
+                      )}
+                    </div>
+                    <div>
+                      <Button className={classes.button} onClick={sendData}>
+                        {isLoading ? <CircularProgress style={{ width: '20px', height: '20px', color: '#fff' }} /> : 'Finalizar'}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )
+      ) : (
+        <>
+          <CarritoDeEnvio />
+          <FormDireccion />
+          <FormFecha />
+          <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
+            <div className="resumen">
+              <div className='formButtons'>
+                <Button onClick={() => setFormEnvioPage(0)} className={classes.buttonWhite}>
+                  Atrás
+                </Button>
+              </div>
+              <div>
+                {carrito !== null && carrito.length > 0 ? (
+                  <>
+                    <p><span>m³ Totales: </span><span>{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4)))} m³</span></p>
+                    <p><span>Dirección de envio: </span><span>{oe.direccion}</span></p>
+                    <p><span>Tipo de servicio: </span><span>Normal</span></p>
+                    <p><span>Fecha de envio: </span><span>{oe.fecha}</span></p>
+                    <p><span>Total a pagar: </span><span>S/.{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4))) < 1 ? 40 : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40}</span></p>
+                  </>
+                ) : (
+                  <h1>Cargando</h1>
+                )}
+              </div>
+              <div>
+                <Button className={classes.button} onClick={sendData}>
+                  {isLoading ? <CircularProgress style={{ width: '20px', height: '20px', color: '#fff' }} /> : 'Finalizar'}
+                </Button>
+              </div>
+            </div>
           </div>
-          <div>
-            {carrito !== null && carrito.length > 0 ? (
-              <>
-                <p><span>m³ Totales: </span><span>{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4)))} m³</span></p>
-                <p><span>Dirección de envio: </span><span>{oe.direccion}</span></p>
-                <p><span>Tipo de servicio: </span><span>Normal</span></p>
-                <p><span>Fecha de envio: </span><span>{oe.fecha}</span></p>
-                <p><span>Total a pagar: </span><span>S/.{carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(4))) < 1 ? 40 : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40}</span></p>
-              </>
-            ) : (
-              <h1>Cargando</h1>
-            )}
-          </div>
-          <div>
-            <Button className={classes.button} onClick={sendData}>
-              {isLoading ? <CircularProgress style={{width: '20px', height: '20px', color:'#fff'}}/> : 'Finalizar'}
-            </Button>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   )
 }

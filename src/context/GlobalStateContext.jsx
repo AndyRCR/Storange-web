@@ -8,7 +8,7 @@ export const GlobalContext = createContext()
 const GlobalStateContext = ({ children }) => {
 
   const [browser, setBrowser] = useState(navigatorDetector)
-  const [webkitBrowser, setWebkitBrowser] = useState('Chrome')
+  const [webkitBrowser, setWebkitBrowser] = useState('Safari')
 
   const [isLoading, setIsLoading] = useState(false)
   const [loaderState, setLoaderState] = useState(1)
@@ -37,7 +37,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(navigatorDetector() === 'Safari' ? 0 :  2)
+  const [formEnvioPage, setFormEnvioPage] = useState(2)
   const [direccionSelect, setDireccionSelect] = useState("default")
   const [direccionName, setDireccionName] = useState(null)
   const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
