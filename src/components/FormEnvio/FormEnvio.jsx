@@ -94,7 +94,7 @@ const FormEnvio = () => {
       <div className={browser === 'Safari' ? 'test safari' : 'test'}>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? -0.5 :  0)} className={classes.buttonWhite}>
+            <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? 2 :  0)} className={classes.buttonWhite}>
               Atrás
             </Button>
           </div>

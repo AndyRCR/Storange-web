@@ -92,7 +92,7 @@ const CarritoDeEnvio = () => {
                             <Button
                                 onClick={() => {
                                 window.scrollTo(0, 0)
-                                setFormEnvioPage(browser === 'Safari' ? 0.5 :  1)
+                                setFormEnvioPage(browser === 'Safari' ? 1 :  1)
                                 }}
                                 className={classes.button}>
                                 Siguiente

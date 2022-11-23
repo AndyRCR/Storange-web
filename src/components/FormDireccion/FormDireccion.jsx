@@ -115,7 +115,7 @@ const FormDireccion = () => {
         <div className={browser === 'Safari' ? 'test safari' : 'test'}>
             <div className='formDireccion'>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? 1.5 :  2)} className={classes.buttonWhite}>
+                    <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? 0 :  2)} className={classes.buttonWhite}>
                         Atrás
                     </Button>
                 </div>
@@ -169,7 +169,7 @@ const FormDireccion = () => {
                 <div className='formButtons'>
                     <Button onClick={() => {
                         window.scrollTo(0, 0)
-                        setFormEnvioPage(browser === 'Safari' ? -0.5 :  0)
+                        setFormEnvioPage(browser === 'Safari' ? 2 :  0)
                         }} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         Siguiente
                     </Button>
