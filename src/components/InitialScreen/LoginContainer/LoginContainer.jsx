@@ -87,9 +87,8 @@ const LoginContainer = () => {
   }
 
   const verifyCaptcha = () => {
-    verifyExistence()
-    // if (captchaState == 1) verifyExistence()
-    // else setCaptchaState(captchaValue !== null)
+    if (captchaState == 1) verifyExistence()
+    else setCaptchaState(captchaValue !== null)
   }
 
   const verifyUser = () => {
