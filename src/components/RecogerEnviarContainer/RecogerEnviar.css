@@ -11,11 +11,11 @@
 }
 
 .recogerEnviarContainer .sectionRecoger{
-    position: relative;
+    /* position: relative;
     max-width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    overflow-x: hidden;
+    overflow-x: hidden; */
 }
 
 .recogerEnviarContainer .sectionRecoger .section{
