@@ -123,13 +123,11 @@ const RecogerEnviarContainer = () => {
     const [direccionSelect, setDireccionSelect] = useState("default")
 
     const handleResize = () => {
-        if(browser !== webkitBrowser){
-            const width = document.querySelector('.navbarRecoger').clientWidth
-    
-            document.querySelectorAll('.sectionRecoger .section').forEach(el => {
-                el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
-            })
-        }
+        const width = document.querySelector('.navbarRecoger').clientWidth
+
+        document.querySelectorAll('.sectionRecoger .section').forEach(el => {
+            el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
+        })
     }
 
     useEffect(() => {
@@ -149,15 +147,9 @@ const RecogerEnviarContainer = () => {
     return (
         <div className='recogerEnviarContainer'>
             <div className='navbarRecoger'>
-                {browser === webkitBrowser ? (
-                    false
-                ) : (
-                    <>
-                        <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
-                        <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
-                        <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
-                    </>
-                )}
+                <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
+                <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
+                <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
             </div>
             <div className='sectionRecoger'>
                 {carrito !== null && carrito.length > 0 ? (
@@ -180,20 +172,16 @@ const RecogerEnviarContainer = () => {
                         </div>
                     </div>
                 )}
-                {browser === webkitBrowser ? false : (
-                    <>
-                        <OrdenesEnProgreso />
-                        <div className="section">
-                            <div className='alert'>
-                                <div className='border'></div>
-                                <div className='icon'>
-                                    <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
-                                </div>
-                                <div className='text'>Para solicitar una recogida de artículos, comunicarse por WhatsApp con el número 951612957</div>
-                            </div>
+                <OrdenesEnProgreso />
+                <div className="section" style={{justifyContent: 'center'}}>
+                    <div className='alert'>
+                        <div className='border'></div>
+                        <div className='icon'>
+                            <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
                         </div>
-                    </>
-                )}
+                        <div className='text'>Para solicitar una recogida de artículos, comunicarse por WhatsApp con el número 951612957</div>
+                    </div>
+                </div>
             </div>
             <div className='footerRecoger'>
                 Cualquier duda o consulta por favor comuníquese con nuestra área de atención al cliente por WhatsApp al teléfono 951612957

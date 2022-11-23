@@ -22,7 +22,7 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const pages = [
-        {text: browser === webkitBrowser ? 'Carrito de envio' : 'Recoger/Enviar', path:'/pickup_send'},
+        {text: 'Recoger/Enviar', path:'/pickup_send'},
         {text: 'Mis articulos', path:'/dashboard'},
         {text: 'Perfil', path:'/perfil'}
     ]
@@ -153,7 +153,7 @@ const Navbar = () => {
                                         </div>
                                     ) : false}
                                 </div>
-                                <div>{browser === webkitBrowser ? 'Carrito de envio' : 'Recoger/Enviar'}</div>
+                                <div>Recoger/Enviar</div>
                             </div>
 
                             <div
