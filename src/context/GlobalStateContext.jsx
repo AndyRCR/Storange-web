@@ -36,7 +36,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(navigatorDetector() === 'Chrome' ? 1.5 : 0)
+  const [formEnvioPage, setFormEnvioPage] = useState(navigatorDetector() === 'Safari' ? 1.5 : 0)
   const [direccionSelect, setDireccionSelect] = useState("default")
   const [direccionName, setDireccionName] = useState(null)
   const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
