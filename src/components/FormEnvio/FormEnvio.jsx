@@ -36,7 +36,7 @@ const FormEnvio = () => {
 
   const classes = useStyles()
 
-  const { browser, formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
+  const { webkitBrowser, browser, formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
 
   const [interaction, setInteraction] = useState(true)
 
@@ -54,7 +54,7 @@ const FormEnvio = () => {
 
   const handleResize = () =>{
     
-    if(browser === 'Safari'){
+    if(browser === webkitBrowser){
       const width = document.querySelector('.fluxSection').clientWidth
       document.querySelector('.fluxSection').style.width = `${width}px`
   
@@ -75,7 +75,7 @@ const FormEnvio = () => {
 
   useEffect(() => {
     if(interaction){
-      setFormEnvioPage(browser === 'Safari' ? 0 :  2)
+      setFormEnvioPage(browser === webkitBrowser ? 0 :  2)
       setInteraction(false)
     }
 
@@ -87,14 +87,14 @@ const FormEnvio = () => {
   }, [formEnvioPage])
 
   return (
-    <div className={`section fluxSection ${browser === 'Safari' ? 'safari' :''}`}>
+    <div className={`section fluxSection ${browser === webkitBrowser ? 'safari' :''}`}>
       <CarritoDeEnvio />
       <FormDireccion />
       <FormFecha />
-      <div className={browser === 'Safari' ? 'test safari' : 'test'}>
+      <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? 2 :  0)} className={classes.buttonWhite}>
+            <Button onClick={() => setFormEnvioPage(browser === webkitBrowser ? 2 :  0)} className={classes.buttonWhite}>
               Atrás
             </Button>
           </div>

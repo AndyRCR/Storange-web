@@ -18,11 +18,11 @@ import './Navbar.css'
 
 const Navbar = () => {
 
-    const {browser, propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito, formatStrings } = useContext(GlobalContext)
+    const { webkitBrowser, browser, propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito, formatStrings } = useContext(GlobalContext)
     const navigate = useNavigate()
 
     const pages = [
-        {text: browser === 'Chrome' ? 'Carrito de envio' : 'Recoger/Enviar', path:'/pickup_send'},
+        {text: browser === webkitBrowser ? 'Carrito de envio' : 'Recoger/Enviar', path:'/pickup_send'},
         {text: 'Mis articulos', path:'/dashboard'},
         {text: 'Perfil', path:'/perfil'}
     ]
@@ -153,7 +153,7 @@ const Navbar = () => {
                                         </div>
                                     ) : false}
                                 </div>
-                                <div>{browser === 'Chrome' ? 'Carrito de envio' : 'Recoger/Enviar'}</div>
+                                <div>{browser === webkitBrowser ? 'Carrito de envio' : 'Recoger/Enviar'}</div>
                             </div>
 
                             <div

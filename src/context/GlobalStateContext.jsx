@@ -8,6 +8,7 @@ export const GlobalContext = createContext()
 const GlobalStateContext = ({ children }) => {
 
   const [browser, setBrowser] = useState(navigatorDetector)
+  const [webkitBrowser, setWebkitBrowser] = useState('Chrome')
 
   const [isLoading, setIsLoading] = useState(false)
   const [loaderState, setLoaderState] = useState(1)
@@ -463,7 +464,7 @@ const GlobalStateContext = ({ children }) => {
         direccionName, setDireccionName,
         direccionAutoSelect, setDireccionAutoSelect,
         formatStrings,
-        browser
+        browser, webkitBrowser
       }}
     >
       {children}

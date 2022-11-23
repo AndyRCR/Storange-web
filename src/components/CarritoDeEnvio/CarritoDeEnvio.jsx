@@ -42,13 +42,13 @@ const CarritoDeEnvio = () => {
 
     const classes = useStyles()
     const navigate = useNavigate()
-    const { browser, carrito, setFormEnvioPage, setActiveModal, actualizarEstadoEnvio, isLoading, ids, setIds } = useContext(GlobalContext)
+    const { webkitBrowser, browser, carrito, setFormEnvioPage, setActiveModal, actualizarEstadoEnvio, isLoading, ids, setIds } = useContext(GlobalContext)
 
     useEffect(() => {
     }, [carrito])
 
     return (
-        <div className={browser === 'Safari' ? 'test safari' : 'test'}>
+        <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
             <div className='carritoDeEnvio articlesList'>
                 {carrito !== null && carrito.length !== 0 ? (
                     <>
@@ -92,7 +92,7 @@ const CarritoDeEnvio = () => {
                             <Button
                                 onClick={() => {
                                 window.scrollTo(0, 0)
-                                setFormEnvioPage(browser === 'Safari' ? 1 :  1)
+                                setFormEnvioPage(browser === webkitBrowser ? 1 :  1)
                                 }}
                                 className={classes.button}>
                                 Siguiente

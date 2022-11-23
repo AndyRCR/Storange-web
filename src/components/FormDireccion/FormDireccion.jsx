@@ -103,7 +103,7 @@ const FormDireccion = () => {
 
     const classes = useStyles()
 
-    const { browser, setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe, direccionSelect, setDireccionSelect, direccionName, setDireccionName } = useContext(GlobalContext)
+    const { webkitBrowser, browser, setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe, direccionSelect, setDireccionSelect, direccionName, setDireccionName } = useContext(GlobalContext)
 
     useEffect(() => {
         if(direcciones !== null){
@@ -112,10 +112,10 @@ const FormDireccion = () => {
     }, [direcciones])
 
     return (
-        <div className={browser === 'Safari' ? 'test safari' : 'test'}>
+        <div className={browser === webkitBrowser ? 'test safari' : 'test'}>
             <div className='formDireccion'>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? 0 :  2)} className={classes.buttonWhite}>
+                    <Button onClick={() => setFormEnvioPage(browser === webkitBrowser ? 0 :  2)} className={classes.buttonWhite}>
                         Atrás
                     </Button>
                 </div>
@@ -169,7 +169,7 @@ const FormDireccion = () => {
                 <div className='formButtons'>
                     <Button onClick={() => {
                         window.scrollTo(0, 0)
-                        setFormEnvioPage(browser === 'Safari' ? 2 :  0)
+                        setFormEnvioPage(browser === webkitBrowser ? 2 :  0)
                         }} className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
                         Siguiente
                     </Button>

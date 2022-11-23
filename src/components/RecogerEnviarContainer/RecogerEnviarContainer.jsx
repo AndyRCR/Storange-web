@@ -116,14 +116,14 @@ const isWeekend = (date) => {
 const RecogerEnviarContainer = () => {
 
     const classes = useStyles()
-    const { browser, direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario, buscarOrdenes, ordenesEnProgreso } = useContext(GlobalContext)
+    const { webkitBrowser, browser, direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario, buscarOrdenes, ordenesEnProgreso } = useContext(GlobalContext)
 
     const [buttonState, setButtonState] = useState([true, false, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
     const [direccionSelect, setDireccionSelect] = useState("default")
 
     const handleResize = () => {
-        if(browser !== 'Safari'){
+        if(browser !== webkitBrowser){
             const width = document.querySelector('.navbarRecoger').clientWidth
     
             document.querySelectorAll('.sectionRecoger .section').forEach(el => {
@@ -149,7 +149,7 @@ const RecogerEnviarContainer = () => {
     return (
         <div className='recogerEnviarContainer'>
             <div className='navbarRecoger'>
-                {browser === 'Safari' ? (
+                {browser === webkitBrowser ? (
                     false
                 ) : (
                     <>
@@ -180,7 +180,7 @@ const RecogerEnviarContainer = () => {
                         </div>
                     </div>
                 )}
-                {browser === 'Safari' ? false : (
+                {browser === webkitBrowser ? false : (
                     <>
                         <OrdenesEnProgreso />
                         <div className="section">
