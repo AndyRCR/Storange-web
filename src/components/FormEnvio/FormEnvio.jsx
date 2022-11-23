@@ -75,7 +75,7 @@ const FormEnvio = () => {
 
   useEffect(() => {
     if(interaction){
-      setFormEnvioPage(browser === 'Safari' ? -1.5 :  0)
+      setFormEnvioPage(browser === 'Safari' ? -1.5 :  2)
       setInteraction(false)
     }
 
@@ -94,7 +94,7 @@ const FormEnvio = () => {
       <div className={browser === 'Safari' ? 'test safari' : 'test'}>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.buttonWhite}>
+            <Button onClick={() => setFormEnvioPage(browser === 'Safari' ? -0.5 :  0)} className={classes.buttonWhite}>
               Atrás
             </Button>
           </div>

@@ -21,7 +21,7 @@
 .recogerEnviarContainer .sectionRecoger .section{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     /* border: 1px dashed black; */
     box-sizing: border-box;
