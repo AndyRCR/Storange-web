@@ -1,12 +1,13 @@
-import { collection, getDocs } from "firebase/firestore";
-import React, { createContext, useState } from "react";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import { db } from "../service/Firebase";
+import React, { createContext, useState } from "react"
+import navigatorDetector from "../tools/NavigatorDetector"
+import { toast } from "react-toastify"
+import Swal from "sweetalert2"
 
 export const GlobalContext = createContext()
 
 const GlobalStateContext = ({ children }) => {
+
+  const [browser, setBrowser] = useState(navigatorDetector)
 
   const [isLoading, setIsLoading] = useState(false)
   const [loaderState, setLoaderState] = useState(1)
@@ -35,7 +36,7 @@ const GlobalStateContext = ({ children }) => {
   const [cajaFilter, setCajaFilter] = useState(false)
   const [sueltoFilter, setSueltoFilter] = useState(false)
 
-  const [formEnvioPage, setFormEnvioPage] = useState(2)
+  const [formEnvioPage, setFormEnvioPage] = useState(navigatorDetector() === 'Chrome' ? 1.5 : 0)
   const [direccionSelect, setDireccionSelect] = useState("default")
   const [direccionName, setDireccionName] = useState(null)
   const [direccionAutoSelect, setDireccionAutoSelect] = useState(false)
@@ -332,6 +333,14 @@ const GlobalStateContext = ({ children }) => {
         setFormEnvioPage(-1)
         buscarArticulos()
         buscarOrdenes()
+        setOe({
+          m3: '',
+          direccion: '',
+          tipoServicio: 'normal',
+          fecha: new Date(Date.now()).toISOString().slice(0,10),
+          total: '',
+          fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
+        })
       })
   }
 
@@ -453,7 +462,8 @@ const GlobalStateContext = ({ children }) => {
         direccionSelect, setDireccionSelect,
         direccionName, setDireccionName,
         direccionAutoSelect, setDireccionAutoSelect,
-        formatStrings
+        formatStrings,
+        browser
       }}
     >
       {children}

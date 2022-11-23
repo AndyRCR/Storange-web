@@ -1,8 +1,33 @@
+.recogerEnviarContainer .fluxSection.safari{
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-x: hidden;
+}
+
 .recogerEnviarContainer .fluxSection{
     position: relative;
     display: flex;
     flex-flow: column nowrap;
     overflow-y: hidden;
+}
+
+.recogerEnviarContainer .fluxSection .test.safari{
+    overflow: hidden;
+    height: 100%;
+    /* min-height: 856px !important; */
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    /* border: 1px dashed black; */
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    transition: .3s;
+    z-index: 0;
+    /* transform: translateX(1668px); */
 }
 
 .recogerEnviarContainer .fluxSection .test{

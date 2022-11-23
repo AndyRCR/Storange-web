@@ -102,7 +102,7 @@ const FormFecha = () => {
 
     const classes = useStyles()
 
-    const { setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe } = useContext(GlobalContext)
+    const { browser, setFormEnvioPage, direcciones, setActiveDireccionModal, oe, setOe } = useContext(GlobalContext)
 
     const [direccionSelect, setDireccionSelect] = useState("default")
     const [direccionName, setdireccionName] = useState(null)
@@ -116,11 +116,10 @@ const FormFecha = () => {
     }, [direcciones])
 
     return (
-        <div className='test'>
+        <div className={browser === 'Safari' ? 'test safari' : 'test'}>
             <div className='formDireccion'>
                 <div className='formButtons'>
-                    <Button onClick={() => setFormEnvioPage(1)} className={classes.buttonWhite}>
-                        <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
+                    <Button onClick={() => setFormEnvioPage(0.5)} className={classes.buttonWhite}>
                         Atrás
                     </Button>
                 </div>
@@ -170,10 +169,9 @@ const FormFecha = () => {
                     <Button
                         onClick={() => {
                         window.scrollTo(0, 0)
-                        setFormEnvioPage(-1)
+                        setFormEnvioPage(-1.5)
                         }}
                         className={classes.button} disabled={oe.direccion === '' || oe.direccion === 'default'}>
-                        <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowDown} />
                         Siguiente
                     </Button>
                 </div>

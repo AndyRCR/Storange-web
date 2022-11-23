@@ -1,19 +1,17 @@
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Button, CircularProgress } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import React from 'react'
 import { useContext } from 'react'
 import { useEffect } from 'react'
 import { GlobalContext } from '../../context/GlobalStateContext'
 import CarritoDeEnvio from '../CarritoDeEnvio/CarritoDeEnvio'
 import FormDireccion from '../FormDireccion/FormDireccion'
-import { db } from '../../service/Firebase'
-import { addDoc, collection, doc } from 'firebase/firestore'
 import Swal from 'sweetalert2'
-import './FormEnvio.css'
 import FormFecha from '../FormFecha/FormFecha'
 import { useState } from 'react'
+import './FormEnvio.css'
 
 const useStyles = makeStyles({
   button: {
@@ -38,57 +36,45 @@ const FormEnvio = () => {
 
   const classes = useStyles()
 
-  const { formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
+  const { browser, formEnvioPage, setFormEnvioPage, carrito, oe, propietario, actualizarOrdenes, obtenerServicio, isLoading, setIsLoading, setOe } = useContext(GlobalContext)
 
   const [interaction, setInteraction] = useState(true)
 
   const sendData = async () => {
     setIsLoading(true)
-    
-    const col = collection(db, propietario.idPropietario)
 
-    const order = await addDoc(col, {
-      ...oe,
-      m3: carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))),
-      total: carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) < 1
-        ? 40
-        : carrito.map(articulo => articulo.volumen).reduce((a, b) => parseFloat((a + b).toPrecision(2))) * 40,
-      articulos: carrito
-    }).finally(() => {
-      setIsLoading(false)
-      setOe({
-        m3: '',
-        direccion: '',
-        tipoServicio: 'normal',
-        fecha: new Date(Date.now()).toISOString().slice(0,10),
-        total: '',
-        fechaServicio: new Date(Date.now()).toISOString().slice(0,10)
-      })
+    Swal.fire({
+      title: 'Se realizo la orden de envío',
+      icon: 'success'
     })
-
-    Swal.fire(
-      'Se realizo la orden de envío',
-      `El código de la orden: ${order.id}`,
-      'success'
-    )
 
     obtenerServicio()
     actualizarOrdenes()
   }
 
   const handleResize = () =>{
-    const height = Array.from(document.querySelectorAll('.fluxSection .test')).map(el => el.clientHeight).sort().at(-1)
-    document.querySelector('.fluxSection').style.height = `${height}px`
-
-    document.querySelectorAll('.fluxSection .test').forEach(el => {
-      el.style.height = `${height}px`
-      el.style.transform = `translateY(${height * formEnvioPage}px)`
-    })
+    
+    if(browser === 'Safari'){
+      const width = document.querySelector('.fluxSection').clientWidth
+      document.querySelector('.fluxSection').style.width = `${width}px`
+  
+      document.querySelectorAll('.fluxSection .test').forEach(el => {
+        el.style.width = `${width}px`
+        el.style.transform = `translateX(${width * formEnvioPage}px)`
+      })
+    } else{
+      const height = Array.from(document.querySelectorAll('.fluxSection .test')).map(el => el.clientHeight).sort().at(-1)
+      document.querySelector('.fluxSection').style.height = `${height}px`
+  
+      document.querySelectorAll('.fluxSection .test').forEach(el => {
+        el.style.height = `${height}px`
+        el.style.transform = `translateY(${height * formEnvioPage}px)`
+      })
+    }
   }
 
   useEffect(() => {
     if(interaction){
-      setFormEnvioPage(2)
       setInteraction(false)
     }
 
@@ -100,15 +86,14 @@ const FormEnvio = () => {
   }, [formEnvioPage])
 
   return (
-    <div className="section fluxSection">
+    <div className={`section fluxSection ${browser === 'Safari' ? 'safari' :''}`}>
       <CarritoDeEnvio />
       <FormDireccion />
       <FormFecha />
-      <div className='test'>
+      <div className={browser === 'Safari' ? 'test safari' : 'test'}>
         <div className="resumen">
           <div className='formButtons'>
-            <Button onClick={() => setFormEnvioPage(0)} className={classes.buttonWhite}>
-              <FontAwesomeIcon style={{ margin: '0 8px' }} icon={faArrowUp} />
+            <Button onClick={() => setFormEnvioPage(-0.5)} className={classes.buttonWhite}>
               Atrás
             </Button>
           </div>

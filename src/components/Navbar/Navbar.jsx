@@ -16,16 +16,16 @@ import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalStateContext';
 import './Navbar.css'
 
-const pages = [
-    {text: 'Recoger/Enviar', path:'/pickup_send'},
-    {text: 'Mis articulos', path:'/dashboard'},
-    {text: 'Perfil', path:'/perfil'}
-];
-
 const Navbar = () => {
 
-    const { propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito, formatStrings } = useContext(GlobalContext)
+    const {browser, propietario, setChange, change, setLoaderState, restartAll, setDireccionSelect, setOe, oe, setFormEnvioPage, carrito, formatStrings } = useContext(GlobalContext)
     const navigate = useNavigate()
+
+    const pages = [
+        {text: browser === 'Chrome' ? 'Carrito de envio' : 'Recoger/Enviar', path:'/pickup_send'},
+        {text: 'Mis articulos', path:'/dashboard'},
+        {text: 'Perfil', path:'/perfil'}
+    ]
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -153,7 +153,7 @@ const Navbar = () => {
                                         </div>
                                     ) : false}
                                 </div>
-                                <div>Recoger/Enviar</div>
+                                <div>{browser === 'Chrome' ? 'Carrito de envio' : 'Recoger/Enviar'}</div>
                             </div>
 
                             <div

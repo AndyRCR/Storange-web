@@ -116,18 +116,20 @@ const isWeekend = (date) => {
 const RecogerEnviarContainer = () => {
 
     const classes = useStyles()
-    const { direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario, buscarOrdenes, ordenesEnProgreso } = useContext(GlobalContext)
+    const { browser, direcciones, setActiveDireccionModal, buscarDireccion, buscarArticulos, articulos, carrito, setActiveModal, propietario, buscarPropietario, buscarOrdenes, ordenesEnProgreso } = useContext(GlobalContext)
 
     const [buttonState, setButtonState] = useState([true, false, false])
     const [value, setValue] = useState(dayjs('2022-04-07'))
     const [direccionSelect, setDireccionSelect] = useState("default")
 
-    const handleResize = () =>{
-        const width = document.querySelector('.navbarRecoger').clientWidth
-
-        document.querySelectorAll('.sectionRecoger .section').forEach(el => {
-            el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
-        })
+    const handleResize = () => {
+        if(browser !== 'Safari'){
+            const width = document.querySelector('.navbarRecoger').clientWidth
+    
+            document.querySelectorAll('.sectionRecoger .section').forEach(el => {
+                el.style.transform = `translateX(-${width * buttonState.indexOf(true)}px)`
+            })
+        }
     }
 
     useEffect(() => {
@@ -147,9 +149,15 @@ const RecogerEnviarContainer = () => {
     return (
         <div className='recogerEnviarContainer'>
             <div className='navbarRecoger'>
-                <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
-                <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
-                <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
+                {browser === 'Safari' ? (
+                    false
+                ) : (
+                    <>
+                        <Button onClick={() => setButtonState([true, false, false])} className={buttonState[0] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Carrito de envío</Button>
+                        <Button onClick={() => setButtonState([false, true, false])} className={buttonState[1] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Ordenes en progreso</Button>
+                        <Button onClick={() => setButtonState([false, false, true])} className={buttonState[2] ? `${classes.buttonBorder} ${classes.buttonBorderActive}` : classes.buttonBorder}>Solicitar recogida</Button>
+                    </>
+                )}
             </div>
             <div className='sectionRecoger'>
                 {carrito !== null && carrito.length > 0 ? (
@@ -166,93 +174,26 @@ const RecogerEnviarContainer = () => {
                                 document.querySelector('.carritoModal').style.top = `${window.scrollY}px`
                                 document.body.style.overflowY = "hidden"
                                 setActiveModal(true)
-                                }} className={classes.button}>
+                            }} className={classes.button}>
                                 Agregar
                             </Button>
                         </div>
                     </div>
                 )}
-                <OrdenesEnProgreso />
-                <div className="section">
-                    {/* <div className='formRecogida'>
-                        <div className="form">
-                            <div className="subform">
-                                <h3>Formulario de Recogida</h3>
-                                <div className="formItem">
-                                    <p>¿Qué artículos necesitas que recojamos?</p>
-                                    <CssTextField
-                                        id="outlined-basic"
-                                        label="Describe los artículos"
-                                        variant="outlined"
-                                        multiline
-                                    />
+                {browser === 'Safari' ? false : (
+                    <>
+                        <OrdenesEnProgreso />
+                        <div className="section">
+                            <div className='alert'>
+                                <div className='border'></div>
+                                <div className='icon'>
+                                    <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
                                 </div>
-                                <div className="formItem">
-                                    <p>Seleccione la dirección de envío</p>
-                                    {direcciones !== null ? (
-                                        <>
-                                            <Select
-                                                name='direccion'
-                                                className={`customSelect ${classes.root}`}
-                                                value={direccionSelect}
-                                                onChange={ e => setDireccionSelect(e.target.value)}
-                                            >
-                                                <MenuItem value="default">Seleccione su dirección</MenuItem>
-                                                {direcciones.map((dir, index) =>{
-                                                    return (
-                                                        <MenuItem key={`direccion${index}`} value={dir.direccion}>{dir.direccion}</MenuItem>
-                                                    )
-                                                })}
-                                            </Select>
-                                            <Button
-                                            onClick={() => {
-                                                document.body.style.overflowY = "hidden"
-                                                setActiveDireccionModal(true)
-                                            }}
-                                            className={classes.button}>
-                                                Agregar nueva dirección
-                                            </Button>
-                                        </>
-                                    ):(
-                                        <>Cargando</>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="subform">
-                                <div>
-                                    <p>¿Qué día te gustaría que pasemos por tus cosas?</p>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <StaticDatePicker
-                                            orientation="landscape"
-                                            openTo="day"
-                                            value={value}
-                                            shouldDisableDate={isWeekend}
-                                            onChange={(newValue) => {
-                                                setValue(newValue)
-                                            }}
-                                            renderInput={(params) => <TextField {...params} />}
-                                        />
-                                    </LocalizationProvider>
-                                </div>
+                                <div className='text'>Para solicitar una recogida de artículos, comunicarse por WhatsApp con el número 951612957</div>
                             </div>
                         </div>
-                        <div className="buttons">
-                            <Button className={classes.buttonWhite}>
-                                Limpiar
-                            </Button>
-                            <Button className={classes.button}>
-                                Solicitar
-                            </Button>
-                        </div>
-                    </div> */}
-                    <div className='alert'>
-                        <div className='border'></div>
-                        <div className='icon'>
-                            <FontAwesomeIcon className='alertIcon' icon={faCircleExclamation} />
-                        </div>
-                        <div className='text'>Para solicitar una recogida de artículos, comunicarse por WhatsApp con el número 951612957</div>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
             <div className='footerRecoger'>
                 Cualquier duda o consulta por favor comuníquese con nuestra área de atención al cliente por WhatsApp al teléfono 951612957
@@ -268,7 +209,7 @@ const RecogerEnviarContainer = () => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover />
-        </div>
+        </div >
     )
 }
 
