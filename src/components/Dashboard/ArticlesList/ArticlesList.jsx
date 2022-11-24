@@ -70,7 +70,13 @@ const ArticlesList = () => {
     }
 
     useEffect(() => {
-        if(activeFilters.length === 0) buscarArticulos()
+        if(activeFilters.length === 0){
+            buscarArticulos()
+            console.trace([...filteredArticles]
+                .filter(el =>{
+                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
+                }).length/10)
+        }
     }, [filter, articulos, filteredArticles])
 
     return (
@@ -99,7 +105,7 @@ const ArticlesList = () => {
                             page={page}
                             className={classes.root}
                             onChange={(e, pageNumber) => setPage(pageNumber)}
-                            count={Math.round([...filteredArticles]
+                            count={Math.ceil([...filteredArticles]
                                 .filter(el =>{
                                     return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
                                 }).length/10)}
@@ -121,7 +127,7 @@ const ArticlesList = () => {
                             className={classes.root}
                             page={page}
                             onChange={(e, pageNumber) => setPage(pageNumber)}
-                            count={Math.round([...filteredArticles]
+                            count={Math.ceil([...filteredArticles]
                                 .filter(el =>{
                                     return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
                                 }).length/10)}

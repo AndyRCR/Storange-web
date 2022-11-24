@@ -75,7 +75,7 @@ const CarritoModal = () => {
                         className={classes.root}
                         page={page}
                         onChange={(e, pageNumber) => setPage(pageNumber)}
-                        count={Math.round([...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.idEstadoArticulo !== 3}).length / 10)}
+                        count={Math.ceil([...articulos].filter(articulo => {return articulo.estadoEnvio === 0 && articulo.idEstadoArticulo !== 3}).length / 10)}
                         shape="rounded" />
                     ) : (
                         <div className='loadingSpinner'>
