@@ -216,7 +216,7 @@ const Navbar = () => {
                                                 <Avatar style={{ backgroundColor: '#795548' }} alt={propietario.nombre} src="/static/images/avatar/2.jpg" />
                                             </IconButton>
                                             <h3 className='name'>
-                                                {`${formatStrings(propietario.nombre)} ${formatStrings(propietario?.apellido)}`}
+                                                {`${formatStrings(propietario.nombre)} ${formatStrings(propietario.apellido || '')}`}
                                             </h3>
                                             <p className='email'>
                                                 {propietario.email}
