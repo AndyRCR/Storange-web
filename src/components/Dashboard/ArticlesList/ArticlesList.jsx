@@ -72,10 +72,6 @@ const ArticlesList = () => {
     useEffect(() => {
         if(activeFilters.length === 0){
             buscarArticulos()
-            console.trace([...filteredArticles]
-                .filter(el =>{
-                    return (el.titulo.toLowerCase().includes(filter) || el.descripcion?.toLowerCase().includes(filter) || el.descripcionPropietario?.toLowerCase().includes(filter))
-                }).length/10)
         }
     }, [filter, articulos, filteredArticles])
 

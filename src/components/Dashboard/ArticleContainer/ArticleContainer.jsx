@@ -10,6 +10,7 @@ import { GlobalContext } from '../../../context/GlobalStateContext'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import { ClimbingBoxLoader } from 'react-spinners'
 import './ArticleContainer.css'
+import Swal from 'sweetalert2'
 
 const CssTextField = withStyles({
   root: {
@@ -78,7 +79,7 @@ const ArticleContainer = () => {
   const navigate = useNavigate()
   const classes = useStyles()
 
-  const { obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading, actualizarEstadoEnvio, setChange, change, setLoaderState, formatStrings } = useContext(GlobalContext)
+  const { cambiarPrecio, cancelarVenta, ventaArticulo, eliminarArticulo, obtenerArticulo, fotos, articulo, actualizarTitulo, actualizarDescripcion, isLoading, actualizarEstadoEnvio, setChange, change, setLoaderState, formatStrings } = useContext(GlobalContext)
 
   const [editTitle, setEditTitle] = useState(false)
   const [editDescription, setEditDescription] = useState(false)
@@ -87,6 +88,167 @@ const ArticleContainer = () => {
   const [newDescription, setNewDescription] = useState('')
 
   let { id } = useParams()
+
+  const repeatPriceSwal = () => {
+    Swal.fire({
+      title: 'Precio',
+      text: 'Indique el precio de venta',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Vender',
+      cancelButtonText: 'Cancelar',
+      footer: '<p style="color: red; font-weight: bold">Ingrese un precio válido!</p>',
+    }).then((result) => {
+      if (result.isConfirmed === true && !isNaN(result.value) && parseFloat(result.value) > 0 && result.value.length > 0) {
+        ventaArticulo(id, result.value)
+      } else if (result.isConfirmed === true && (isNaN(result.value) || parseFloat(result.value) <= 0 || result.value.length === 0)) {
+        repeatPriceSwal()
+      }
+    })
+  }
+
+  const repeatPoliciesSwal = () => {
+    Swal.fire({
+      title: '¿Está seguro que desea poner en venta el siguiente artículo?',
+      text: 'Lea las políticas de venta en Storange y marque el checkbox a continuación',
+      icon: 'warning',
+      input: 'checkbox',
+      inputValue: 0,
+      inputPlaceholder: 'He leído las <a href="https://www.siasa.com/mails/politicasdeventas.pdf" target="_blank" style="color: #F94700">Políticas de Venta</a> y quiero vender mi artículo',
+      showCancelButton: true,
+      confirmButtonText: 'Siguiente',
+      cancelButtonText: 'Cancelar',
+      footer: '<p style="color: red; font-weight: bold">Acepte el acuerdo y marque el checkbox</p>',
+    }).then((result) => {
+      if (result.value === 1 && result.isConfirmed === true) {
+        Swal.fire({
+          title: 'Precio',
+          text: 'Indique el precio de venta',
+          input: 'text',
+          showCancelButton: true,
+          confirmButtonText: 'Vender',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.isConfirmed === true && !isNaN(result.value) && parseFloat(result.value) > 0 && result.value.length > 0) {
+            ventaArticulo(id, result.value)
+          } else if (result.isConfirmed === true && (isNaN(result.value) || parseFloat(result.value) <= 0 || result.value.length === 0)) {
+            repeatPriceSwal()
+          }
+        })
+      } else if (result.value === 0 && result.isConfirmed === true) {
+        repeatPoliciesSwal()
+      }
+    })
+  }
+
+  const handleCancelSell = () => {
+    Swal.fire({
+      title: '¿Esta seguro(a) que desea cancelar la venta?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, cancelalo!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cancelarVenta(id)
+      }
+    })
+  }
+
+  const handleSell = () => {
+    Swal.fire({
+      title: '¿Está seguro que desea poner en venta el siguiente artículo?',
+      text: 'Lea las políticas de venta en Storange y marque el checkbox a continuación',
+      icon: 'warning',
+      input: 'checkbox',
+      inputValue: 0,
+      inputPlaceholder: 'He leído las <a href="https://www.siasa.com/mails/politicasdeventas.pdf" target="_blank" style="color: #F94700">Políticas de Venta</a> y quiero vender mi artículo',
+      showCancelButton: true,
+      confirmButtonText: 'Siguiente',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value === 1 && result.isConfirmed === true) {
+        Swal.fire({
+          title: 'Precio',
+          text: 'Indique el precio de venta',
+          input: 'text',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Vender',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.isConfirmed === true && !isNaN(result.value) && parseFloat(result.value) > 0 && result.value.length > 0) {
+            ventaArticulo(id, result.value)
+          } else if (result.isConfirmed === true && (isNaN(result.value) || parseFloat(result.value) <= 0 || result.value.length === 0)) {
+            repeatPriceSwal()
+          }
+        })
+      } else if (result.value === 0 && result.isConfirmed === true) {
+        repeatPoliciesSwal()
+      }
+    })
+  }
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: '¿Esta seguro(a) que desea eliminar el artículo?',
+      text: "Este cambio no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borralo!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        eliminarArticulo(id, navigate)
+      }
+    })
+  }
+  
+  const repeatChangePriceSwal = () => {
+    Swal.fire({
+      title: 'Cambio de precio',
+      text: 'Indique el nuevo precio de venta',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Cambiar',
+      cancelButtonText: 'Cancelar',
+      footer: '<p style="color: red; font-weight: bold">Ingrese un precio válido!</p>',
+    }).then((result) => {
+      if (result.isConfirmed === true && !isNaN(result.value) && parseFloat(result.value) > 0 && result.value.length > 0) {
+        cambiarPrecio(id, result.value)
+      } else if (result.isConfirmed === true && (isNaN(result.value) || parseFloat(result.value) <= 0 || result.value.length === 0)) {
+        repeatChangePriceSwal()
+      }
+    })
+  }
+
+  const handlePriceChange = () => {
+    Swal.fire({
+      title: 'Cambio de precio',
+      text: 'Indique el nuevo precio de venta',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Cambiar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed === true && !isNaN(result.value) && parseFloat(result.value) > 0 && result.value.length > 0) {
+        cambiarPrecio(id, result.value)
+      } else if (result.isConfirmed === true && (isNaN(result.value) || parseFloat(result.value) <= 0 || result.value.length === 0)) {
+        repeatChangePriceSwal()
+      }
+    })
+  }
 
   useEffect(() => {
     obtenerArticulo(id)
@@ -229,7 +391,7 @@ const ArticleContainer = () => {
               <div className='gestion'>
                 <h3>Gestión del artículo</h3>
                 <div className='estado'>
-                  {articulo.estadoArticulo}
+                  {articulo.idEstadoArticulo === 2 ? `${articulo.estadoArticulo}: S/${articulo.precio}` : articulo.estadoArticulo}
                 </div>
               </div>
               <div className='acciones'>
@@ -263,14 +425,35 @@ const ArticleContainer = () => {
                         </div>
                       </div>
                     )}
-                    {/* <div className='secondaryButtons'>
-                    <Button className={classes.buttonAction}>
-                      Vender
-                    </Button>
-                    <Button className={classes.buttonAction}>
-                      Eliminar
-                    </Button>
-                  </div> */}
+                    <div className='secondaryButtons'>
+                      {articulo.idEstadoArticulo === 2 ? (
+                        <Button
+                          onClick={handlePriceChange}
+                          className={classes.buttonAction}>
+                          Cambiar precio de venta
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={handleSell}
+                          className={classes.buttonAction}>
+                          Vender
+                        </Button>
+                      )}
+                      <Button
+                        onClick={handleDelete}
+                        className={classes.buttonAction}>
+                        {isLoading ? <CircularProgress style={{ color: '#fff', width: '20px', height: '20px' }} /> : 'Eliminar'}
+                      </Button>
+                    </div>
+                    {articulo.idEstadoArticulo === 2 ? (
+                      <div className='secondaryButtons'>
+                        <Button
+                          onClick={handleCancelSell}
+                          className={classes.buttonAction}>
+                          Cancelar venta
+                        </Button>
+                      </div>
+                    ) : false}
                   </div>
                 )}
               </div>
