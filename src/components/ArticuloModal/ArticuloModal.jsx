@@ -31,7 +31,7 @@ const ArticuloModal = ({ articulo }) => {
                 <div
                     onClick={() => {
                         if (!isLoading) actualizarEstadoEnvio(1, articulo.idArticulo)
-                        setFormEnvioPage(1.5)
+                        setFormEnvioPage(2)
                     }}
                     className='estado'>
                     Agregar al carrito
