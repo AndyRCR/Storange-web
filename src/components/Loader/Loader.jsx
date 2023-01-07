@@ -5,7 +5,7 @@ import './Loader.css'
 
 const Loader = () => {
 
-    const {loaderState, setLoaderState, change, propietario} = useContext(GlobalContext)
+    const {loaderState, setLoaderState, change} = useContext(GlobalContext)
 
     const navigate = useNavigate()
 

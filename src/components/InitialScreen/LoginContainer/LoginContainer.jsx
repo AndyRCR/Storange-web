@@ -76,7 +76,7 @@ const LoginContainer = () => {
   const handleChange = (evt) => {
     const { name, value } = evt.target
 
-    if (name === 'email') {
+    if (name === 'email​') {
       setEmail(value)
       setEmailAction(true)
     } else if (name === 'password') {
