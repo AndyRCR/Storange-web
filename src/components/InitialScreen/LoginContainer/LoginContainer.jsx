@@ -48,7 +48,7 @@ const useStyles = makeStyles({
     backgroundColor: '#f94700 !important',
     textTransform: 'none !important',
     fontWeight: 'bold !important',
-    width: '250px !important'
+    width: '240px !important'
   }
 })
 
