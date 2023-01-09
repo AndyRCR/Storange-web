@@ -16,7 +16,7 @@ const Loader = () => {
             setLoaderState(1)
             document.body.style.overflowY = "hidden"
             setTimeout(()=> {
-                setLoaderState(2)
+                setLoaderState(1)
                 document.body.style.overflowY = "visible"
             }, 800)
         }
