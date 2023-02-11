@@ -86,8 +86,9 @@ const LoginContainer = () => {
   }
 
   const verifyCaptcha = () => {
-    if (captchaState == 1) verifyExistence()
-    else setCaptchaState(captchaValue !== null)
+    verifyExistence()
+    // if (captchaState == 1) verifyExistence()
+    // else setCaptchaState(captchaValue !== null)
   }
 
   const verifyUser = () => {
@@ -205,7 +206,7 @@ const LoginContainer = () => {
             value={password}
             style={{ marginBottom: '16px', width: '100%' }}
           />
-          <div className='recaptcha'>
+          {/* <div className='recaptcha'>
             <ReCAPTCHA
               style={{ display: 'inline-block' }}
               sitekey='6LdGppQiAAAAAJEMB6uI6ZrC55gd37BVIym7yjxN'
@@ -216,7 +217,7 @@ const LoginContainer = () => {
             <p className={captchaState ? 'errorLabel' : 'errorLabel visible'}>
               Se necesita verificación
             </p>
-          </div>
+          </div> */}
           <Button
             className={classes.button}
             onClick={verifyCaptcha}
